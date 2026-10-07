@@ -1,0 +1,574 @@
+site:
+  name: "NeuralBytea"
+  tagline: "Odoo apps and custom development"
+  description: "NeuralBytea builds production-ready Odoo 18 apps: vendor, customer and employee portals, payment providers, HR and payroll tools, dashboards and backend UI upgrades. 17 apps on the Odoo Apps Store."
+  url: "https://neuralbytea.github.io/neuralbyteai.github.io"
+  available_for_work: true
+  store: "https://apps.odoo.com/apps/browse?repo_maintainer_id=1172096"
+
+contact:
+  email: "neuralbytea@gmail.com"
+  phone: ""
+  linkedin: ""
+  github: "https://github.com/neuralbytea"
+  location: "Lahore, Pakistan"
+  remote: true
+
+hire:
+  - k: "Odoo Apps Store"
+    v: "17 apps"
+    n: "All built for Odoo 18 and installable straight from the store."
+  - k: "Custom development"
+    v: "Modules & portals"
+    n: "Custom Odoo modules, portals, payment and API integrations, dashboards and migrations."
+  - k: "Questions & support"
+    v: "Talk to us"
+    n: "Questions about an app? Use the contact form or the app page on the Odoo store."
+  - k: "Engagement"
+    v: "Fixed price or hourly"
+    n: "Tell us what you need and we will reply with how we would approach it."
+
+stats:
+  - label: "Apps on the Odoo store"
+    value: "17"
+  - label: "Odoo version"
+    value: "18.0"
+  - label: "Product lines"
+    value: "5"
+  - label: "Editions"
+    value: "Community + Enterprise"
+
+projects:
+  - id: "nb_vendor_portal_pro"
+    title: "Vendor Portal Pro"
+    category: "odoo"
+    featured: true
+    year: 2026
+    client: "NeuralBytea"
+    role: "Community & Enterprise · $99 · OPL-1"
+    odoo_version: "Odoo 18.0"
+    image: "assets/images/apps/nb_vendor_portal_pro.jpg"
+    store_url: "https://apps.odoo.com/apps/modules/18.0/nb_vendor_portal_pro/"
+    short_desc: "Vendor portal: onboarding, RFQ quoting, PO acknowledgment, vendor bills and payments"
+    metric: "63"
+    metric_label: "portal routes"
+    full_desc: "A full supplier self-service portal for Odoo Purchase. Vendors onboard themselves, quote on RFQs, acknowledge purchase orders, send advance shipping notices, upload compliance documents and track bills and payments, while buyers keep scorecards, disputes and price comparisons inside Odoo."
+    tags:
+      - "Portals"
+      - "Purchase"
+      - "Vendors"
+    modules:
+      - "Purchase"
+      - "Purchase Requisition"
+      - "Accounting"
+      - "Portal"
+      - "Contacts"
+    tech_stack:
+      - "Python"
+      - "Odoo ORM"
+      - "QWeb"
+      - "OWL / JavaScript"
+    highlights:
+      - "Vendor onboarding with compliance documents and versioning"
+      - "RFQ quoting, price requests and side-by-side price comparison"
+      - "PO acknowledgment, advance shipping notices (ASN) and dispute handling"
+      - "Vendor scorecards, alerts and read receipts"
+      - "Vendor bills and payment visibility in the portal"
+
+  - id: "salesperson_portal"
+    title: "Field Sales Booking"
+    category: "odoo"
+    featured: true
+    year: 2026
+    client: "NeuralBytea"
+    role: "Community & Enterprise · $99 · OPL-1"
+    odoo_version: "Odoo 18.0"
+    image: "assets/images/apps/salesperson_portal.jpg"
+    store_url: "https://apps.odoo.com/apps/modules/18.0/salesperson_portal/"
+    short_desc: "Field sales rep portal: reps book orders for customers from the portal, no user seat"
+    metric: "$99"
+    metric_label: "one-time price"
+    full_desc: "Lets field sales reps book orders for their customers from the Odoo portal without consuming an internal user seat. Includes catalog and cart, credit checks, discounts and rewards, customer creation, invoices, support tickets and a commission engine with plans and rules."
+    tags:
+      - "Portals"
+      - "Sales"
+      - "Commissions"
+    modules:
+      - "Sales"
+      - "Accounting"
+      - "Portal"
+      - "Mail"
+    tech_stack:
+      - "Python"
+      - "Odoo ORM"
+      - "QWeb"
+      - "OWL / JavaScript"
+    highlights:
+      - "Reps work as portal users, so no internal user seat is needed"
+      - "Catalog, cart, credit check and discount / reward handling"
+      - "Commission plans and rules with commission lines"
+      - "Customers, invoices, offers and support tickets from one dashboard"
+      - "Automated test suite covering the ordering flow"
+
+  - id: "nb_services_billing_pro"
+    title: "Services Billing Pro"
+    category: "odoo"
+    featured: true
+    year: 2026
+    client: "NeuralBytea"
+    role: "Community & Enterprise · $99 · OPL-1"
+    odoo_version: "Odoo 18.0"
+    image: ""
+    store_url: "https://apps.odoo.com/apps/modules/18.0/nb_services_billing_pro/"
+    short_desc: "Employee rate cards, automatic margin per timesheet line, portal timer and order-based billing"
+    metric: "$99"
+    metric_label: "one-time price"
+    full_desc: "Adds multi-tier rate cards (billing rate and cost rate per employee, customer, project and service type) to Odoo timesheets. Every timesheet line gets its margin automatically, employees log time from a portal timer, and non-billable work can be hidden or shown on the invoice at zero price."
+    tags:
+      - "Portals"
+      - "Timesheets"
+      - "Services"
+    modules:
+      - "Sales Timesheet"
+      - "Projects"
+      - "Invoicing"
+      - "Portal"
+    tech_stack:
+      - "Python"
+      - "Odoo ORM"
+      - "QWeb"
+      - "OWL / JavaScript"
+    highlights:
+      - "Rate cards by employee, customer, project, service type and date range"
+      - "Automatic billing amount, cost amount and margin on each timesheet line"
+      - "Portal timer and manual time entry"
+      - "Margin report and team overview for managers"
+      - "Non-billable time shown at 0.00 on the invoice, or hidden"
+      - "Cost rates never exposed to customers"
+
+  - id: "nb_customer_portal_pro"
+    title: "Customer Portal Pro"
+    category: "odoo"
+    featured: true
+    year: 2026
+    client: "NeuralBytea"
+    role: "Community & Enterprise · $99 · OPL-1"
+    odoo_version: "Odoo 18.0"
+    image: "assets/images/apps/nb_customer_portal_pro.jpg"
+    store_url: "https://apps.odoo.com/apps/modules/18.0/nb_customer_portal_pro/"
+    short_desc: "Customer portal: self-service ordering, order-to-cash dashboard, invoices, payments, tickets"
+    metric: "25"
+    metric_label: "portal routes"
+    full_desc: "Turns the Odoo customer portal into a self-service workspace: customers place orders, follow the order-to-cash flow on a dashboard, view invoices and payments, receive alerts and raise support tickets."
+    tags:
+      - "Portals"
+      - "Sales"
+      - "Customers"
+    modules:
+      - "Sales"
+      - "Accounting"
+      - "Contacts"
+      - "Portal"
+    tech_stack:
+      - "Python"
+      - "Odoo ORM"
+      - "QWeb"
+      - "OWL / JavaScript"
+    highlights:
+      - "Self-service ordering from the portal"
+      - "Order-to-cash dashboard"
+      - "Invoices and payments in one place"
+      - "Support tickets and portal alerts with read tracking"
+      - "Scheduled mail notifications"
+
+  - id: "nb_employee_self_service"
+    title: "Employee Self Service"
+    category: "odoo"
+    featured: false
+    year: 2026
+    client: "NeuralBytea"
+    role: "Community & Enterprise · $119 · OPL-1"
+    odoo_version: "Odoo 18.0"
+    image: ""
+    store_url: "https://apps.odoo.com/apps/modules/18.0/nb_employee_self_service/"
+    short_desc: "Internal self-service portal: profile, time off, attendance, expenses and payslips"
+    metric: "$119"
+    metric_label: "one-time price"
+    full_desc: "An employee self-service portal on the /my pages: profile, time off, attendance (with correction requests), expenses and payslips, with role-aware access."
+    tags:
+      - "Portals"
+      - "HR & Payroll"
+    modules:
+      - "Employees"
+      - "Portal"
+      - "Mail"
+    tech_stack:
+      - "Python"
+      - "Odoo ORM"
+      - "QWeb"
+      - "OWL / JavaScript"
+    highlights:
+      - "Profile, time off, attendance, expenses and payslips"
+      - "Attendance correction requests"
+      - "Role-aware visibility"
+      - "Works alongside Portal Sidebar Pro for navigation"
+
+  - id: "portal_ext"
+    title: "Portal Sidebar Pro"
+    category: "odoo"
+    featured: false
+    year: 2026
+    client: "NeuralBytea"
+    role: "Community & Enterprise · $49 · OPL-1"
+    odoo_version: "Odoo 18.0"
+    image: "assets/images/apps/portal_ext.jpg"
+    store_url: "https://apps.odoo.com/apps/modules/18.0/portal_ext/"
+    short_desc: "Collapsible sidebar, live dashboard and redesigned My Account for the Odoo customer portal"
+    metric: "$49"
+    metric_label: "one-time price"
+    full_desc: "A collapsible, auto-built sidebar for the Odoo portal /my area, a redesigned home dashboard and cleaner My Details and Security pages. Pairs with the NeuralBytea portals."
+    tags:
+      - "Portals"
+      - "Frontend"
+    modules:
+      - "Portal"
+    tech_stack:
+      - "Python"
+      - "Odoo ORM"
+      - "QWeb"
+      - "OWL / JavaScript"
+    highlights:
+      - "Collapsible sidebar built from the portal entries"
+      - "Live portal home dashboard"
+      - "Redesigned My Details and Security pages"
+
+  - id: "payment_Mastercard"
+    title: "Mastercard MPGS Payment"
+    category: "odoo"
+    featured: true
+    year: 2026
+    client: "NeuralBytea"
+    role: "Community & Enterprise · $49 · OPL-1"
+    odoo_version: "Odoo 18.0"
+    image: "assets/images/apps/payment_Mastercard.jpg"
+    store_url: "https://apps.odoo.com/apps/modules/18.0/payment_Mastercard/"
+    short_desc: "Mastercard (MPGS) Hosted Checkout payment provider for secure online payments"
+    metric: "$49"
+    metric_label: "one-time price"
+    full_desc: "Payment provider for the Mastercard Payment Gateway Services (MPGS) Hosted Checkout with 3-D Secure. Payments are posted automatically and reconciled with invoices."
+    tags:
+      - "Payments"
+      - "Accounting"
+    modules:
+      - "Payment Providers"
+      - "Invoicing"
+    tech_stack:
+      - "Python"
+      - "Odoo ORM"
+      - "QWeb"
+      - "OWL / JavaScript"
+    highlights:
+      - "Hosted Checkout, so card data never touches your server"
+      - "3-D Secure support"
+      - "Automatic payment posting and invoice reconciliation"
+      - "Standard Odoo payment provider configuration"
+
+  - id: "employee_loan_management_enterprise"
+    title: "Employee Loan Pro"
+    category: "odoo"
+    featured: true
+    year: 2026
+    client: "NeuralBytea"
+    role: "Enterprise (needs Payroll) · $49 · OPL-1"
+    odoo_version: "Odoo 18.0"
+    image: "assets/images/apps/employee_loan_management_enterprise.jpg"
+    store_url: "https://apps.odoo.com/apps/modules/18.0/employee_loan_management_enterprise/"
+    short_desc: "Employee loans and salary advances with automatic payroll deduction and analytics"
+    metric: "$49"
+    metric_label: "one-time price"
+    full_desc: "Manages employee loans and salary advances end to end: loan types, installment schedules, rescheduling, accounting configuration and automatic deduction on the payslip, with an analytics dashboard."
+    tags:
+      - "HR & Payroll"
+      - "Accounting"
+    modules:
+      - "Payroll"
+      - "Accounting"
+      - "Employees"
+    tech_stack:
+      - "Python"
+      - "Odoo ORM"
+      - "QWeb"
+      - "OWL / JavaScript"
+    highlights:
+      - "Loan types and installment schedules"
+      - "Automatic payroll deduction through payslip inputs"
+      - "Loan rescheduling wizard"
+      - "Accounting integration and configuration"
+      - "Analytics dashboard and portal access"
+
+  - id: "hr_attendance_board"
+    title: "Attendance Leave Gantt"
+    category: "odoo"
+    featured: false
+    year: 2026
+    client: "NeuralBytea"
+    role: "Enterprise (needs Contracts) · $24.99 · OPL-1"
+    odoo_version: "Odoo 18.0"
+    image: "assets/images/apps/hr_attendance_board.jpg"
+    store_url: "https://apps.odoo.com/apps/modules/18.0/hr_attendance_board/"
+    short_desc: "Color-coded attendance and leave Gantt: office, remote and hybrid, click-to-edit, KPIs"
+    metric: "$24.99"
+    metric_label: "one-time price"
+    full_desc: "A colour-coded Gantt board of attendance and leave that separates office, remote and hybrid days, with click-to-edit, remote-work periods on contracts and on-site versus remote KPIs."
+    tags:
+      - "HR & Payroll"
+      - "Dashboards"
+    modules:
+      - "Attendances"
+      - "Time Off"
+      - "Employees"
+      - "Contracts"
+    tech_stack:
+      - "Python"
+      - "Odoo ORM"
+      - "QWeb"
+      - "OWL / JavaScript"
+    highlights:
+      - "Gantt of attendance and leave in one view"
+      - "Office, remote and hybrid classification"
+      - "Click-to-edit from the board"
+      - "Remote work periods on contracts"
+      - "On-site vs remote KPI dashboard"
+
+  - id: "nb_payroll_dashboard"
+    title: "Payroll Dashboard Pro"
+    category: "odoo"
+    featured: false
+    year: 2026
+    client: "NeuralBytea"
+    role: "Enterprise (needs Payroll) · $29 · OPL-1"
+    odoo_version: "Odoo 18.0"
+    image: ""
+    store_url: "https://apps.odoo.com/apps/modules/18.0/nb_payroll_dashboard/"
+    short_desc: "Owl payroll dashboard and Excel/PDF salary report, zero configuration"
+    metric: "$29"
+    metric_label: "one-time price"
+    full_desc: "A zero-configuration payroll dashboard built with Owl, plus a wizard that exports salary reports to Excel and PDF."
+    tags:
+      - "Dashboards"
+      - "HR & Payroll"
+    modules:
+      - "Payroll"
+      - "Accounting"
+    tech_stack:
+      - "Python"
+      - "Odoo ORM"
+      - "QWeb"
+      - "OWL / JavaScript"
+    highlights:
+      - "Owl dashboard over payslip data"
+      - "Excel and PDF salary report"
+      - "No setup needed after install"
+
+  - id: "sale_payment_dashboard"
+    title: "Sales & Payment Dashboard"
+    category: "odoo"
+    featured: false
+    year: 2026
+    client: "NeuralBytea"
+    role: "Community & Enterprise · $49 · OPL-1"
+    odoo_version: "Odoo 18.0"
+    image: ""
+    store_url: "https://apps.odoo.com/apps/modules/18.0/sale_payment_dashboard/"
+    short_desc: "Owl dashboards for Sales, Invoices and Payments: live KPIs, recovery, customer trends"
+    metric: "$49"
+    metric_label: "one-time price"
+    full_desc: "Owl dashboards that link sale orders, invoices and payments: live KPIs, recovery tracking, customer revenue ranking, product category mix and 12-month trends."
+    tags:
+      - "Dashboards"
+      - "Sales"
+      - "Accounting"
+    modules:
+      - "Sales"
+      - "Accounting"
+    tech_stack:
+      - "Python"
+      - "Odoo ORM"
+      - "QWeb"
+      - "OWL / JavaScript"
+    highlights:
+      - "Live sales, invoice and payment KPIs"
+      - "Recovery tracking for outstanding amounts"
+      - "Customer revenue ranking and category mix"
+      - "12-month trends"
+
+  - id: "nb_smart_list_search_pro"
+    title: "Smart List Search Pro"
+    category: "odoo"
+    featured: false
+    year: 2026
+    client: "NeuralBytea"
+    role: "Community & Enterprise · $59 · OPL-1"
+    odoo_version: "Odoo 18.0"
+    image: "assets/images/apps/nb_smart_list_search_pro.jpg"
+    store_url: "https://apps.odoo.com/apps/modules/18.0/nb_smart_list_search_pro/"
+    short_desc: "Sticky column filters, AI search ranks and groups your Odoo list data instantly"
+    metric: "$59"
+    metric_label: "one-time price"
+    full_desc: "Adds sticky column filters to Odoo list views and an AI search that ranks and groups records. Supports multiple AI model providers with per-company credentials and saved search profiles."
+    tags:
+      - "Backend UI"
+      - "AI"
+    modules:
+      - "Web"
+      - "Mail"
+    tech_stack:
+      - "Python"
+      - "Odoo ORM"
+      - "QWeb"
+      - "OWL / JavaScript"
+    highlights:
+      - "Sticky per-column filters on list views"
+      - "AI-assisted search that ranks and groups results"
+      - "Choice of AI providers and models"
+      - "Saved search profiles"
+
+  - id: "mail_ext"
+    title: "Chatter Workspace Pro"
+    category: "odoo"
+    featured: false
+    year: 2026
+    client: "NeuralBytea"
+    role: "Community & Enterprise · $29 · OPL-1"
+    odoo_version: "Odoo 18.0"
+    image: "assets/images/apps/mail_ext.jpg"
+    store_url: "https://apps.odoo.com/apps/modules/18.0/mail_ext/"
+    short_desc: "Hide, resize chatter with per-user memory; admin layout rules; preview toggle"
+    metric: "$29"
+    metric_label: "one-time price"
+    full_desc: "Lets users hide and resize the chatter with their choice remembered per user, while admins set layout rules per model and company."
+    tags:
+      - "Backend UI"
+    modules:
+      - "Discuss"
+    tech_stack:
+      - "Python"
+      - "Odoo ORM"
+      - "QWeb"
+      - "OWL / JavaScript"
+    highlights:
+      - "Hide and resize chatter"
+      - "Per-user memory of layout"
+      - "Admin layout rules"
+      - "Preview toggle"
+      - "Translated (3 languages)"
+
+  - id: "pane_split_view"
+    title: "Split View Pro"
+    category: "odoo"
+    featured: false
+    year: 2026
+    client: "NeuralBytea"
+    role: "Community & Enterprise · $24.99 · OPL-1"
+    odoo_version: "Odoo 18.0"
+    image: "assets/images/apps/pane_split_view.jpg"
+    store_url: "https://apps.odoo.com/apps/modules/18.0/pane_split_view/"
+    short_desc: "Master-detail split pane for every Odoo 18 list view, preview and edit side by side"
+    metric: "$24.99"
+    metric_label: "one-time price"
+    full_desc: "A master-detail split pane for Odoo 18 list views so you can preview and edit records beside the list."
+    tags:
+      - "Backend UI"
+    modules:
+      - "Web"
+    tech_stack:
+      - "Python"
+      - "Odoo ORM"
+      - "QWeb"
+      - "OWL / JavaScript"
+    highlights:
+      - "Split pane on list views"
+      - "Preview and edit side by side"
+
+  - id: "web_home_menu"
+    title: "Home Menu Enterprise UI"
+    category: "odoo"
+    featured: false
+    year: 2026
+    client: "NeuralBytea"
+    role: "Community · $20 · OPL-1"
+    odoo_version: "Odoo 18.0"
+    image: "assets/images/apps/web_home_menu.jpg"
+    store_url: "https://apps.odoo.com/apps/modules/18.0/web_home_menu/"
+    short_desc: "Enterprise-like Home Menu for Community Edition"
+    metric: "$20"
+    metric_label: "one-time price"
+    full_desc: "Brings an Enterprise-style home menu to Odoo Community."
+    tags:
+      - "Backend UI"
+      - "Community"
+    modules:
+      - "Web"
+    tech_stack:
+      - "Python"
+      - "Odoo ORM"
+      - "QWeb"
+      - "OWL / JavaScript"
+    highlights:
+      - "Enterprise-like app grid home menu for Community"
+
+  - id: "web_appbar"
+    title: "Sidebar App Navigation"
+    category: "odoo"
+    featured: false
+    year: 2026
+    client: "NeuralBytea"
+    role: "Community & Enterprise · $10 · OPL-1"
+    odoo_version: "Odoo 18.0"
+    image: "assets/images/apps/web_appbar.jpg"
+    store_url: "https://apps.odoo.com/apps/modules/18.0/web_appbar/"
+    short_desc: "Collapsible sidebar and appbar navigation with modern design for Odoo"
+    metric: "$10"
+    metric_label: "one-time price"
+    full_desc: "A collapsible sidebar and appbar navigation with a modern design. Works with Web UI Extensions."
+    tags:
+      - "Backend UI"
+      - "Theme"
+    modules:
+      - "Web"
+      - "Web UI Extensions"
+    tech_stack:
+      - "Python"
+      - "Odoo ORM"
+      - "QWeb"
+      - "OWL / JavaScript"
+    highlights:
+      - "Collapsible sidebar navigation"
+      - "Modern appbar design"
+
+  - id: "web_ext"
+    title: "Web UI Extensions"
+    category: "odoo"
+    featured: false
+    year: 2026
+    client: "NeuralBytea"
+    role: "Community & Enterprise · $5 · OPL-1"
+    odoo_version: "Odoo 18.0"
+    image: "assets/images/apps/web_ext.jpg"
+    store_url: "https://apps.odoo.com/apps/modules/18.0/web_ext/"
+    short_desc: "Modern UI enhancements and customizations for Odoo web interface"
+    metric: "$5"
+    metric_label: "one-time price"
+    full_desc: "Shared UI enhancements for the Odoo web client. Required by Sidebar App Navigation."
+    tags:
+      - "Backend UI"
+      - "Theme"
+    modules:
+      - "Web"
+    tech_stack:
+      - "Python"
+      - "Odoo ORM"
+      - "QWeb"
+      - "OWL / JavaScript"
+    highlights:
+      - "Modern UI enhancements for the web client"
