@@ -171,3 +171,10 @@ input,textarea{background:rgba(255,255,255,.05);border:1px solid var(--line2);co
 .fam-ai{background:rgba(250,204,21,.14);color:#fde68a}
 .cv-ai{background:radial-gradient(90% 120% at 90% 0,rgba(250,204,21,.4),transparent),radial-gradient(70% 90% at 0 100%,rgba(168,85,247,.4),transparent),#1b1a2e}
 .fam-grid{grid-template-columns:repeat(3,1fr)}
+
+.gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.gallery figure{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:rgba(255,255,255,.03);transition:.3s}
+.gallery figure:hover{border-color:rgba(109,123,255,.5);transform:translateY(-3px)}
+.gallery img{width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;object-position:top}
+.gallery figcaption{padding:12px 14px;font-size:13.5px;color:var(--mut)}
+@media(max-width:620px){.gallery{grid-template-columns:1fr}}

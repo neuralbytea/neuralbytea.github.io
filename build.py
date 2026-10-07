@@ -205,6 +205,10 @@ def app_page(i, app):
     mods = "".join(f"<span class='tag'>{e(x)}</span>" for x in app.get("modules", []))
     tech = "".join(f"<span class='tag'>{e(x)}</span>" for x in app.get("tech_stack", []))
     feats = "".join(f"<li>{e(x)}</li>" for x in app.get("highlights", []))
+    shots = app.get("screenshots", [])
+    gallery = ('<h2 class="h3">Screenshots</h2><div class="gallery">' + "".join(
+        f'<figure><a href="{root}{s["src"]}" target="_blank" rel="noopener"><img src="{root}{s["src"]}" alt="{e(app["title"])}: {e(s["caption"])}" loading="lazy" width="1440" height="900"></a>'
+        f'<figcaption>{e(s["caption"])}</figcaption></figure>' for s in shots) + "</div>") if shots else ""
     lat_s, lat = latest(app)
     price_num = str(float(lat.get("price") or 0))
     vlist = "".join(
@@ -217,7 +221,7 @@ def app_page(i, app):
   <div class="chips-row"><span class="chip fam-{FAM_CLASS[family(app)]}">{e(family(app))}</span>{''.join(f'<span class="tag">{e(t)}</span>' for t in app['tags'][1:])}</div>
   <h1>{e(app['title'])}</h1><p class="lead">{e(app['short_desc'])}.</p>
   <h2 class="h3">About this app</h2><p class="body">{e(app['full_desc'])}</p>
-  <h2 class="h3">Key features</h2><ul class="feat">{feats}</ul>
+  <h2 class="h3">Key features</h2><ul class="feat">{feats}</ul>{gallery}
  </div>
  <aside class="detail-side"><div class="card buy">
   <div class="buy-price"><b>{price_label(latest(app)[1])}</b><span>{"one-time" if float(latest(app)[1].get("price") or 0) else "open licence"}</span></div>
