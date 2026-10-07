@@ -1,7 +1,7 @@
 site:
   name: "NeuralBytea"
   tagline: "Odoo apps and custom development"
-  description: "NeuralBytea builds production-ready Odoo 18 apps: vendor, customer and employee portals, payment providers, HR and payroll tools, dashboards and backend UI upgrades. 17 apps on the Odoo Apps Store."
+  description: "NeuralBytea builds production-ready apps for Odoo 17, 18 and 19: vendor, customer and employee portals, payment providers, HR and payroll tools, dashboards backend UI upgrades and an AI assistant. 19 apps on the Odoo Apps Store."
   url: "https://neuralbytea.github.io/neuralbyteai.github.io"
   available_for_work: true
   store: "https://apps.odoo.com/apps/browse?repo_maintainer_id=1172096"
@@ -16,8 +16,8 @@ contact:
 
 hire:
   - k: "Odoo Apps Store"
-    v: "17 apps"
-    n: "All built for Odoo 18 and installable straight from the store."
+    v: "19 apps"
+    n: "Built for Odoo 17, 18 and 19 and installable straight from the store."
   - k: "Custom development"
     v: "Modules & portals"
     n: "Custom Odoo modules, portals, payment and API integrations, dashboards and migrations."
@@ -30,11 +30,11 @@ hire:
 
 stats:
   - label: "Apps on the Odoo store"
-    value: "17"
-  - label: "Odoo version"
-    value: "18.0"
+    value: "19"
+  - label: "Odoo versions"
+    value: "17 · 18 · 19"
   - label: "Product lines"
-    value: "5"
+    value: "6"
   - label: "Editions"
     value: "Community + Enterprise"
 
@@ -276,7 +276,7 @@ projects:
   - id: "employee_loan_management_enterprise"
     title: "Employee Loan Pro"
     category: "odoo"
-    featured: true
+    featured: false
     year: 2026
     client: "NeuralBytea"
     role: "Enterprise (needs Payroll) · $49 · OPL-1"
@@ -473,10 +473,10 @@ projects:
     odoo_version: "Odoo 18.0"
     image: "assets/images/apps/pane_split_view.jpg"
     store_url: "https://apps.odoo.com/apps/modules/18.0/pane_split_view/"
-    short_desc: "Master-detail split pane for every Odoo 18 list view, preview and edit side by side"
+    short_desc: "Master-detail split pane for every Odoo list view, preview and edit side by side"
     metric: "$24.99"
     metric_label: "one-time price"
-    full_desc: "A master-detail split pane for Odoo 18 list views so you can preview and edit records beside the list."
+    full_desc: "A master-detail split pane for Odoo list views so you can preview and edit records beside the list."
     tags:
       - "Backend UI"
     modules:
@@ -572,3 +572,64 @@ projects:
       - "OWL / JavaScript"
     highlights:
       - "Modern UI enhancements for the web client"
+
+  - id: "nb_ai_chatbot"
+    title: "AI Chat Assistant"
+    category: "odoo"
+    featured: true
+    year: 2026
+    client: "NeuralBytea"
+    role: "Community & Enterprise · $19 · OPL-1"
+    odoo_version: "Odoo 19.0"
+    image: ""
+    store_url: "https://apps.odoo.com/apps/modules/19.0/nb_ai_chatbot/"
+    short_desc: "AI chatbot for Odoo: ChatGPT, Claude and Gemini query your data and create records on confirm"
+    metric: "$19"
+    metric_label: "one-time price"
+    full_desc: "A floating AI chat bubble on every screen of Odoo Community and Enterprise. Connect your own AI model with your own API key, then chat with your Odoo data. The assistant always runs with the access rights of the signed-in user."
+    tags:
+      - "AI Assistant"
+      - "Backend UI"
+    modules:
+      - "Discuss"
+      - "Web"
+    tech_stack:
+      - "Python"
+      - "Odoo ORM"
+      - "OWL / JavaScript"
+    highlights:
+      - "Bring your own AI agent in 10 seconds: pick a provider, paste the API key"
+      - "OpenAI (ChatGPT), Claude, Gemini, Groq, NVIDIA NIM, OpenCode Zen, Ollama or any OpenAI-compatible API"
+      - "Ask questions about your data: it searches, counts and totals records"
+      - "Every answer lists the records it used, with a link to open them"
+      - "Create or update records by asking, confirming each change with one click"
+
+  - id: "payment_provider_ngenius"
+    title: "N-Genius Payment Provider"
+    category: "odoo"
+    featured: false
+    year: 2026
+    client: "NeuralBytea"
+    role: "Community & Enterprise · Free · LGPL-3"
+    odoo_version: "Odoo 19.0"
+    image: ""
+    store_url: "https://apps.odoo.com/apps/modules/19.0/payment_provider_ngenius/"
+    short_desc: "N-Genius card payments in Odoo: hosted checkout, webhooks, sandbox and full refunds"
+    metric: "Free"
+    metric_label: "open licence"
+    full_desc: "Accept online payments in Odoo with N-Genius Online by Network International. Customers pay on a secure hosted checkout, payment status updates automatically, and you can refund in full from Odoo. Requires an active N-Genius merchant account."
+    tags:
+      - "Payments"
+      - "Accounting"
+    modules:
+      - "Payment Providers"
+      - "Invoicing"
+    tech_stack:
+      - "Python"
+      - "Odoo ORM"
+      - "QWeb"
+    highlights:
+      - "Secure hosted checkout"
+      - "Sandbox and production environments"
+      - "Automatic payment status updates through webhooks"
+      - "Full refund support from Odoo"

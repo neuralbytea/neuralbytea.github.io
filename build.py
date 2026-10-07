@@ -19,6 +19,8 @@ FORM_ID = os.environ.get("FORMSPREE_ID", "mzdwrpyp")  # TODO: replace with a Neu
 
 D = yaml.safe_load((ROOT / "data/portfolio_data.yaml").read_text())
 SITE, CONTACT, APPS = D["site"], D["contact"], D["projects"]
+VERS = yaml.safe_load((ROOT / "data/versions.yaml").read_text())  # from scan_versions.py
+SERIES = ["19.0", "18.0", "17.0"]  # newest first
 NAME = SITE["name"]
 STORE = SITE["store"]
 e = lambda v: html.escape(str(v if v is not None else ""), quote=True)
@@ -28,6 +30,7 @@ FAMILIES = [
     ("Payments", "💳", "payments", "Mastercard MPGS Hosted Checkout with 3-D Secure and automatic invoice reconciliation."),
     ("HR & Payroll", "👥", "hr", "Employee loans with payroll deduction, attendance and leave Gantt, self-service HR."),
     ("Dashboards", "📊", "dash", "Owl dashboards for sales, invoices, payments and payroll with Excel and PDF export."),
+    ("AI Assistant", "🤖", "ai", "An AI chat bubble inside Odoo: bring your own ChatGPT, Claude or Gemini key and chat with your data."),
     ("Backend UI", "🧩", "ui", "AI list search, split view, chatter workspace, home menu and sidebar navigation."),
 ]
 FAM_CLASS = {f[0]: f[2] for f in FAMILIES}
@@ -40,6 +43,26 @@ def family(app):
 def meta(app):
     parts = [p.strip() for p in app["role"].split("·")]
     return {"edition": parts[0], "price": parts[1] if len(parts) > 1 else "", "licence": parts[2] if len(parts) > 2 else ""}
+
+
+def vers(app):
+    """Published series for this app, newest first: [(series, info)]."""
+    v = VERS.get(app["id"], {})
+    return [(s, v[s]) for s in SERIES if s in v]
+
+
+def price_label(info):
+    p = float(info.get("price") or 0)
+    return "Free" if not p else "$%s" % (("%g" % p) if p == int(p) else "%.2f" % p)
+
+
+def latest(app):
+    v = vers(app)
+    return v[0] if v else (app["odoo_version"].split()[-1], {"price": None, "url": app["store_url"], "version": ""})
+
+
+def ver_chips(app):
+    return "".join(f'<i class="vb">{s.split(".")[0]}</i>' for s, _ in reversed(vers(app)))
 
 
 def slug(app):
@@ -103,16 +126,16 @@ def cover(app, root, cls="shot"):
         img = app["image"].replace("assets/", "")
         return f'<div class="{cls}"><img src="{root}{img}" alt="{e(app["title"])} for Odoo" loading="lazy" width="1000" height="500"></div>'
     f = family(app)
-    return f'<div class="{cls} cover cv-{FAM_CLASS[f]}"><small>Odoo 18</small><b>{e(app["title"])}</b><span>{e(f)}</span></div>'
+    return f'<div class="{cls} cover cv-{FAM_CLASS[f]}"><small>Odoo {latest(app)[0].split(".")[0]}</small><b>{e(app["title"])}</b><span>{e(f)}</span></div>'
 
 
 def app_card(app, root):
     m = meta(app)
-    return f"""<a class="card app reveal" href="{root}apps/{slug(app)}/" data-line="{FAM_CLASS[family(app)]}" data-q="{e((app['title'] + ' ' + app['short_desc'] + ' ' + ' '.join(app['tags'])).lower())}">
+    return f"""<a class="card app reveal" href="{root}apps/{slug(app)}/" data-line="{FAM_CLASS[family(app)]}" data-ver="{' '.join(s.split('.')[0] for s, _ in vers(app))}" data-q="{e((app['title'] + ' ' + app['short_desc'] + ' ' + ' '.join(app['tags'])).lower())}">
 {cover(app, root)}
-<div class="app-body"><div class="app-top"><span class="chip fam-{FAM_CLASS[family(app)]}">{e(family(app))}</span><span class="price">{e(m['price'])}</span></div>
+<div class="app-body"><div class="app-top"><span class="chip fam-{FAM_CLASS[family(app)]}">{e(family(app))}</span><span class="price">{price_label(latest(app)[1])}</span></div>
 <h3>{e(app['title'])}</h3><p>{e(app['short_desc'])}</p>
-<span class="more">View details <i>→</i></span></div></a>"""
+<div class="app-foot"><span class="more">View details <i>→</i></span><span class="vbs" title="Odoo versions">{ver_chips(app)}</span></div></div></a>"""
 
 
 # --------------------------------------------------------------------------- pages
@@ -128,21 +151,21 @@ def home():
         for n, ico, c, d in FAMILIES) + ('<a class="card fam reveal" href="contact/"><div class="ico">🛠</div><h3>Custom development</h3>'
         '<p>Need something else? We build custom Odoo modules, portals and integrations.</p><span class="more">Talk to us <i>→</i></span></a>')
     hire = "".join(f'<div class="card hire reveal"><small>{e(h["k"])}</small><b>{e(h["v"])}</b><p>{e(h["n"])}</p></div>' for h in D["hire"])
-    tech = "".join(f"<span>{t}</span>" for t in ["Odoo 18", "Python", "OWL", "JavaScript", "PostgreSQL", "QWeb", "Portals", "Payments", "HR & Payroll", "Accounting", "Purchase", "Sales"])
+    tech = "".join(f"<span>{t}</span>" for t in ["Odoo 17", "Odoo 18", "Odoo 19", "Python", "OWL", "JavaScript", "PostgreSQL", "QWeb", "Portals", "Payments", "HR & Payroll", "Accounting", "Purchase", "Sales"])
     body = f"""
 <section class="hero wrap">
  <div class="hero-copy">
   <span class="pill"><i class="dot"></i>{len(APPS)} apps live on the Odoo Apps Store</span>
   <h1>Odoo apps that <em>empower</em> your team and customers.</h1>
-  <p class="lead">{NAME} builds production-ready Odoo apps: vendor, customer and employee portals, payment providers, HR and payroll tools, dashboards and backend UI upgrades. Install from the store, or let us build it for you.</p>
+  <p class="lead">{NAME} builds production-ready Odoo apps for versions 17, 18 and 19: vendor, customer and employee portals, payment providers, HR and payroll tools, dashboards, an AI assistant and backend UI upgrades. Install from the store, or let us build it for you.</p>
   <div class="btn-row"><a class="btn btn-primary" href="apps/">Browse the apps</a><a class="btn btn-ghost" href="contact/">Talk to us →</a></div>
-  <ul class="trust"><li>Odoo 18</li><li>Community &amp; Enterprise</li><li>OPL-1 licensed</li><li>Store-published</li></ul>
+  <ul class="trust"><li>Odoo 17 · 18 · 19</li><li>Community &amp; Enterprise</li><li>OPL-1 licensed</li><li>Store-published</li></ul>
  </div>
  <div class="hero-art" aria-hidden="true"><div class="glow"></div>{stack}</div>
 </section>
 <section class="wrap stats">{stats}</section>
 <div class="marquee" aria-hidden="true"><div class="track">{tech}{tech}</div></div>
-<section class="wrap sec"><div class="sec-head reveal"><span class="eyebrow">Product lines</span><h2>Five families of Odoo apps</h2><p>Each app does one job and works out of the box after install.</p></div>
+<section class="wrap sec"><div class="sec-head reveal"><span class="eyebrow">Product lines</span><h2>Six families of Odoo apps</h2><p>Each app does one job and works out of the box after install.</p></div>
  <div class="grid fam-grid">{fams}</div></section>
 <section class="wrap sec"><div class="sec-head reveal"><span class="eyebrow">Featured</span><h2>Where most customers start</h2><p>Portals, payments and payroll tools.</p><a class="see" href="apps/">All {len(APPS)} apps →</a></div>
  <div class="grid app-grid">{''.join(app_card(a, root) for a in featured)}</div></section>
@@ -153,7 +176,7 @@ def home():
  <div class="btn-row center"><a class="btn btn-primary" href="contact/">Contact us</a><a class="btn btn-ghost" href="{STORE}" target="_blank" rel="noopener">Odoo Apps Store ↗</a></div></div></section>"""
     ld = {"@context": "https://schema.org", "@type": "Organization", "name": NAME, "url": SITE_URL + "/", "email": CONTACT["email"],
           "logo": SITE_URL + "/images/mark-512.png", "description": SITE["description"]}
-    return page(f"{NAME} | Odoo 18 Apps & Custom Odoo Development", SITE["description"], "", "home", body,
+    return page(f"{NAME} | Odoo 17, 18 & 19 Apps and Custom Odoo Development", SITE["description"], "", "home", body,
                 f'<script type="application/ld+json">{json.dumps(ld)}</script>')
 
 
@@ -161,13 +184,16 @@ def apps_page():
     root = "../"
     chips = '<button class="fchip on" data-line="all">All <b>%d</b></button>' % len(APPS) + "".join(
         f'<button class="fchip" data-line="{c}">{n} <b>{sum(1 for a in APPS if family(a) == n)}</b></button>' for n, _, c, _ in FAMILIES)
+    vchips = '<button class="fchip vchip on" data-ver="all">All</button>' + "".join(
+        f'<button class="fchip vchip" data-ver="{s.split(".")[0]}">{s.split(".")[0]} <b>{sum(1 for a in APPS if s in dict(vers(a)))}</b></button>' for s in SERIES)
     body = f"""<section class="wrap page-hero"><div class="crumb"><a href="{root}">Home</a> / Apps</div>
-<h1>Odoo 18 apps</h1><p class="lead">Every app is published on the Odoo Apps Store. Filter by product line, or search by feature.</p>
+<h1>Odoo apps</h1><p class="lead">Every app is published on the Odoo Apps Store. Pick your Odoo version, filter by product line, or search by feature.</p>
+<div class="toolbar"><div class="chips vchips"><span class="lbl">Odoo</span>{vchips}</div></div>
 <div class="toolbar"><div class="chips">{chips}</div><input id="q" type="search" placeholder="Search apps…" aria-label="Search apps"></div></section>
 <section class="wrap"><div class="grid app-grid" id="app-grid">{''.join(app_card(a, root) for a in APPS)}</div>
 <p id="none" class="muted center" hidden>No apps match your search.</p></section>"""
-    return page(f"Odoo 18 Apps by {NAME} | Portals, Payments, HR, Dashboards",
-                f"Browse {len(APPS)} Odoo 18 apps by {NAME}: vendor, customer and employee portals, Mastercard MPGS payments, employee loans, dashboards and backend UI.",
+    return page(f"Odoo 17, 18 & 19 Apps by {NAME} | Portals, Payments, HR, AI",
+                f"Browse {len(APPS)} Odoo apps for versions 17, 18 and 19 by {NAME}: portals, payments, HR and payroll, dashboards, AI assistant and backend UI.",
                 "apps/", "apps", body)
 
 
@@ -179,7 +205,11 @@ def app_page(i, app):
     mods = "".join(f"<span class='tag'>{e(x)}</span>" for x in app.get("modules", []))
     tech = "".join(f"<span class='tag'>{e(x)}</span>" for x in app.get("tech_stack", []))
     feats = "".join(f"<li>{e(x)}</li>" for x in app.get("highlights", []))
-    price_num = re.sub(r"[^0-9.]", "", m["price"])
+    lat_s, lat = latest(app)
+    price_num = str(float(lat.get("price") or 0))
+    vlist = "".join(
+        f'<a class="vrow{" new" if i == 0 else ""}" href="{info["url"]}" target="_blank" rel="noopener"><b>Odoo {s.split(".")[0]}</b>'
+        f'<span>v{info["version"].split(".", 2)[2]} · {price_label(info)}</span><i>Get ↗</i></a>' for i, (s, info) in enumerate(vers(app)))
     body = f"""<section class="wrap page-hero slim"><div class="crumb"><a href="{root}">Home</a> / <a href="{root}apps/">Apps</a> / {e(app['title'])}</div></section>
 <section class="wrap detail">
  <div class="detail-main">
@@ -190,20 +220,21 @@ def app_page(i, app):
   <h2 class="h3">Key features</h2><ul class="feat">{feats}</ul>
  </div>
  <aside class="detail-side"><div class="card buy">
-  <div class="buy-price"><b>{e(m['price'])}</b><span>one-time</span></div>
-  <a class="btn btn-primary block" href="{app['store_url']}" target="_blank" rel="noopener">Get it on Odoo Apps ↗</a>
+  <div class="buy-price"><b>{price_label(latest(app)[1])}</b><span>{"one-time" if float(latest(app)[1].get("price") or 0) else "open licence"}</span></div>
+  <h4>Get it for your Odoo version</h4>
+  <div class="vlist">{vlist}</div>
   <a class="btn btn-ghost block" href="{root}contact/?subject={e(app['title'])}">Ask a question</a>
-  <dl><dt>Odoo version</dt><dd>{e(app['odoo_version'])}</dd><dt>Edition</dt><dd>{e(m['edition'])}</dd><dt>Licence</dt><dd>{e(m['licence'])}</dd><dt>Publisher</dt><dd>{NAME}</dd></dl>
+  <dl><dt>Odoo versions</dt><dd>{" · ".join(s.split(".")[0] for s, _ in reversed(vers(app)))}</dd><dt>Edition</dt><dd>{e(m['edition'])}</dd><dt>Licence</dt><dd>{e(m['licence'])}</dd><dt>Publisher</dt><dd>{NAME}</dd></dl>
   <h4>Works with</h4><div class="tags">{mods}</div><h4>Tech stack</h4><div class="tags">{tech}</div></div></aside>
 </section>
 <section class="wrap sec"><div class="sec-head"><h2>Related apps</h2></div><div class="grid app-grid">{''.join(app_card(a, root) for a in related)}</div>
 <div class="pn"><a href="{root}apps/{slug(prev_a)}/">← {e(prev_a['title'])}</a><a href="{root}apps/{slug(next_a)}/">{e(next_a['title'])} →</a></div></section>"""
     ld = {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": app["title"], "applicationCategory": "BusinessApplication",
-          "operatingSystem": "Odoo 18", "description": app["short_desc"], "url": f"{SITE_URL}/apps/{slug(app)}/",
-          "offers": {"@type": "Offer", "price": price_num, "priceCurrency": "USD", "url": app["store_url"]},
+          "operatingSystem": "Odoo " + ", ".join(s.split(".")[0] for s, _ in vers(app)), "description": app["short_desc"], "url": f"{SITE_URL}/apps/{slug(app)}/",
+          "offers": {"@type": "Offer", "price": price_num, "priceCurrency": "USD", "url": lat["url"]},
           "publisher": {"@type": "Organization", "name": NAME}}
     img = app["image"].replace("assets/", "") if app.get("image") else "images/og-cover.png"
-    return page(f"{app['title']} for Odoo 18 | {NAME}", app["short_desc"] + ". " + app["full_desc"][:110], f"apps/{slug(app)}/", "apps", body,
+    return page(f"{app['title']} for Odoo {' / '.join(s.split('.')[0] for s, _ in reversed(vers(app)))} | {NAME}", app["short_desc"] + ". " + app["full_desc"][:110], f"apps/{slug(app)}/", "apps", body,
                 f'<script type="application/ld+json">{json.dumps(ld)}</script>', img)
 
 

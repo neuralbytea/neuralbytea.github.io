@@ -19,21 +19,26 @@
   var grid = d.getElementById('app-grid');
   if (grid) {
     var cards = [].slice.call(grid.children), q = d.getElementById('q'), none = d.getElementById('none');
-    var chips = [].slice.call(d.querySelectorAll('.fchip')), line = 'all';
+    var chips = [].slice.call(d.querySelectorAll('.fchip:not(.vchip)')), vchips = [].slice.call(d.querySelectorAll('.vchip'));
+    var line = 'all', ver = 'all';
     var apply = function () {
       var t = q.value.trim().toLowerCase(), n = 0;
       cards.forEach(function (c) {
-        var ok = (line === 'all' || c.dataset.line === line) && (!t || c.dataset.q.indexOf(t) > -1);
+        var ok = (line === 'all' || c.dataset.line === line) &&
+                 (ver === 'all' || (' ' + c.dataset.ver + ' ').indexOf(' ' + ver + ' ') > -1) &&
+                 (!t || c.dataset.q.indexOf(t) > -1);
         c.hidden = !ok; if (ok) { n++; c.classList.add('in'); }
       });
       none.hidden = n > 0;
     };
-    var set = function (l) {
-      line = l; chips.forEach(function (c) { c.classList.toggle('on', c.dataset.line === l); }); apply();
-    };
-    chips.forEach(function (c) { c.addEventListener('click', function () { set(c.dataset.line); }); });
+    var setLine = function (l) { line = l; chips.forEach(function (c) { c.classList.toggle('on', c.dataset.line === l); }); apply(); };
+    var setVer = function (v) { ver = v; vchips.forEach(function (c) { c.classList.toggle('on', c.dataset.ver === v); }); apply(); };
+    chips.forEach(function (c) { c.addEventListener('click', function () { setLine(c.dataset.line); }); });
+    vchips.forEach(function (c) { c.addEventListener('click', function () { setVer(c.dataset.ver); }); });
     q.addEventListener('input', apply);
-    var p = new URLSearchParams(location.search).get('line'); if (p) set(p);
+    var P = new URLSearchParams(location.search);
+    if (P.get('line')) setLine(P.get('line'));
+    if (P.get('v')) setVer(P.get('v'));
   }
 
   // contact form: prefill subject, send via fetch

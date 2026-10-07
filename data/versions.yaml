@@ -1,0 +1,175 @@
+employee_loan_management_enterprise:
+  '17.0':
+    version: 17.0.1.0.0
+    price: '49.0'
+    url: https://apps.odoo.com/apps/modules/17.0/employee_loan_management_enterprise/
+  '18.0':
+    version: 18.0.1.0.8
+    price: 49.0
+    url: https://apps.odoo.com/apps/modules/18.0/employee_loan_management_enterprise/
+  '19.0':
+    version: 19.0.1.0.10
+    price: 49.0
+    url: https://apps.odoo.com/apps/modules/19.0/employee_loan_management_enterprise/
+hr_attendance_board:
+  '17.0':
+    version: 17.0.2.0.0
+    price: '24.99'
+    url: https://apps.odoo.com/apps/modules/17.0/hr_attendance_board/
+  '18.0':
+    version: 18.0.2.0.5
+    price: 24.99
+    url: https://apps.odoo.com/apps/modules/18.0/hr_attendance_board/
+  '19.0':
+    version: 19.0.2.0.6
+    price: 24.99
+    url: https://apps.odoo.com/apps/modules/19.0/hr_attendance_board/
+mail_ext:
+  '18.0':
+    version: 18.0.2.1.1
+    price: 29.0
+    url: https://apps.odoo.com/apps/modules/18.0/mail_ext/
+  '19.0':
+    version: 19.0.2.1.2
+    price: 29.0
+    url: https://apps.odoo.com/apps/modules/19.0/mail_ext/
+nb_ai_chatbot:
+  '19.0':
+    version: 19.0.1.0.1
+    price: 19.0
+    url: https://apps.odoo.com/apps/modules/19.0/nb_ai_chatbot/
+nb_customer_portal_pro:
+  '18.0':
+    version: 18.0.1.3.5
+    price: 99.0
+    url: https://apps.odoo.com/apps/modules/18.0/nb_customer_portal_pro/
+  '19.0':
+    version: 19.0.1.3.5
+    price: 99.0
+    url: https://apps.odoo.com/apps/modules/19.0/nb_customer_portal_pro/
+nb_employee_self_service:
+  '18.0':
+    version: 18.0.2.0.4
+    price: 119.0
+    url: https://apps.odoo.com/apps/modules/18.0/nb_employee_self_service/
+  '19.0':
+    version: 19.0.2.0.4
+    price: 119.0
+    url: https://apps.odoo.com/apps/modules/19.0/nb_employee_self_service/
+nb_payroll_dashboard:
+  '18.0':
+    version: 18.0.1.0.7
+    price: 29.0
+    url: https://apps.odoo.com/apps/modules/18.0/nb_payroll_dashboard/
+  '19.0':
+    version: 19.0.1.0.8
+    price: 29.0
+    url: https://apps.odoo.com/apps/modules/19.0/nb_payroll_dashboard/
+nb_services_billing_pro:
+  '18.0':
+    version: 18.0.1.0.7
+    price: 99.0
+    url: https://apps.odoo.com/apps/modules/18.0/nb_services_billing_pro/
+  '19.0':
+    version: 19.0.1.0.7
+    price: 99.0
+    url: https://apps.odoo.com/apps/modules/19.0/nb_services_billing_pro/
+nb_smart_list_search_pro:
+  '18.0':
+    version: 18.0.1.0.1
+    price: 59.0
+    url: https://apps.odoo.com/apps/modules/18.0/nb_smart_list_search_pro/
+  '19.0':
+    version: 19.0.1.0.3
+    price: 59.0
+    url: https://apps.odoo.com/apps/modules/19.0/nb_smart_list_search_pro/
+nb_vendor_portal_pro:
+  '18.0':
+    version: 18.0.1.8.5
+    price: 99.0
+    url: https://apps.odoo.com/apps/modules/18.0/nb_vendor_portal_pro/
+  '19.0':
+    version: 19.0.1.8.5
+    price: 99.0
+    url: https://apps.odoo.com/apps/modules/19.0/nb_vendor_portal_pro/
+pane_split_view:
+  '18.0':
+    version: 18.0.1.0.4
+    price: 24.99
+    url: https://apps.odoo.com/apps/modules/18.0/pane_split_view/
+  '19.0':
+    version: 19.0.1.0.5
+    price: 24.99
+    url: https://apps.odoo.com/apps/modules/19.0/pane_split_view/
+payment_Mastercard:
+  '18.0':
+    version: 18.0.1.0.4
+    price: 49.0
+    url: https://apps.odoo.com/apps/modules/18.0/payment_Mastercard/
+  '19.0':
+    version: 19.0.1.0.5
+    price: 49.0
+    url: https://apps.odoo.com/apps/modules/19.0/payment_Mastercard/
+payment_provider_ngenius:
+  '19.0':
+    version: 19.0.1.1.1
+    price: null
+    url: https://apps.odoo.com/apps/modules/19.0/payment_provider_ngenius/
+portal_ext:
+  '18.0':
+    version: 18.0.1.0.7
+    price: 49.0
+    url: https://apps.odoo.com/apps/modules/18.0/portal_ext/
+  '19.0':
+    version: 19.0.1.0.7
+    price: 49.0
+    url: https://apps.odoo.com/apps/modules/19.0/portal_ext/
+sale_payment_dashboard:
+  '17.0':
+    version: 17.0.1.0.0
+    price: '49.0'
+    url: https://apps.odoo.com/apps/modules/17.0/sale_payment_dashboard/
+  '18.0':
+    version: 18.0.1.2.3
+    price: 49.0
+    url: https://apps.odoo.com/apps/modules/18.0/sale_payment_dashboard/
+  '19.0':
+    version: 19.0.1.2.4
+    price: 49.0
+    url: https://apps.odoo.com/apps/modules/19.0/sale_payment_dashboard/
+salesperson_portal:
+  '18.0':
+    version: 18.0.2.5.0
+    price: 99.0
+    url: https://apps.odoo.com/apps/modules/18.0/salesperson_portal/
+  '19.0':
+    version: 19.0.2.5.0
+    price: 99.0
+    url: https://apps.odoo.com/apps/modules/19.0/salesperson_portal/
+web_appbar:
+  '18.0':
+    version: 18.0.1.0.6
+    price: 10.0
+    url: https://apps.odoo.com/apps/modules/18.0/web_appbar/
+  '19.0':
+    version: 19.0.1.0.7
+    price: 15.0
+    url: https://apps.odoo.com/apps/modules/19.0/web_appbar/
+web_ext:
+  '18.0':
+    version: 18.0.1.0.5
+    price: 5.0
+    url: https://apps.odoo.com/apps/modules/18.0/web_ext/
+  '19.0':
+    version: 19.0.1.0.6
+    price: 5.0
+    url: https://apps.odoo.com/apps/modules/19.0/web_ext/
+web_home_menu:
+  '18.0':
+    version: 18.0.1.0.4
+    price: 20.0
+    url: https://apps.odoo.com/apps/modules/18.0/web_home_menu/
+  '19.0':
+    version: 19.0.1.0.5
+    price: 20.0
+    url: https://apps.odoo.com/apps/modules/19.0/web_home_menu/
