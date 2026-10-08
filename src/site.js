@@ -1,6 +1,7 @@
 (function () {
   var d = document, de = d.documentElement;
   de.classList.add('js');
+  try { if (location.pathname.replace(/index\.html$/, '').split('/').filter(Boolean).length === (document.querySelector('link[rel=canonical]') && new URL(document.querySelector('link[rel=canonical]').href).pathname.split('/').filter(Boolean).length) && document.querySelector('.hero') && !sessionStorage.getItem('nb_intro')) { de.classList.add('js-loader'); sessionStorage.setItem('nb_intro', '1'); setTimeout(function () { de.classList.remove('js-loader'); }, 1800); } } catch (e) {}
   var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   // mobile menu

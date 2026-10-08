@@ -102,7 +102,7 @@ def head(title, desc, path, root, og_image="images/og-cover.png", extra=""):
 <meta property="og:title" content="{e(title)}"><meta property="og:description" content="{e(desc)}">
 <meta property="og:url" content="{url}"><meta property="og:image" content="{SITE_URL}/{og_image}">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="{root}favicon.ico" sizes="any"><link rel="apple-touch-icon" href="{root}apple-touch-icon.png">
+<link rel="icon" href="{root}favicon.svg" type="image/svg+xml"><link rel="icon" href="{root}favicon.ico" sizes="any"><link rel="apple-touch-icon" href="{root}apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@500;600;700;800&family=JetBrains+Mono:wght@400&display=swap">
 <link rel="stylesheet" href="{root}assets/style.css">
@@ -116,7 +116,7 @@ def nav(root, active):
     def a(key, href, label):
         return f'<a href="{root}{href}"{" class=on" if key == active else ""}>{label}</a>'
     return f"""<header class="nav"><div class="wrap nav-in">
-<a class="brand" href="{root}"><img src="{root}images/mark-512.png" width="30" height="30" alt="">{NAME}</a>
+<a class="brand" href="{root}" aria-label="{NAME} home"><img class="brand-mark" src="{root}images/nb-mark.svg" width="92" height="50" alt=""><span class="brand-txt"><b>Neural<i>bytea</i></b><small>Solutions that empower</small></span></a>
 <nav id="menu">{a("home", "", "Home")}{a("apps", "apps/", "Apps")}{a("about", "about/", "About")}{a("faq", "faq/", "FAQ")}{a("contact", "contact/", "Contact")}
 <a href="{STORE}" target="_blank" rel="noopener">Odoo Store ↗</a>{'<button type="button" class="ask-ai" data-nbc-open>✦ Ask AI</button>' if CHAT_ON else ""}</nav>
 <a class="btn btn-sm btn-primary nav-cta" href="{root}contact/">Start a project</a>
@@ -127,7 +127,7 @@ def nav(root, active):
 def footer(root):
     fam = "".join(f'<a href="{root}apps/?line={FAM_CLASS[f[0]]}">{f[0]}</a>' for f in FAMILIES)
     return f"""<footer class="foot"><div class="wrap foot-grid">
-<div><a class="brand" href="{root}"><img src="{root}images/mark-512.png" width="30" height="30" alt="">{NAME}</a>
+<div><a class="brand brand-lg" href="{root}" aria-label="{NAME} home"><img class="brand-mark" src="{root}images/nb-mark.svg" width="118" height="64" alt=""><span class="brand-txt"><b>Neural<i>bytea</i></b><small>Solutions that empower</small></span></a>
 <p class="muted">Odoo apps and custom development. {len(APPS)} apps on the Odoo Apps Store.</p>
 <a href="mailto:{CONTACT['email']}">{CONTACT['email']}</a><span class="muted">{CONTACT['location']}</span></div>
 <div><h4>Product lines</h4>{fam}</div>
@@ -138,7 +138,7 @@ def footer(root):
 
 def page(title, desc, path, active, body, extra="", og="images/og-cover.png"):
     root = "../" * len(path.strip("/").split("/")) if path.endswith("/") else ""
-    return head(title, desc, path, root, og, extra) + f'<body>\n<div class="aurora"></div>\n{nav(root, active)}\n<main>{body.replace("{{root}}", root)}</main>\n{footer(root)}\n</body></html>'
+    return head(title, desc, path, root, og, extra) + f'<body>\n<div class="aurora"></div>\n<div class="loader" aria-hidden="true"><img src="{root}images/nb-mark.svg" alt=""></div>\n{nav(root, active)}\n<main>{body.replace("{{root}}", root)}</main>\n{footer(root)}\n</body></html>'
 
 
 def cover(app, root, cls="shot", lazy=True):

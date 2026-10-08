@@ -15,9 +15,8 @@ background:radial-gradient(55% 45% at 12% -8%,rgba(47,91,255,.20),transparent 62
 
 /* nav */
 .nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(16px);background:rgba(255,255,255,.82);border-bottom:1px solid var(--line)}
-.nav-in{display:flex;align-items:center;gap:28px;height:68px}
-.brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:18px;letter-spacing:-.01em}
-.brand img{border-radius:8px}
+.nav-in{display:flex;align-items:center;gap:28px;height:84px}
+.brand{display:flex;align-items:center;gap:12px;font-weight:700;font-size:18px;letter-spacing:-.01em}
 #menu{display:flex;gap:6px;margin-left:auto}
 #menu a{padding:8px 14px;border-radius:10px;color:var(--mut);font-size:14.5px;font-weight:500;transition:.2s}
 #menu a:hover,#menu a.on{color:var(--a);background:#eef2ff}
@@ -341,3 +340,35 @@ body{font-size:clamp(16px,.28vw + 12.4px,18px)}
 .nbc-card{display:block;padding:10px 12px;border:1px solid var(--line2);border-radius:12px;background:#fff;text-decoration:none!important;font-weight:400!important;color:var(--tx)!important;transition:.2s}
 a.nbc-card:hover{border-color:var(--a);background:#eef2ff}
 .nbc-card b{display:block;font:600 14px Sora;color:var(--tx)}.nbc-card span{display:block;font-size:13px;color:var(--mut);margin-top:2px}.nbc-card i{display:block;margin-top:4px;font-style:normal;font-size:12.5px;font-weight:600;color:var(--a)}
+
+/* ---- brand: large animated vector mark + wordmark ---- */
+.nav-in{height:84px}
+.brand-mark{width:auto;height:50px;display:block;filter:drop-shadow(0 6px 14px rgba(47,91,255,.35));transition:.35s}
+.brand:hover .brand-mark{transform:scale(1.06) rotate(-1.5deg);filter:drop-shadow(0 8px 20px rgba(18,181,240,.6))}
+.brand-txt{display:flex;flex-direction:column;line-height:1}
+.brand-txt b{font:700 25px/1 Sora;letter-spacing:-.03em;color:var(--tx)}
+.brand-txt b i{font-style:normal;background:linear-gradient(100deg,#2f5bff,#9a5cff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.brand-txt small{margin-top:5px;font:600 9.5px Inter;letter-spacing:.3em;text-transform:uppercase;color:var(--mut);white-space:nowrap}
+.brand-lg .brand-mark{height:64px}.brand-lg .brand-txt b{font-size:30px}
+#menu{top:84px}
+@media(max-width:960px){#menu{top:84px}.brand-txt small{display:none}.brand-mark{height:42px}.brand-txt b{font-size:21px}.nav-in{height:72px}#menu{top:72px}}
+@media(max-width:380px){.brand-txt b{font-size:18px}.brand-mark{height:36px}}
+.nav{backdrop-filter:blur(18px) saturate(1.4)}
+.nav:after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:1px;background:linear-gradient(90deg,transparent,#2f5bff 20%,#12b5f0 50%,#9a5cff 80%,transparent);opacity:.55}
+.nav{position:sticky}
+/* one-time intro loader (home, first visit per tab) */
+.loader{position:fixed;inset:0;z-index:200;display:none;place-items:center;background:#070b16}
+.loader img{width:min(360px,60vw);animation:ldr 1.1s ease both}
+.js-loader .loader{display:grid;animation:ldrout .5s ease 1.15s forwards}
+@keyframes ldr{from{opacity:0;transform:scale(.88);filter:blur(8px)}to{opacity:1;transform:none;filter:none}}
+@keyframes ldrout{to{opacity:0;visibility:hidden}}
+@media(prefers-reduced-motion:reduce){.js-loader .loader{display:none}}
+/* hero emblem behind the app shots */
+.hero-art:before{content:"";position:absolute;right:0;top:-14%;width:72%;aspect-ratio:1.84;background:url(../images/nb-mark.svg) center/contain no-repeat;opacity:.08;filter:blur(1px);animation:bob 9s ease-in-out infinite;pointer-events:none}
+/* tech-grid accent on the hero */
+.hero{position:relative}
+/* footer brand: stacked so the tagline can never run into the next column */
+.foot .brand-lg{flex-direction:column;align-items:flex-start;gap:12px}
+.foot .brand-lg .brand-mark{height:72px}.foot .brand-lg .brand-txt small{letter-spacing:.24em}
+.foot-grid .brand .brand-txt{display:flex;flex-direction:column;margin:0;color:var(--tx)}
+.foot-grid .brand .brand-txt small{display:block;margin:6px 0 0;color:var(--mut)}
