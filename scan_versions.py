@@ -9,7 +9,7 @@ Odoo Apps Store page for that series really exists (HTTP 200).
     ODOO_PROJ=/path/to/odoo_proj python3 scan_versions.py
     python3 scan_versions.py --no-store      # skip the store check (trust the manifests)
 """
-import ast, os, sys, urllib.request, urllib.error
+import ast, datetime, os, sys, urllib.request, urllib.error
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 import yaml
@@ -23,14 +23,28 @@ SKIP = {"nb_employee_portal"}
 OUT = Path(__file__).parent / "data/versions.yaml"
 
 
+SRC_EXT = {".py", ".xml", ".js", ".scss", ".css", ".csv", ".po"}
+
+
+def last_updated(module_dir):
+    """Newest mtime of real source files (not store artwork, docs or caches)."""
+    newest = 0
+    for f in module_dir.rglob("*"):
+        if f.suffix in SRC_EXT and "__pycache__" not in f.parts and "node_modules" not in f.parts and "description" not in f.parts and "docs" not in f.parts:
+            newest = max(newest, f.stat().st_mtime)
+    return datetime.date.fromtimestamp(newest).isoformat() if newest else None
+
+
 def manifests(series):
     base = PROJ / f"odoo{series.split('.')[0]}/env/env_neural/addons/Neural_Byte_Modules"
     for m in base.rglob("__manifest__.py"):
         if "node_modules" in m.parts:
             continue
         try:
-            yield m.parent.name, ast.literal_eval(m.read_text())
-        except (ValueError, SyntaxError) as ex:
+            mf = ast.literal_eval(m.read_text())
+            mf["_updated"] = last_updated(m.parent)
+            yield m.parent.name, mf
+        except (ValueError, SyntaxError, OSError) as ex:
             print(f"skip {m}: {ex}", file=sys.stderr)
 
 
@@ -55,7 +69,7 @@ def main():
             # a few 17.0 copies still carry an 18.0 manifest: not a real 17.0 port
             if not ver.startswith(s.split(".")[0] + "."):
                 continue
-            found.setdefault(sname, {})[s] = {"version": ver, "price": mf.get("price")}
+            found.setdefault(sname, {})[s] = {"version": ver, "price": mf.get("price"), "updated": mf["_updated"]}
     jobs = [(n, s) for n, v in found.items() for s in v]
     with ThreadPoolExecutor(8) as ex:
         ok = dict(zip(jobs, ex.map(lambda j: store_ok(j[1], j[0]) if check else True, jobs)))

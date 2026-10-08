@@ -18,7 +18,7 @@ body:before{content:"";position:absolute;inset:0;background-image:linear-gradien
 .brand{position:absolute;left:60px;top:58px;display:flex;align-items:center;gap:14px;font:600 14px Inter;letter-spacing:.2em;color:#cfd0ee}
 .brand i{width:44px;height:44px;border-radius:12px;background:%(accent)s;display:grid;place-items:center;box-shadow:0 8px 24px -6px %(accent)s}
 .brand img{width:26px;height:26px;border-radius:6px}
-h1{position:absolute;left:60px;top:128px;width:600px;font:700 66px/1.04 Sora;letter-spacing:-.03em}
+h1{position:absolute;left:60px;top:128px;width:600px;font:700 %(tsize)spx/1.04 Sora;letter-spacing:-.03em}
 h1 em{font-style:normal;background:%(grad)s;-webkit-background-clip:text;background-clip:text;color:transparent}
 .sub{position:absolute;left:60px;top:300px;width:540px;font:400 20px/1.5 Inter;color:#b9b8d9}
 .sub b{color:#fff;font-weight:600}
@@ -68,6 +68,24 @@ BANNERS = {
     shot=f"{SHOTS}/sb-team-overview.png", iw=1000, ix=-8, iy=-70, url="Services Billing / Team overview",
     ck="Margin (rate card)", cv="53.7%", cs="on 475 billable hours", tag="Cost rate and margin never reach portal users",
     foot="Odoo 19 · Community & Enterprise · OPL-1"),
+ "pd": dict(
+    bg="#1a0f1f", glow1="rgba(244,63,94,.34)", glow2="rgba(251,146,60,.26)", accent="linear-gradient(135deg,#f43f5e,#fb923c)",
+    grad="linear-gradient(100deg,#fda4af,#fdba74)", cardbg="linear-gradient(135deg,#e11d48,#ea580c)", mark=MARK,
+    title="Payroll<br>Dashboard <em>Pro</em>",
+    sub="Zero-configuration payroll analytics: worked days, salary computations and <b>Excel / PDF</b> reports.",
+    pills="".join(f'<span style="--c:{c}">{t}</span>' for t, c in [("Payslip batches", "#fda4af"), ("Worked days view", "#fdba74"), ("Salary computations", "#fcd34d"), ("Department filters", "#5eead4"), ("Excel export", "#86efac"), ("PDF report", "#93c5fd")]),
+    shot=f"{SHOTS}/pd-dash.png", iw=900, ix=-6, iy=-4, url="Payroll / Dashboard",
+    ck="Net salary (batch)", cv="67,000", cs="20 employees, 440 worked days", tag="Enterprise: works on top of Payroll",
+    foot="Odoo 19 · Enterprise (needs Payroll) · OPL-1"),
+ "sp": dict(
+    bg="#07161d", glow1="rgba(16,185,129,.34)", glow2="rgba(14,165,233,.28)", accent="linear-gradient(135deg,#10b981,#0ea5e9)",
+    grad="linear-gradient(100deg,#6ee7b7,#7dd3fc)", cardbg="linear-gradient(135deg,#059669,#0284c7)", mark=MARK,
+    title="Sales &amp; Payment<br><em>Dashboard</em>", tsize=56,
+    sub="Follow every order to invoice to payment: live KPIs, <b>recovery tracking</b> and 12-month trends.",
+    pills="".join(f'<span style="--c:{c}">{t}</span>' for t, c in [("Order-to-cash pipeline", "#6ee7b7"), ("Recovery rate", "#fcd34d"), ("Overdue tracking", "#fca5a5"), ("Customer analysis", "#7dd3fc"), ("Sales analytics", "#c4b5fd"), ("Customer / product filters", "#fdba74")]),
+    shot=f"{SHOTS}/sp-dash.png", iw=900, ix=-6, iy=-4, url="Sales Insights / Sales & Payments",
+    ck="Recovery rate", cv="63.6%", cs="of invoiced amount", tag="Click any card to trace order, invoice, payment",
+    foot="Odoo 19 · Community & Enterprise · OPL-1"),
 }
 
 ICON = """<!doctype html><meta charset=utf-8><style>*{margin:0}body{width:256px;height:256px;background:transparent}
@@ -96,6 +114,7 @@ ICONS = {
 
 
 def render(tpl, vals):
+    vals = {"tsize": 66, **vals}
     for k, v in vals.items():
         tpl = tpl.replace(f"%({k})s", str(v))
     return tpl.replace("%%", "%")
@@ -103,12 +122,17 @@ def render(tpl, vals):
 
 def main():
     b = Browser(width=1200, height=600)
+    only = os.environ.get("ONLY")
     for k, v in BANNERS.items():
+        if only and k not in only.split(","):
+            continue
         open(f"art/{k}_banner.html", "w").write(render(BASE, v))
         b.go("file://" + os.path.abspath(f"art/{k}_banner.html"), 2.5)
         b.js("document.fonts.ready.then(()=>true)")
         time.sleep(1)
         b.shot(None, f"{OUT}/{k}_banner.png", clip={"x": 0, "y": 0, "width": 1200, "height": 600})
+    if only:
+        b.close(); print("ok", os.listdir(OUT)); return
     b.send("Emulation.setDeviceMetricsOverride", width=256, height=256, deviceScaleFactor=1, mobile=False)
     b.send("Emulation.setDefaultBackgroundColorOverride", color={"r": 0, "g": 0, "b": 0, "a": 0})
     for k, svg in ICONS.items():

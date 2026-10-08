@@ -10,3 +10,7 @@ Custom domain: `SITE_URL=https://yourdomain.com python3 build.py` (writes CNAME)
 Deploy: repo Settings > Pages > Source = GitHub Actions (workflow in .github/workflows/deploy.yml).
 Add an app: append to `projects:` in the YAML, drop a 1000x500 banner in `src/static/images/apps/`, rebuild.
 TODO: replace the Formspree ID (still Hammad's) via FORMSPREE_ID.
+
+## Pages
+Home, Apps (filters, sort, pagination), per-app pages, About, FAQ, Contact, Privacy Policy, Terms of Use, Sitemap, 404.
+`scan_versions.py` refreshes versions, prices and update dates; `tools/` holds the screenshot driver and banner/icon generator.

@@ -1,7 +1,7 @@
 site:
   name: NeuralBytea
   tagline: Odoo apps and custom development
-  description: 'NeuralBytea builds production-ready apps for Odoo 17, 18 and 19: vendor, customer and employee portals, payment providers, HR and payroll tools, dashboards backend UI upgrades and an AI assistant. 19 apps on the Odoo Apps Store.'
+  description: 'NeuralBytea builds production-ready apps for Odoo 17, 18 and 19: vendor, customer and employee portals, payment providers, HR and payroll tools, dashboards, backend UI upgrades and an AI assistant. 19 apps on the Odoo Apps Store.'
   url: https://neuralbytea.github.io/neuralbyteai.github.io
   available_for_work: true
   store: https://apps.odoo.com/apps/browse?repo_maintainer_id=1172096
@@ -365,7 +365,7 @@ projects:
   client: NeuralBytea
   role: Enterprise (needs Payroll) · $29 · OPL-1
   odoo_version: Odoo 18.0
-  image: ''
+  image: assets/images/apps/nb_payroll_dashboard.jpg
   store_url: https://apps.odoo.com/apps/modules/18.0/nb_payroll_dashboard/
   short_desc: Owl payroll dashboard and Excel/PDF salary report, zero configuration
   metric: $29
@@ -394,7 +394,7 @@ projects:
   client: NeuralBytea
   role: Community & Enterprise · $49 · OPL-1
   odoo_version: Odoo 18.0
-  image: ''
+  image: assets/images/apps/sale_payment_dashboard.jpg
   store_url: https://apps.odoo.com/apps/modules/18.0/sale_payment_dashboard/
   short_desc: 'Owl dashboards for Sales, Invoices and Payments: live KPIs, recovery, customer trends'
   metric: $49
@@ -590,7 +590,7 @@ projects:
   client: NeuralBytea
   role: Community & Enterprise · $19 · OPL-1
   odoo_version: Odoo 19.0
-  image: ''
+  image: assets/images/apps/nb_ai_chatbot.jpg
   store_url: https://apps.odoo.com/apps/modules/19.0/nb_ai_chatbot/
   short_desc: 'AI chatbot for Odoo: ChatGPT, Claude and Gemini query your data and create records on confirm'
   metric: $19
@@ -620,7 +620,7 @@ projects:
   client: NeuralBytea
   role: Community & Enterprise · Free · LGPL-3
   odoo_version: Odoo 19.0
-  image: ''
+  image: assets/images/apps/payment_provider_ngenius.jpg
   store_url: https://apps.odoo.com/apps/modules/19.0/payment_provider_ngenius/
   short_desc: 'N-Genius card payments in Odoo: hosted checkout, webhooks, sandbox and full refunds'
   metric: Free
