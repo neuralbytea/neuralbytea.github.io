@@ -91,48 +91,74 @@
   // Two transports with the same result shape {status, j:{reply, retry_after}}:
   //  - proxy: our Cloudflare Worker holds the key (recommended)
   //  - direct: GitHub-Pages-only; the key was injected at build time from a CI secret (camouflaged, not secret)
-  var brain = null, lastCall = 0;
+  var brain = null, lastCall = 0, lastQuestion = '';
   var groqKey = function () { try { return atob(cfg.k.join('')).split('').reverse().join(''); } catch (e) { return ''; } };
+  var loadBrain = function () {
+    // never cache a failed import: a transient failure must not break the chat until the page is reloaded
+    brain = brain || import('./chat/prompt.js').catch(function (err) { brain = null; err.nbWhy = 'script'; throw err; });
+    return brain;
+  };
+  // Every outcome has the same shape {status, j:{reply, retry_after}} or {why, detail} for failures that never got an HTTP answer.
+  var fetchFail = function (err) { return { why: err && err.name === 'AbortError' ? 'timeout' : (err && err.nbWhy) || 'network', detail: String(err && (err.name + ': ' + err.message) || err) }; };
   var ask = function (msgs, signal) {
     if (!cfg.endpoint) {
       var wait = 3000 - (Date.now() - lastCall);
-      if (wait > 0) return Promise.resolve({ status: 429, j: { retry_after: Math.ceil(wait / 1000) } });
+      if (wait > 0) return Promise.resolve({ status: 429, j: { retry_after: Math.ceil(wait / 1000) }, soft: true });
       lastCall = Date.now();
-      brain = brain || import('./chat/prompt.js');
-      return brain.then(function (m) {
+      return loadBrain().then(function (m) {
         var clean = msgs.map(function (x) { return { role: x.role, content: String(x.content).slice(0, 600) }; });
         return fetch('https://api.groq.com/openai/v1/chat/completions', { method: 'POST', signal: signal,
           headers: { authorization: 'Bearer ' + groqKey(), 'content-type': 'application/json' }, body: JSON.stringify(m.groqBody(clean, cfg.model)) })
           .then(function (r) {
             return r.json().catch(function () { return {}; }).then(function (j) {
               var text = j && j.choices && j.choices[0] && j.choices[0].message && j.choices[0].message.content;
-              return { status: r.status === 200 && !text ? 502 : r.status, j: { reply: text ? String(text).replace(/gsk_[A-Za-z0-9]+/g, '[removed]').trim().slice(0, 2500) : '', retry_after: Math.min(60, Math.ceil(parseFloat(r.headers.get('retry-after')) || 20)) } };
+              var api = j && j.error && (j.error.message || j.error.code) || '';
+              return { status: r.status === 200 && !text ? 502 : r.status, detail: 'HTTP ' + r.status + (api ? ' ' + String(api).slice(0, 120) : ''),
+                j: { reply: text ? String(text).replace(/gsk_[A-Za-z0-9]+/g, '[removed]').trim().slice(0, 2500) : '', retry_after: Math.min(60, Math.ceil(parseFloat(r.headers.get('retry-after')) || 20)) } };
             });
           });
-      });
+      }).catch(fetchFail);
     }
     return fetch(cfg.endpoint, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ messages: msgs }), signal: signal })
-      .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { return { status: r.status, j: j }; }); });
+      .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { return { status: r.status, j: j, detail: 'HTTP ' + r.status }; }); })
+      .catch(fetchFail);
   };
   var contactLink = '<a href="' + esc(rootPath) + 'contact/">contact form</a>';
+  // Turn a failed outcome into a clear message for the visitor (plus a technical line for support)
+  var explain = function (x) {
+    var m, det = x.detail ? '<small class="nbc-det">Details: ' + esc(x.detail) + '</small>' : '';
+    if (x.why === 'timeout') m = 'The assistant took too long to answer.';
+    else if (x.why === 'script') m = 'A chat file could not be loaded. Please refresh the page (Ctrl+Shift+R) and try again.';
+    else if (x.why === 'network') m = 'Your browser could not connect to the AI service (api.groq.com). This is usually a network, VPN, firewall or ad-blocker setting.';
+    else if (x.status === 401 || x.status === 403) m = 'The assistant\'s access key was rejected, so it cannot answer right now.';
+    else if (x.status === 404 || x.status === 400) m = 'The assistant is misconfigured at the moment.';
+    else if (x.status >= 500) m = 'The AI service is having a temporary problem.';
+    else m = 'Sorry, the assistant is not available right now.';
+    try { console.error('[NeuralBytea chat]', x.why || x.status, x.detail || ''); } catch (e) {}
+    return '<p>' + m + '</p>' + det + '<p><button type="button" class="nbc-retry">Try again</button> or use the ' + contactLink + '.</p>';
+  };
   var send = function (text) {
     text = String(text || '').trim().slice(0, 500);
     if (!text || busy) return;
-    busy = true; form.classList.add('busy'); chips.hidden = true;
+    busy = true; form.classList.add('busy'); chips.hidden = true; lastQuestion = text;
     history.push({ role: 'user', content: text }); save();
     bubble('me', '<p>' + esc(text) + '</p>');
     var typing = bubble('bot nbc-typing', '<span></span><span></span><span></span>');
-    var ctl = new AbortController(), to = setTimeout(function () { ctl.abort(); }, 35000);
+    var ctl = new AbortController(), to = setTimeout(function () { ctl.abort(); }, 40000);
     ask(history.slice(-5), ctl.signal)
       .then(function (x) {
         typing.remove();
-        if (x.status === 200 && x.j.reply) { history.push({ role: 'assistant', content: x.j.reply }); save(); bubble('bot', render(x.j.reply)); }
-        else if (x.status === 429) { history.pop(); save(); fail('<p>I am getting a lot of questions right now. Please try again in a minute' + (x.j.retry_after ? ' (about ' + x.j.retry_after + 's)' : '') + ', or use the ' + contactLink + '.</p>'); }
-        else { history.pop(); save(); fail('<p>Sorry, the assistant is not available right now. Please use the ' + contactLink + ' or email us.</p>'); }
+        if (x.status === 200 && x.j && x.j.reply) { history.push({ role: 'assistant', content: x.j.reply }); save(); bubble('bot', render(x.j.reply)); return; }
+        history.pop(); save();
+        if (x.status === 429) fail(x.soft ? '<p>One moment, please send your next question in a couple of seconds.</p>' : '<p>I am getting a lot of questions right now. Please try again in about ' + (x.j.retry_after || 30) + ' seconds, or use the ' + contactLink + '.</p><p><button type="button" class="nbc-retry">Try again</button></p>');
+        else fail(explain(x));
       })
-      .catch(function () { typing.remove(); history.pop(); save(); fail('<p>I could not reach the assistant. Please check your connection, or use the ' + contactLink + '.</p>'); })
+      .catch(function (err) { typing.remove(); history.pop(); save(); fail(explain(fetchFail(err))); })
       .then(function () { clearTimeout(to); busy = false; form.classList.remove('busy'); ta.focus(); });
   };
+  log.addEventListener('click', function (e) {
+    if (e.target.classList && e.target.classList.contains('nbc-retry') && lastQuestion && !busy) { var el = e.target.closest('.nbc-m'); if (el) el.remove(); send(lastQuestion); }
+  });
   // Public hooks so any button on the page can open the chat (optionally with a question)
   window.NBChat = { open: function (q) { if (panel.hidden) open(true); hideTeaser(true); if (q) setTimeout(function () { send(q); }, 350); } };
   d.addEventListener('click', function (e) {
