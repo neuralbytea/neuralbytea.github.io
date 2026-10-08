@@ -4,6 +4,7 @@ site:
   description: 'NeuralBytea builds production-ready apps for Odoo 17, 18 and 19: vendor, customer and employee portals, payment providers, HR and payroll tools, dashboards, backend UI upgrades and an AI assistant. 19 apps on the Odoo Apps Store.'
   url: https://neuralbytea.github.io/neuralbyteai.github.io
   available_for_work: true
+  chat_endpoint: ""  # set to the deployed Worker URL, see worker/README.md
   store: https://apps.odoo.com/apps/browse?repo_maintainer_id=1172096
 contact:
   email: neuralbytea@gmail.com

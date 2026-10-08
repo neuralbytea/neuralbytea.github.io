@@ -1,0 +1,114 @@
+/* NeuralBytea chat widget. Talks to the chat proxy (worker/); the AI key is never in this file.
+   It only appears when the site was built with a chat endpoint (window.NB_CHAT). */
+(function () {
+  var cfg = window.NB_CHAT;
+  if (!cfg || !cfg.endpoint) return;
+  var d = document, KEY = 'nb_chat_v1', MAX_KEEP = 12;
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var site = (cfg.site || location.origin).replace(/\/$/, '');
+  var rootPath = (function () { var s = d.querySelector('script[src*="assets/chat.js"]'); return s ? s.getAttribute('src').replace('assets/chat.js', '') : ''; })();
+
+  var GREETING = 'Hi! I can answer questions about our Odoo apps, versions and prices, or help you scope a custom module. What do you need?';
+  var CHIPS = ['What apps do you have?', 'Is there a free app?', 'Which apps work on Odoo 17?', 'I need a custom module'];
+  var history = [];
+  try { history = JSON.parse(sessionStorage.getItem(KEY) || '[]').filter(function (m) { return m && typeof m.content === 'string' && (m.role === 'user' || m.role === 'assistant'); }); } catch (e) {}
+  var busy = false;
+
+  var esc = function (s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); };
+  var safeUrl = function (u) {
+    u = u.trim();
+    if (u.indexOf(site) === 0 || u.indexOf('https://apps.odoo.com/') === 0 || /^\/(?!\/)/.test(u)) return u;
+    return null;
+  };
+  var inline = function (t) {
+    t = esc(t);
+    t = t.replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, function (m, label, url) {
+      var u = safeUrl(url.replace(/&amp;/g, '&'));
+      return u ? '<a href="' + esc(u) + '"' + (u.indexOf(site) === 0 || u.charAt(0) === '/' ? '' : ' target="_blank" rel="noopener"') + '>' + label + '</a>' : label;
+    });
+    t = t.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+    return t;
+  };
+  // Small, safe markdown subset: paragraphs, bullet/numbered lists, tables, bold, allowed links.
+  var render = function (src) {
+    var lines = String(src).replace(/\r/g, '').split('\n'), out = '', list = null, tbl = [];
+    var closeList = function () { if (list) { out += '</' + list + '>'; list = null; } };
+    var flushTbl = function () {
+      if (!tbl.length) return;
+      var rows = tbl.filter(function (r) { return !/^\s*\|?[\s:|-]+\|?\s*$/.test(r); }).map(function (r) { return r.replace(/^\s*\||\|\s*$/g, '').split('|'); });
+      out += '<div class="nbc-tw"><table>' + rows.map(function (r, i) { var tag = i === 0 ? 'th' : 'td'; return '<tr>' + r.map(function (c) { return '<' + tag + '>' + inline(c.trim()) + '</' + tag + '>'; }).join('') + '</tr>'; }).join('') + '</table></div>';
+      tbl = [];
+    };
+    lines.forEach(function (ln) {
+      if (/^\s*\|/.test(ln)) { closeList(); tbl.push(ln); return; }
+      flushTbl();
+      var b = ln.match(/^\s*[-*•]\s+(.*)/), n = ln.match(/^\s*\d+[.)]\s+(.*)/);
+      if (b || n) { var tag = b ? 'ul' : 'ol'; if (list !== tag) { closeList(); out += '<' + tag + '>'; list = tag; } out += '<li>' + inline((b || n)[1]) + '</li>'; return; }
+      closeList();
+      if (ln.trim()) out += '<p>' + inline(ln) + '</p>';
+    });
+    flushTbl(); closeList();
+    return out;
+  };
+
+  // ---- DOM
+  var root = d.createElement('div'); root.className = 'nbc';
+  root.innerHTML =
+    '<button class="nbc-fab" type="button" aria-label="Open chat assistant" aria-expanded="false"><svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><path fill="currentColor" d="M4 4h16a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-5 4v-4H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/></svg><span>Ask us</span></button>' +
+    '<section class="nbc-panel" role="dialog" aria-label="NeuralBytea assistant" hidden>' +
+    '<header><img src="' + esc(rootPath) + 'images/mark-512.png" alt="" width="34" height="34"><div><b>NeuralBytea Assistant</b><small>Ask about our apps or custom work</small></div>' +
+    '<button type="button" class="nbc-new" title="Start a new chat" aria-label="Start a new chat">↺</button><button type="button" class="nbc-x" aria-label="Close chat">×</button></header>' +
+    '<div class="nbc-log" role="log" aria-live="polite"></div>' +
+    '<div class="nbc-chips"></div>' +
+    '<form class="nbc-form"><textarea rows="1" maxlength="500" placeholder="Type your question…" aria-label="Your question"></textarea><button type="submit" aria-label="Send"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M3 20.5v-6l9-2.5-9-2.5v-6L22 12z"/></svg></button></form>' +
+    '<p class="nbc-note">AI answers can be wrong: check the app page or the Odoo store. Please do not share passwords or private data.</p></section>';
+  d.body.appendChild(root);
+  var $ = function (s) { return root.querySelector(s); };
+  var fab = $('.nbc-fab'), panel = $('.nbc-panel'), log = $('.nbc-log'), chips = $('.nbc-chips'), form = $('.nbc-form'), ta = form.querySelector('textarea');
+
+  var save = function () { try { sessionStorage.setItem(KEY, JSON.stringify(history.slice(-MAX_KEEP))); } catch (e) {} };
+  var scroll = function () { log.scrollTop = log.scrollHeight; };
+  var bubble = function (role, html) { var el = d.createElement('div'); el.className = 'nbc-m nbc-' + role; el.innerHTML = html; log.appendChild(el); scroll(); return el; };
+  var drawAll = function () {
+    log.innerHTML = '';
+    bubble('bot', render(GREETING));
+    history.forEach(function (m) { bubble(m.role === 'user' ? 'me' : 'bot', m.role === 'user' ? '<p>' + esc(m.content) + '</p>' : render(m.content)); });
+    chips.hidden = history.length > 0;
+  };
+  chips.innerHTML = CHIPS.map(function (c) { return '<button type="button">' + esc(c) + '</button>'; }).join('');
+
+  var open = function (on) {
+    panel.hidden = !on; fab.setAttribute('aria-expanded', on ? 'true' : 'false'); root.classList.toggle('open', on);
+    if (on) { drawAll(); setTimeout(function () { ta.focus(); }, reduce ? 0 : 150); } else fab.focus();
+  };
+  fab.addEventListener('click', function () { open(panel.hidden); });
+  $('.nbc-x').addEventListener('click', function () { open(false); });
+  d.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !panel.hidden) open(false); });
+  $('.nbc-new').addEventListener('click', function () { history = []; save(); drawAll(); });
+  chips.addEventListener('click', function (e) { if (e.target.tagName === 'BUTTON') send(e.target.textContent); });
+
+  var fail = function (html) { bubble('bot nbc-err', html); };
+  var contactLink = '<a href="' + esc(rootPath) + 'contact/">contact form</a>';
+  var send = function (text) {
+    text = String(text || '').trim().slice(0, 500);
+    if (!text || busy) return;
+    busy = true; form.classList.add('busy'); chips.hidden = true;
+    history.push({ role: 'user', content: text }); save();
+    bubble('me', '<p>' + esc(text) + '</p>');
+    var typing = bubble('bot nbc-typing', '<span></span><span></span><span></span>');
+    var ctl = new AbortController(), to = setTimeout(function () { ctl.abort(); }, 35000);
+    fetch(cfg.endpoint, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ messages: history.slice(-5) }), signal: ctl.signal })
+      .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { return { status: r.status, j: j }; }); })
+      .then(function (x) {
+        typing.remove();
+        if (x.status === 200 && x.j.reply) { history.push({ role: 'assistant', content: x.j.reply }); save(); bubble('bot', render(x.j.reply)); }
+        else if (x.status === 429) { history.pop(); save(); fail('<p>I am getting a lot of questions right now. Please try again in a minute' + (x.j.retry_after ? ' (about ' + x.j.retry_after + 's)' : '') + ', or use the ' + contactLink + '.</p>'); }
+        else { history.pop(); save(); fail('<p>Sorry, the assistant is not available right now. Please use the ' + contactLink + ' or email us.</p>'); }
+      })
+      .catch(function () { typing.remove(); history.pop(); save(); fail('<p>I could not reach the assistant. Please check your connection, or use the ' + contactLink + '.</p>'); })
+      .then(function () { clearTimeout(to); busy = false; form.classList.remove('busy'); ta.focus(); });
+  };
+  form.addEventListener('submit', function (e) { e.preventDefault(); var t = ta.value; ta.value = ''; ta.style.height = ''; send(t); });
+  ta.addEventListener('keydown', function (e) { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); form.requestSubmit(); } });
+  ta.addEventListener('input', function () { ta.style.height = 'auto'; ta.style.height = Math.min(ta.scrollHeight, 110) + 'px'; });
+})();

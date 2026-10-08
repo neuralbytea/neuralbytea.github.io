@@ -15,10 +15,12 @@ import yaml
 ROOT = Path(__file__).parent
 OUT = ROOT / "site"
 SITE_URL = os.environ.get("SITE_URL", "https://neuralbytea.github.io").rstrip("/")
+CHAT_ENDPOINT = os.environ.get("CHAT_ENDPOINT", "").strip()  # set after deploying worker/ (see worker/README.md)
 FORM_ID = os.environ.get("FORMSPREE_ID", "maeqodlq")  # NeuralBytea contact form (Formspree)
 
 D = yaml.safe_load((ROOT / "data/portfolio_data.yaml").read_text())
 SITE, CONTACT, APPS = D["site"], D["contact"], D["projects"]
+CHAT_ENDPOINT = CHAT_ENDPOINT or str(SITE.get("chat_endpoint") or "").strip()
 VERS = yaml.safe_load((ROOT / "data/versions.yaml").read_text())  # from scan_versions.py
 SERIES = ["19.0", "18.0", "17.0"]  # newest first
 NAME = SITE["name"]
@@ -72,6 +74,7 @@ def slug(app):
 # --------------------------------------------------------------------------- layout
 def head(title, desc, path, root, og_image="images/og-cover.png", extra=""):
     url = f"{SITE_URL}/{path}"
+    chat_cfg = f'<script>window.NB_CHAT={json.dumps({"endpoint": CHAT_ENDPOINT, "site": SITE_URL})}</script>\n' if CHAT_ENDPOINT else ""
     return f"""<!DOCTYPE html>
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
@@ -89,6 +92,7 @@ def head(title, desc, path, root, og_image="images/og-cover.png", extra=""):
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@500;600;700;800&family=JetBrains+Mono:wght@400&display=swap">
 <link rel="stylesheet" href="{root}assets/style.css">
 <script defer src="{root}assets/site.js"></script>
+{chat_cfg}<script defer src="{root}assets/chat.js"></script>
 {extra}
 </head>"""
 
@@ -361,9 +365,9 @@ def privacy_page():
     c = CONTACT["email"]
     S = [
      ("Who we are", f"<p>{NAME} publishes Odoo apps and offers custom Odoo development. We are based in {CONTACT['location']} and work remotely. You can reach us at <a href='mailto:{c}'>{c}</a>. This policy explains what personal data this website handles.</p>"),
-     ("What we collect", "<p>Only what you choose to send us, plus a little technical data any website receives:</p><ul><li><b>Contact form:</b> your name, email address, subject and message.</li><li><b>Technical data:</b> your IP address and browser details, which our hosting provider receives when you load a page.</li></ul><p>We do not run analytics or advertising trackers, and this site does not set cookies.</p>"),
+     ("What we collect", "<p>Only what you choose to send us, plus a little technical data any website receives:</p><ul><li><b>Contact form:</b> your name, email address, subject and message.</li>" + ("<li><b>Chat assistant:</b> the questions you type into the chat window.</li>" if CHAT_ENDPOINT else "") + "<li><b>Technical data:</b> your IP address and browser details, which our hosting provider receives when you load a page.</li></ul><p>We do not run analytics or advertising trackers, and this site does not set cookies. " + ("The chat window keeps your current conversation in your browser tab only (session storage) and it is cleared when you close the tab." if CHAT_ENDPOINT else "") + "</p>"),
      ("How we use it", "<p>We use your contact details and message only to reply to you and to handle your request or project. We do not sell your data and we do not use it for marketing you did not ask for.</p>"),
-     ("Who processes it", "<ul><li><b>Formspree</b> receives the contact form and forwards it to our email inbox.</li><li><b>GitHub Pages</b> hosts this website and may keep standard server logs.</li><li><b>Google Fonts</b> serves the fonts, so your browser requests them from Google.</li></ul><p>Links to the Odoo Apps Store and other sites take you away from this website. Their own privacy policies apply there.</p>"),
+     ("Who processes it", "<ul><li><b>Formspree</b> receives the contact form and forwards it to our email inbox.</li><li><b>GitHub Pages</b> hosts this website and may keep standard server logs.</li><li><b>Google Fonts</b> serves the fonts, so your browser requests them from Google.</li>" + ("<li><b>Cloudflare</b> runs the chat service that receives your chat questions, and <b>Groq</b> generates the answer. Do not type passwords or private data into the chat. We do not store chat conversations.</li>" if CHAT_ENDPOINT else "") + "</ul><p>Links to the Odoo Apps Store and other sites take you away from this website. Their own privacy policies apply there.</p>"),
      ("How long we keep it", "<p>We keep emails for as long as needed to answer you, deliver any work we agree, and keep ordinary business records. You can ask us to delete them sooner.</p>"),
      ("Your rights", f"<p>You can ask us what data we hold about you, ask us to correct or delete it, or object to how we use it. Email <a href='mailto:{c}'>{c}</a> and we will reply.</p>"),
      ("Children", "<p>This website is not aimed at children and we do not knowingly collect their data.</p>"),
@@ -397,6 +401,33 @@ def sitemap_page():
     return page(f"Sitemap | {NAME}", f"All pages and apps on the {NAME} website.", "sitemap/", "", body)
 
 
+def write_knowledge():
+    """worker/src/knowledge.js: everything the chat assistant may say, generated from the same data as the site."""
+    apps = []
+    for a in APPS:
+        v = vers(a)
+        m = meta(a)
+        apps.append({
+            "id": a["id"], "title": a["title"], "line": family(a), "edition": m["edition"], "licence": m["licence"],
+            "versions": [{"odoo": s.split(".")[0], "price": price_label(i), "module_version": i["version"].split(".", 2)[2], "store": i["url"]} for s, i in v],
+            "summary": a["short_desc"], "about": a["full_desc"], "features": a.get("highlights", []), "works_with": a.get("modules", []),
+            "page": f"{SITE_URL}/apps/{slug(a)}/"})
+    facts = [
+        "Apps are built for Odoo 17, 18 and 19; Odoo 19 has the full range, Odoo 17 has only Employee Loan Pro, Attendance Leave Gantt and Sales & Payment Dashboard.",
+        "Most apps run on Community and Enterprise; Employee Loan Pro, Attendance Leave Gantt and Payroll Dashboard Pro need Enterprise features (Payroll or Contracts).",
+        "Install from the Odoo Apps Store like any app. Paid apps: one-time price per app, OPL-1 licence, no subscription. N-Genius payment provider is free (LGPL-3).",
+        "Custom development: custom Odoo modules, portals, payment and API integrations, dashboards and migrations, fixed price or hourly.",
+        "Support: contact form or the app's store page; replies by email.",
+        "Employee Self Service needs internal users. The AI Chat Assistant uses the customer's own AI provider and API key and respects each user's access rights."]
+    company = {
+        "name": NAME, "site": SITE_URL, "email": CONTACT["email"], "location": CONTACT["location"], "store": STORE,
+        "contact_page": SITE_URL + "/contact/", "facts": facts}
+    out = ROOT / "worker/src/knowledge.js"
+    out.write_text("// GENERATED by build.py from data/portfolio_data.yaml and data/versions.yaml. Do not edit.\n"
+                   f"export const APPS = {json.dumps(apps, ensure_ascii=False, indent=1)};\n"
+                   f"export const COMPANY = {json.dumps(company, ensure_ascii=False, indent=1)};\n", encoding="utf-8")
+
+
 def not_found():
     # Absolute root-relative assets so it works at any depth on a domain root.
     body = '<section class="wrap page-hero center"><h1>404</h1><p class="lead">That page does not exist.</p><a class="btn btn-primary" href="/">Back to home</a></section>'
@@ -416,7 +447,7 @@ def main():
         shutil.rmtree(OUT)
     shutil.copytree(ROOT / "src/static", OUT)
     (OUT / "assets").mkdir()
-    for f in ("style.css", "site.js"):
+    for f in ("style.css", "site.js", "chat.js"):
         shutil.copy(ROOT / "src" / f, OUT / "assets" / f)
     write("index.html", home())
     write("apps/index.html", apps_page())
@@ -429,6 +460,7 @@ def main():
     write("terms/index.html", terms_page())
     write("sitemap/index.html", sitemap_page())
     write("404.html", not_found())
+    write_knowledge()
     urls = ["", "apps/", "about/", "faq/", "contact/", "privacy/", "terms/", "sitemap/"] + [f"apps/{slug(a)}/" for a in APPS]
     write("sitemap.xml", '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
           + "".join(f"<url><loc>{SITE_URL}/{u}</loc></url>\n" for u in urls) + "</urlset>\n")

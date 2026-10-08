@@ -15,6 +15,7 @@ jobs:
       - run: python3 build.py
         env:
           SITE_URL: ${{ vars.SITE_URL || 'https://neuralbytea.github.io' }}
+          CHAT_ENDPOINT: ${{ vars.CHAT_ENDPOINT }}
       - uses: actions/upload-pages-artifact@v3
         with: { path: site }
   deploy:

@@ -123,7 +123,10 @@
   var f = d.querySelector('form.form');
   if (f) {
     var s = new URLSearchParams(location.search).get('subject');
-    if (s) d.getElementById('subject').value = 'Question about ' + s;
+    var P2 = new URLSearchParams(location.search);
+    if (P2.get('subject')) d.getElementById('subject').value = P2.get('subject');
+    else if (s) d.getElementById('subject').value = 'Question about ' + s;
+    if (P2.get('message')) f.querySelector('textarea').value = P2.get('message').slice(0, 1500);
     f.addEventListener('submit', function (ev) {
       ev.preventDefault();
       var st = d.getElementById('status'), b = f.querySelector('button'); b.disabled = true; st.textContent = 'Sending…';

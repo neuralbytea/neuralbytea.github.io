@@ -1,0 +1,1 @@
+{ "name": "neuralbytea-chat", "private": true, "type": "module", "scripts": { "deploy": "wrangler deploy", "dev": "wrangler dev", "test": "node test/e2e.mjs" } }

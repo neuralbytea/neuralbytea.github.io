@@ -272,3 +272,31 @@ textarea{resize:vertical;min-height:140px;height:100%}
 @media(max-width:1000px){.why-grid{grid-template-columns:repeat(2,1fr)}.about-intro,.split,.doc,.sm-grid{grid-template-columns:1fr}.toc{position:static}.split-l,.split-r{padding:30px!important}.filters.sticky{position:static}.ask{flex-direction:column;align-items:flex-start}}
 @media(max-width:620px){.why-grid{grid-template-columns:1fr}}
 .doc .toc a{text-decoration:none}
+
+/* ---- chat widget ---- */
+.nbc{position:fixed;right:22px;bottom:22px;z-index:90;font-family:Inter,system-ui,sans-serif}
+.nbc-fab{display:flex;align-items:center;gap:9px;height:54px;padding:0 20px 0 16px;border:0;border-radius:99px;background:var(--grad);color:#fff;font:600 15px Sora;cursor:pointer;box-shadow:0 16px 36px -10px rgba(47,91,255,.8);transition:.25s}
+.nbc-fab:hover{transform:translateY(-3px);box-shadow:0 22px 44px -10px rgba(18,181,240,.75)}.nbc.open .nbc-fab{display:none}
+.nbc-panel{position:absolute;right:0;bottom:0;width:390px;max-width:calc(100vw - 28px);height:min(600px,calc(100vh - 44px));display:flex;flex-direction:column;border-radius:22px;background:#fff;border:1px solid var(--line2);box-shadow:0 40px 80px -24px rgba(11,22,48,.55);overflow:hidden;animation:nbcin .25s ease}
+@keyframes nbcin{from{opacity:0;transform:translateY(14px) scale(.98)}}
+.nbc-panel[hidden]{display:none}
+.nbc-panel header{display:flex;align-items:center;gap:12px;padding:14px 14px 14px 16px;color:#fff;background:linear-gradient(120deg,#1f3fd9,#12a5e8)}
+.nbc-panel header img{border-radius:10px;background:#0b1630;padding:3px}.nbc-panel header div{flex:1;line-height:1.25}.nbc-panel header b{display:block;font:600 15px Sora}.nbc-panel header small{opacity:.88;font-size:12.5px}
+.nbc-panel header button{width:34px;height:34px;border-radius:10px;border:0;background:rgba(255,255,255,.18);color:#fff;font-size:20px;line-height:1;cursor:pointer}.nbc-panel header button:hover{background:rgba(255,255,255,.3)}
+.nbc-log{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px;background:var(--bg2);scroll-behavior:smooth}
+.nbc-m{max-width:88%;padding:10px 14px;border-radius:16px;font-size:14.5px;line-height:1.55;overflow-wrap:anywhere}
+.nbc-m p{margin:0 0 6px}.nbc-m p:last-child{margin:0}.nbc-m ul,.nbc-m ol{margin:4px 0 6px;padding-left:20px}.nbc-m a{color:var(--a);font-weight:600;text-decoration:underline}
+.nbc-bot{align-self:flex-start;background:#fff;border:1px solid var(--line);border-bottom-left-radius:5px;color:var(--tx)}
+.nbc-me{align-self:flex-end;background:var(--grad);color:#fff;border-bottom-right-radius:5px}.nbc-me p{margin:0}
+.nbc-err{background:#fff4f2;border-color:#ffd2c9}
+.nbc-tw{overflow-x:auto;margin:6px 0}.nbc-tw table{border-collapse:collapse;font-size:12.5px}.nbc-tw th,.nbc-tw td{border:1px solid var(--line);padding:4px 8px;text-align:left}.nbc-tw th{background:var(--bg2)}
+.nbc-typing{display:flex;gap:5px;padding:14px 16px}.nbc-typing span{width:7px;height:7px;border-radius:50%;background:var(--a);opacity:.35;animation:nbcdot 1.2s infinite}.nbc-typing span:nth-child(2){animation-delay:.2s}.nbc-typing span:nth-child(3){animation-delay:.4s}
+@keyframes nbcdot{50%{opacity:1;transform:translateY(-3px)}}
+.nbc-chips{display:flex;flex-wrap:wrap;gap:8px;padding:10px 14px;background:var(--bg2);border-top:1px solid var(--line)}.nbc-chips[hidden]{display:none}
+.nbc-chips button{padding:7px 12px;border-radius:99px;border:1px solid var(--line2);background:#fff;color:var(--a);font:500 13px Inter;cursor:pointer;transition:.2s}.nbc-chips button:hover{background:var(--a);color:#fff;border-color:var(--a)}
+.nbc-form{display:flex;gap:8px;align-items:flex-end;padding:12px 14px;border-top:1px solid var(--line);background:#fff}
+.nbc-form textarea{flex:1;resize:none;min-height:42px;max-height:110px;padding:10px 12px;border:1px solid var(--line2);border-radius:12px;font:14.5px/1.4 Inter}
+.nbc-form button{width:44px;height:44px;border-radius:12px;border:0;background:var(--grad);color:#fff;cursor:pointer;display:grid;place-items:center;flex:none}.nbc-form.busy button{opacity:.5;pointer-events:none}
+.nbc-note{margin:0;padding:0 14px 10px;background:#fff;font-size:11.5px;line-height:1.4;color:var(--mut)}
+@media(max-width:620px){.nbc{right:12px;bottom:12px}.nbc-panel{position:fixed;inset:8px;width:auto;max-width:none;height:auto}}
+@media(prefers-reduced-motion:reduce){.nbc-panel{animation:none}.nbc-typing span{animation:none;opacity:.6}}
