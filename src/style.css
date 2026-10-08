@@ -372,3 +372,15 @@ a.nbc-card:hover{border-color:var(--a);background:#eef2ff}
 .foot .brand-lg .brand-mark{height:72px}.foot .brand-lg .brand-txt small{letter-spacing:.24em}
 .foot-grid .brand .brand-txt{display:flex;flex-direction:column;margin:0;color:var(--tx)}
 .foot-grid .brand .brand-txt small{display:block;margin:6px 0 0;color:var(--mut)}
+
+/* ---- larger company logo ---- */
+.nav-in{height:98px}#menu{top:98px}
+.brand{gap:16px}
+.brand-mark{height:68px}
+.brand-txt b{font-size:34px}
+.brand-txt small{font-size:11px;margin-top:7px;letter-spacing:.32em}
+.foot .brand-lg .brand-mark{height:92px}.foot .brand-lg .brand-txt b{font-size:38px}
+.nav .btn-sm{padding:11px 22px;font-size:15px}
+@media(max-width:1180px){.brand-mark{height:58px}.brand-txt b{font-size:29px}.brand-txt small{letter-spacing:.24em;font-size:10px}.nav-in{gap:18px}}
+@media(max-width:960px){.nav-in{height:80px}#menu{top:80px}.brand-mark{height:52px}.brand-txt b{font-size:25px}.brand-txt small{display:none}}
+@media(max-width:380px){.brand-mark{height:44px}.brand-txt b{font-size:21px}}
