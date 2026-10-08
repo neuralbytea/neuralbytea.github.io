@@ -133,6 +133,24 @@
       .catch(function () { typing.remove(); history.pop(); save(); fail('<p>I could not reach the assistant. Please check your connection, or use the ' + contactLink + '.</p>'); })
       .then(function () { clearTimeout(to); busy = false; form.classList.remove('busy'); ta.focus(); });
   };
+  // Public hooks so any button on the page can open the chat (optionally with a question)
+  window.NBChat = { open: function (q) { if (panel.hidden) open(true); hideTeaser(true); if (q) setTimeout(function () { send(q); }, 350); } };
+  d.addEventListener('click', function (e) {
+    var el = e.target.closest && e.target.closest('[data-nbc-open],[data-nbc-ask]');
+    if (!el) return;
+    e.preventDefault(); d.body.classList.remove('menu-open');
+    window.NBChat.open(el.getAttribute('data-nbc-ask') || '');
+  });
+  // Greeting pop-up next to the bubble (once per tab session, dismissible)
+  var teaser = d.createElement('div'); teaser.className = 'nbc-teaser'; teaser.hidden = true;
+  teaser.innerHTML = '<button type="button" class="nbc-tx" aria-label="Dismiss">×</button><p><b>Hi! 👋</b> Ask me about our Odoo apps, prices or custom work.</p>';
+  root.insertBefore(teaser, fab);
+  function hideTeaser(remember) { teaser.hidden = true; if (remember) try { sessionStorage.setItem('nb_chat_teaser', '1'); } catch (e) {} }
+  teaser.querySelector('.nbc-tx').addEventListener('click', function (e) { e.stopPropagation(); hideTeaser(true); });
+  teaser.querySelector('p').addEventListener('click', function () { window.NBChat.open(''); });
+  var seen = false; try { seen = sessionStorage.getItem('nb_chat_teaser') === '1'; } catch (e) {}
+  if (!seen && !history.length) setTimeout(function () { if (panel.hidden) teaser.hidden = false; }, reduce ? 800 : 3500);
+  fab.addEventListener('click', function () { hideTeaser(true); });
   form.addEventListener('submit', function (e) { e.preventDefault(); var t = ta.value; ta.value = ''; ta.style.height = ''; send(t); });
   ta.addEventListener('keydown', function (e) { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); form.requestSubmit(); } });
   ta.addEventListener('input', function () { ta.style.height = 'auto'; ta.style.height = Math.min(ta.scrollHeight, 110) + 'px'; });

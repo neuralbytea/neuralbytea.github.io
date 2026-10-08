@@ -118,7 +118,7 @@ def nav(root, active):
     return f"""<header class="nav"><div class="wrap nav-in">
 <a class="brand" href="{root}"><img src="{root}images/mark-512.png" width="30" height="30" alt="">{NAME}</a>
 <nav id="menu">{a("home", "", "Home")}{a("apps", "apps/", "Apps")}{a("about", "about/", "About")}{a("faq", "faq/", "FAQ")}{a("contact", "contact/", "Contact")}
-<a href="{STORE}" target="_blank" rel="noopener">Odoo Store ↗</a></nav>
+<a href="{STORE}" target="_blank" rel="noopener">Odoo Store ↗</a>{'<button type="button" class="ask-ai" data-nbc-open>✦ Ask AI</button>' if CHAT_ON else ""}</nav>
 <a class="btn btn-sm btn-primary nav-cta" href="{root}contact/">Start a project</a>
 <button class="burger" aria-label="Menu" aria-controls="menu"><i></i><i></i></button>
 </div></header>"""
@@ -215,6 +215,14 @@ def home():
     fams = [f'<a class="card fam" href="apps/?line={c}"><div class="ico">{ico}</div><h3>{n}</h3><p>{d}</p><span class="more">{n_apps(n)} <i>→</i></span></a>' for n, ico, c, d in FAMILIES]
     tech = "".join(f"<span>{t}</span>" for t in ["Odoo 17", "Odoo 18", "Odoo 19", "Python", "OWL", "JavaScript", "PostgreSQL", "QWeb", "Portals", "Payments", "HR & Payroll", "Accounting", "Purchase", "Sales"])
     why = "".join(f'<div class="glass reveal"><div class="num">{n}</div><h3>{t}</h3><p>{p}</p></div>' for n, t, p in VALUE)
+    qs = ["Which apps work on Odoo 19?", "Is there a free app?", "How much is Vendor Portal Pro?", "I need a custom module"]
+    askai = ("""<section class="wrap sec askai-sec"><div class="askai reveal"><div class="askai-copy"><span class="eyebrow">AI assistant</span>
+ <h2>Ask our AI assistant</h2><p>Get instant answers about our apps, Odoo versions, prices and custom development. In English, Urdu or Roman Urdu.</p>
+ <div class="askai-chips">""" + "".join(f'<button type="button" data-nbc-ask="{e(q)}">{e(q)}</button>' for q in qs) + """</div>
+ <button type="button" class="btn btn-primary" data-nbc-open>✦ Start chatting</button></div>
+ <div class="askai-demo" aria-hidden="true"><div class="d-me">Which apps work on Odoo 17?</div>
+ <div class="d-bot">Three of our apps are available for Odoo 17: <b>Employee Loan Pro</b>, <b>Attendance Leave Gantt</b> and <b>Sales &amp; Payment Dashboard</b>.</div>
+ <div class="d-me">Is there a free app?</div><div class="d-bot">Yes, the <b>N-Genius Payment Provider</b> is free.</div></div></div></section>""") if CHAT_ON else ""
     body = f"""
 <section class="hero wrap">
  <div class="hero-copy">
@@ -227,7 +235,7 @@ def home():
  <div class="hero-art" aria-hidden="true"><div class="glow"></div>{stack}</div>
 </section>
 <section class="wrap stats">{stats}</section>
-<section class="wrap"><div class="marquee" aria-hidden="true"><div class="track">{tech}{tech}</div></div></section>
+{askai}<section class="wrap"><div class="marquee" aria-hidden="true"><div class="track">{tech}{tech}</div></div></section>
 <section class="wrap sec"><div class="sec-head reveal"><span class="eyebrow">Top picks</span><h2>Where most customers start</h2><p>Our most-used portals, payments and AI tools.</p><a class="see" href="apps/">All {len(APPS)} apps →</a></div>
  {car([app_card(a, root, reveal=False, lazy=False) for a in featured])}</section>
 <section class="wrap sec"><div class="sec-head reveal"><span class="eyebrow">Product lines</span><h2>Browse by product line</h2><p>Six families, each app doing one job well.</p></div>
