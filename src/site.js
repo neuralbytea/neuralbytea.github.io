@@ -51,7 +51,8 @@
   // apps page: search + filters + sort + pagination (the full list is already in the HTML)
   var grid = d.getElementById('app-grid');
   if (grid) {
-    var PER = 6;
+    var PER = 6;   // recomputed from the number of grid columns so every page is a full grid (no orphan row)
+    var perPage = function () { var cols = getComputedStyle(grid).gridTemplateColumns.split(' ').length; return cols >= 4 ? 8 : 6; };
     var cards = [].slice.call(grid.children);
     var $ = function (id) { return d.getElementById(id); };
     var ctl = { q: $('q'), ver: $('f-ver'), line: $('f-line'), price: $('f-price'), upd: $('f-upd'), sort: $('f-sort') };
@@ -73,6 +74,7 @@
       return { el: c, rank: +c.dataset.rank, price: +c.dataset.price, upd: new Date(c.dataset.updated).getTime(), name: c.dataset.name };
     });
     var draw = function () {
+      PER = perPage();
       var t = ctl.q.value.trim().toLowerCase(), v = ctl.ver.value, l = ctl.line.value, pk = ctl.price.value, u = ctl.upd.value;
       var list = rows.filter(function (r) {
         var c = r.el;
@@ -100,6 +102,8 @@
     };
     var reset = function () { ctl.q.value = ''; ['ver', 'line', 'price', 'upd'].forEach(function (k) { ctl[k].value = 'all'; }); ctl.sort.value = 'top'; page = 1; draw(); };
     Object.keys(ctl).forEach(function (k) { ctl[k].addEventListener(k === 'q' ? 'input' : 'change', function () { page = 1; draw(); }); });
+    var lastPer = perPage(), rt = null;
+    window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(function () { if (perPage() !== lastPer) { lastPer = perPage(); page = 1; draw(); } }, 150); });
     $('f-reset').addEventListener('click', reset);
     $('clear').addEventListener('click', function (e) { e.preventDefault(); reset(); });
     var P = new URLSearchParams(location.search);
