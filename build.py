@@ -15,7 +15,7 @@ import yaml
 ROOT = Path(__file__).parent
 OUT = ROOT / "site"
 SITE_URL = os.environ.get("SITE_URL", "https://neuralbytea.github.io").rstrip("/")
-FORM_ID = os.environ.get("FORMSPREE_ID", "mzdwrpyp")  # TODO: replace with a NeuralByte-owned form
+FORM_ID = os.environ.get("FORMSPREE_ID", "maeqodlq")  # NeuralBytea contact form (Formspree)
 
 D = yaml.safe_load((ROOT / "data/portfolio_data.yaml").read_text())
 SITE, CONTACT, APPS = D["site"], D["contact"], D["projects"]
