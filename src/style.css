@@ -337,3 +337,7 @@ body{font-size:clamp(16px,.28vw + 12.4px,18px)}
 @media(max-width:380px){h1{font-size:32px}.btn{padding:12px 18px}.stat{padding:16px 10px}.stats{gap:10px}}
 .nbc-det{display:block;margin:2px 0 8px;font-size:11.5px;color:var(--mut);word-break:break-word}
 .nbc-retry{padding:6px 14px;border-radius:99px;border:1px solid var(--a);background:#fff;color:var(--a);font:600 13px Inter;cursor:pointer}.nbc-retry:hover{background:var(--a);color:#fff}
+.nbc-cards{display:grid;gap:8px;margin:6px 0}
+.nbc-card{display:block;padding:10px 12px;border:1px solid var(--line2);border-radius:12px;background:#fff;text-decoration:none!important;font-weight:400!important;color:var(--tx)!important;transition:.2s}
+a.nbc-card:hover{border-color:var(--a);background:#eef2ff}
+.nbc-card b{display:block;font:600 14px Sora;color:var(--tx)}.nbc-card span{display:block;font-size:13px;color:var(--mut);margin-top:2px}.nbc-card i{display:block;margin-top:4px;font-style:normal;font-size:12.5px;font-weight:600;color:var(--a)}

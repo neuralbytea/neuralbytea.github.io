@@ -35,8 +35,18 @@
     var closeList = function () { if (list) { out += '</' + list + '>'; list = null; } };
     var flushTbl = function () {
       if (!tbl.length) return;
-      var rows = tbl.filter(function (r) { return !/^\s*\|?[\s:|-]+\|?\s*$/.test(r); }).map(function (r) { return r.replace(/^\s*\||\|\s*$/g, '').split('|'); });
-      out += '<div class="nbc-tw"><table>' + rows.map(function (r, i) { var tag = i === 0 ? 'th' : 'td'; return '<tr>' + r.map(function (c) { return '<' + tag + '>' + inline(c.trim()) + '</' + tag + '>'; }).join('') + '</tr>'; }).join('') + '</table></div>';
+      var rows = tbl.filter(function (r) { return !/^\s*\|?[\s:|-]+\|?\s*$/.test(r); }).map(function (r) { return r.replace(/^\s*\||\|\s*$/g, '').split('|').map(function (c) { return c.trim(); }); });
+      var head = rows.shift() || [];
+      var skip = head.map(function (h) { return /^(link|page|url|store)/i.test(h); });
+      // a table is too wide for a chat bubble: show every row as a small card (title, details, link)
+      out += '<div class="nbc-cards">' + rows.map(function (r) {
+        var link = null;
+        r.forEach(function (c) { var m = c.match(/\[[^\]]+\]\(([^)\s]+)\)/); if (m && !link && safeUrl(m[1])) link = safeUrl(m[1]); });
+        var plain = function (c) { return c.replace(/\[([^\]]+)\]\([^)]*\)/g, '$1').replace(/\*\*/g, ''); };
+        var title = plain(r[0] || ''), meta = r.slice(1).filter(function (c, i) { return !skip[i + 1] && c && plain(c) !== title; }).map(plain);
+        var body = '<b>' + esc(title) + '</b>' + (meta.length ? '<span>' + meta.map(esc).join(' · ') + '</span>' : '');
+        return link ? '<a class="nbc-card" href="' + esc(link) + '"' + (link.indexOf(site) === 0 || link.charAt(0) === '/' ? '' : ' target="_blank" rel="noopener"') + '>' + body + '<i>View →</i></a>' : '<div class="nbc-card">' + body + '</div>';
+      }).join('') + '</div>';
       tbl = [];
     };
     lines.forEach(function (ln) {
