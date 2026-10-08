@@ -2,7 +2,7 @@
    It only appears when the site was built with a chat endpoint (window.NB_CHAT). */
 (function () {
   var cfg = window.NB_CHAT;
-  if (!cfg || !cfg.endpoint) return;
+  if (!cfg || !(cfg.endpoint || (cfg.mode === 'direct' && cfg.k))) return;
   var d = document, KEY = 'nb_chat_v1', MAX_KEEP = 12;
   var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
   var site = (cfg.site || location.origin).replace(/\/$/, '');
@@ -88,6 +88,32 @@
   chips.addEventListener('click', function (e) { if (e.target.tagName === 'BUTTON') send(e.target.textContent); });
 
   var fail = function (html) { bubble('bot nbc-err', html); };
+  // Two transports with the same result shape {status, j:{reply, retry_after}}:
+  //  - proxy: our Cloudflare Worker holds the key (recommended)
+  //  - direct: GitHub-Pages-only; the key was injected at build time from a CI secret (camouflaged, not secret)
+  var brain = null, lastCall = 0;
+  var groqKey = function () { try { return atob(cfg.k.join('')).split('').reverse().join(''); } catch (e) { return ''; } };
+  var ask = function (msgs, signal) {
+    if (!cfg.endpoint) {
+      var wait = 3000 - (Date.now() - lastCall);
+      if (wait > 0) return Promise.resolve({ status: 429, j: { retry_after: Math.ceil(wait / 1000) } });
+      lastCall = Date.now();
+      brain = brain || import('./chat/prompt.js');
+      return brain.then(function (m) {
+        var clean = msgs.map(function (x) { return { role: x.role, content: String(x.content).slice(0, 600) }; });
+        return fetch('https://api.groq.com/openai/v1/chat/completions', { method: 'POST', signal: signal,
+          headers: { authorization: 'Bearer ' + groqKey(), 'content-type': 'application/json' }, body: JSON.stringify(m.groqBody(clean, cfg.model)) })
+          .then(function (r) {
+            return r.json().catch(function () { return {}; }).then(function (j) {
+              var text = j && j.choices && j.choices[0] && j.choices[0].message && j.choices[0].message.content;
+              return { status: r.status === 200 && !text ? 502 : r.status, j: { reply: text ? String(text).replace(/gsk_[A-Za-z0-9]+/g, '[removed]').trim().slice(0, 2500) : '', retry_after: Math.min(60, Math.ceil(parseFloat(r.headers.get('retry-after')) || 20)) } };
+            });
+          });
+      });
+    }
+    return fetch(cfg.endpoint, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ messages: msgs }), signal: signal })
+      .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { return { status: r.status, j: j }; }); });
+  };
   var contactLink = '<a href="' + esc(rootPath) + 'contact/">contact form</a>';
   var send = function (text) {
     text = String(text || '').trim().slice(0, 500);
@@ -97,8 +123,7 @@
     bubble('me', '<p>' + esc(text) + '</p>');
     var typing = bubble('bot nbc-typing', '<span></span><span></span><span></span>');
     var ctl = new AbortController(), to = setTimeout(function () { ctl.abort(); }, 35000);
-    fetch(cfg.endpoint, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ messages: history.slice(-5) }), signal: ctl.signal })
-      .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { return { status: r.status, j: j }; }); })
+    ask(history.slice(-5), ctl.signal)
       .then(function (x) {
         typing.remove();
         if (x.status === 200 && x.j.reply) { history.push({ role: 'assistant', content: x.j.reply }); save(); bubble('bot', render(x.j.reply)); }

@@ -21,6 +21,17 @@ FORM_ID = os.environ.get("FORMSPREE_ID", "maeqodlq")  # NeuralBytea contact form
 D = yaml.safe_load((ROOT / "data/portfolio_data.yaml").read_text())
 SITE, CONTACT, APPS = D["site"], D["contact"], D["projects"]
 CHAT_ENDPOINT = CHAT_ENDPOINT or str(SITE.get("chat_endpoint") or "").strip()
+# Direct mode (GitHub Pages only, no proxy): the Groq key comes from a CI secret and is NEVER committed.
+# It is only camouflaged (reversed + base64 + chunked) so naive scrapers do not spot "gsk_"; anyone with DevTools can still read it.
+CHAT_KEY = "" if CHAT_ENDPOINT else os.environ.get("CHAT_KEY", "").strip()
+CHAT_ON = bool(CHAT_ENDPOINT or CHAT_KEY)
+
+
+def _scramble(key):
+    import base64
+    b = base64.b64encode(key[::-1].encode()).decode()
+    n = -(-len(b) // 4)
+    return [b[i:i + n] for i in range(0, len(b), n)]
 VERS = yaml.safe_load((ROOT / "data/versions.yaml").read_text())  # from scan_versions.py
 SERIES = ["19.0", "18.0", "17.0"]  # newest first
 NAME = SITE["name"]
@@ -74,7 +85,11 @@ def slug(app):
 # --------------------------------------------------------------------------- layout
 def head(title, desc, path, root, og_image="images/og-cover.png", extra=""):
     url = f"{SITE_URL}/{path}"
-    chat_cfg = f'<script>window.NB_CHAT={json.dumps({"endpoint": CHAT_ENDPOINT, "site": SITE_URL})}</script>\n' if CHAT_ENDPOINT else ""
+    chat_cfg = ""
+    if CHAT_ENDPOINT:
+        chat_cfg = f'<script>window.NB_CHAT={json.dumps({"endpoint": CHAT_ENDPOINT, "site": SITE_URL})}</script>\n'
+    elif CHAT_KEY:
+        chat_cfg = f'<script>window.NB_CHAT={json.dumps({"mode": "direct", "k": _scramble(CHAT_KEY), "site": SITE_URL, "model": "openai/gpt-oss-20b"})}</script>\n'
     return f"""<!DOCTYPE html>
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
@@ -365,9 +380,9 @@ def privacy_page():
     c = CONTACT["email"]
     S = [
      ("Who we are", f"<p>{NAME} publishes Odoo apps and offers custom Odoo development. We are based in {CONTACT['location']} and work remotely. You can reach us at <a href='mailto:{c}'>{c}</a>. This policy explains what personal data this website handles.</p>"),
-     ("What we collect", "<p>Only what you choose to send us, plus a little technical data any website receives:</p><ul><li><b>Contact form:</b> your name, email address, subject and message.</li>" + ("<li><b>Chat assistant:</b> the questions you type into the chat window.</li>" if CHAT_ENDPOINT else "") + "<li><b>Technical data:</b> your IP address and browser details, which our hosting provider receives when you load a page.</li></ul><p>We do not run analytics or advertising trackers, and this site does not set cookies. " + ("The chat window keeps your current conversation in your browser tab only (session storage) and it is cleared when you close the tab." if CHAT_ENDPOINT else "") + "</p>"),
+     ("What we collect", "<p>Only what you choose to send us, plus a little technical data any website receives:</p><ul><li><b>Contact form:</b> your name, email address, subject and message.</li>" + ("<li><b>Chat assistant:</b> the questions you type into the chat window.</li>" if CHAT_ON else "") + "<li><b>Technical data:</b> your IP address and browser details, which our hosting provider receives when you load a page.</li></ul><p>We do not run analytics or advertising trackers, and this site does not set cookies. " + ("The chat window keeps your current conversation in your browser tab only (session storage) and it is cleared when you close the tab." if CHAT_ON else "") + "</p>"),
      ("How we use it", "<p>We use your contact details and message only to reply to you and to handle your request or project. We do not sell your data and we do not use it for marketing you did not ask for.</p>"),
-     ("Who processes it", "<ul><li><b>Formspree</b> receives the contact form and forwards it to our email inbox.</li><li><b>GitHub Pages</b> hosts this website and may keep standard server logs.</li><li><b>Google Fonts</b> serves the fonts, so your browser requests them from Google.</li>" + ("<li><b>Cloudflare</b> runs the chat service that receives your chat questions, and <b>Groq</b> generates the answer. Do not type passwords or private data into the chat. We do not store chat conversations.</li>" if CHAT_ENDPOINT else "") + "</ul><p>Links to the Odoo Apps Store and other sites take you away from this website. Their own privacy policies apply there.</p>"),
+     ("Who processes it", "<ul><li><b>Formspree</b> receives the contact form and forwards it to our email inbox.</li><li><b>GitHub Pages</b> hosts this website and may keep standard server logs.</li><li><b>Google Fonts</b> serves the fonts, so your browser requests them from Google.</li>" + (("<li><b>Cloudflare</b> runs the chat service that receives your chat questions, and <b>Groq</b> generates the answer. Do not type passwords or private data into the chat. We do not store chat conversations.</li>" if CHAT_ENDPOINT else "<li><b>Groq</b> receives your chat questions directly from your browser to generate the answer. Do not type passwords or private data into the chat. We do not store chat conversations.</li>") if CHAT_ON else "") + "</ul><p>Links to the Odoo Apps Store and other sites take you away from this website. Their own privacy policies apply there.</p>"),
      ("How long we keep it", "<p>We keep emails for as long as needed to answer you, deliver any work we agree, and keep ordinary business records. You can ask us to delete them sooner.</p>"),
      ("Your rights", f"<p>You can ask us what data we hold about you, ask us to correct or delete it, or object to how we use it. Email <a href='mailto:{c}'>{c}</a> and we will reply.</p>"),
      ("Children", "<p>This website is not aimed at children and we do not knowingly collect their data.</p>"),
@@ -449,6 +464,10 @@ def main():
     (OUT / "assets").mkdir()
     for f in ("style.css", "site.js", "chat.js"):
         shutil.copy(ROOT / "src" / f, OUT / "assets" / f)
+    if CHAT_KEY:
+        (OUT / "assets/chat").mkdir(parents=True, exist_ok=True)
+        for f in ("prompt.js", "knowledge.js"):
+            shutil.copy(ROOT / "worker/src" / f, OUT / "assets/chat" / f)
     write("index.html", home())
     write("apps/index.html", apps_page())
     for i, a in enumerate(APPS):

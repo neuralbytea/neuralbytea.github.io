@@ -16,6 +16,7 @@ jobs:
         env:
           SITE_URL: ${{ vars.SITE_URL || 'https://neuralbytea.github.io' }}
           CHAT_ENDPOINT: ${{ vars.CHAT_ENDPOINT }}
+          CHAT_KEY: ${{ secrets.GROQ_API_KEY }}
       - uses: actions/upload-pages-artifact@v3
         with: { path: site }
   deploy:
