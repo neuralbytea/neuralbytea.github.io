@@ -49,6 +49,7 @@ FAMILIES = [
     ("Backend UI", "🧩", "ui", "AI list search, split view, chatter workspace, home menu and sidebar navigation."),
 ]
 FAM_CLASS = {f[0]: f[2] for f in FAMILIES}
+REDIRECTS = {"payment_provider_ngenius": "payment_ngenius"}  # old page address -> current one
 WORDS = {3: "Three", 4: "Four", 5: "Five", 6: "Six", 7: "Seven", 8: "Eight", 9: "Nine", 10: "Ten"}
 _fill = lambda s: s.replace("{n}", str(len(APPS))).replace("{lines}", str(len(FAMILIES)))
 SITE["description"] = _fill(SITE["description"])
@@ -512,6 +513,8 @@ def main():
     write("privacy/index.html", privacy_page())
     write("terms/index.html", terms_page())
     write("sitemap/index.html", sitemap_page())
+    for old, new in REDIRECTS.items():
+        write(f"apps/{old}/index.html", f'<!doctype html><meta charset="utf-8"><meta name="robots" content="noindex"><title>Redirecting</title><link rel="canonical" href="{SITE_URL}/apps/{new}/"><meta http-equiv="refresh" content="0; url=../{new}/"><a href="../{new}/">Continue to the app page</a>')
     write("404.html", not_found())
     write_knowledge()
     urls = ["", "apps/", "about/", "faq/", "contact/", "privacy/", "terms/", "sitemap/"] + [f"apps/{slug(a)}/" for a in APPS]

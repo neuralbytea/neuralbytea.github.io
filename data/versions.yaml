@@ -201,12 +201,12 @@ payment_Mastercard:
     price: 49.0
     updated: '2026-10-07'
     url: https://apps.odoo.com/apps/modules/19.0/payment_Mastercard/
-payment_provider_ngenius:
+payment_ngenius:
   '19.0':
-    version: 19.0.1.1.1
+    version: 19.0.1.1.2
     price: null
-    updated: '2026-10-07'
-    url: https://apps.odoo.com/apps/modules/19.0/payment_provider_ngenius/
+    updated: '2026-10-23'
+    url: https://apps.odoo.com/apps/modules/19.0/payment_ngenius/
 portal_ext:
   '18.0':
     version: 18.0.1.0.7

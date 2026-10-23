@@ -17,9 +17,10 @@ import yaml
 PROJ = Path(os.environ.get("ODOO_PROJ", Path.home() / "development/odoo_proj"))
 SERIES = ["17.0", "18.0", "19.0"]
 # technical name in the repo -> technical name on the store, where they differ
-STORE_NAME = {"payment_ngenius": "payment_provider_ngenius", "payment_provider_ngenius": "payment_provider_ngenius"}
+STORE_NAME = {}
 # modules in the repos that must not be listed (not published)
-SKIP = {"nb_employee_portal"}
+# payment_provider_ngenius is a different author's Odoo 18 module that sits in the Odoo 18 repo; it is not a NeuralBytea app
+SKIP = {"nb_employee_portal", "payment_provider_ngenius"}
 OUT = Path(__file__).parent / "data/versions.yaml"
 
 

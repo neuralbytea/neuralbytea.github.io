@@ -15,7 +15,7 @@ contact:
   remote: true
 hire:
 - k: Odoo Apps Store
-  v: "{n} apps"
+  v: '{n} apps'
   n: Built for Odoo 17, 18 and 19 and installable straight from the store.
 - k: Custom development
   v: Modules & portals
@@ -1121,7 +1121,7 @@ projects:
   - 'Ask questions about your data: it searches, counts and totals records'
   - Every answer lists the records it used, with a link to open them
   - Create or update records by asking, confirming each change with one click
-- id: payment_provider_ngenius
+- id: payment_ngenius
   title: N-Genius Payment Provider
   category: odoo
   featured: false
@@ -1129,8 +1129,8 @@ projects:
   client: NeuralBytea
   role: Community & Enterprise · Free · LGPL-3
   odoo_version: Odoo 19.0
-  image: assets/images/apps/payment_provider_ngenius.jpg
-  store_url: https://apps.odoo.com/apps/modules/19.0/payment_provider_ngenius/
+  image: assets/images/apps/payment_ngenius.jpg
+  store_url: https://apps.odoo.com/apps/modules/19.0/payment_ngenius/
   short_desc: 'N-Genius card payments in Odoo: hosted checkout, webhooks, sandbox and full refunds'
   metric: Free
   metric_label: open licence
@@ -1150,3 +1150,12 @@ projects:
   - Sandbox and production environments
   - Automatic payment status updates through webhooks
   - Full refund support from Odoo
+  screenshots:
+  - src: images/apps/shots/payment_ngenius/n-genius-card-payment-method-invoice-pay-odoo.jpg
+    caption: Customers choose Card on the invoice Pay dialog, secured by N-Genius
+  - src: images/apps/shots/payment_ngenius/n-genius-provider-credentials-test-mode-odoo.jpg
+    caption: 'Provider form: API key, outlet reference, region and a Test Connection button'
+  - src: images/apps/shots/payment_ngenius/n-genius-payment-transaction-refund-child-odoo.jpg
+    caption: A confirmed N-Genius payment with its full refund as a child transaction
+  - src: images/apps/shots/payment_ngenius/n-genius-payments-odoo-19-overview.jpg
+    caption: How Odoo 19, the N-Genius Payment Provider and N-Genius Online work together

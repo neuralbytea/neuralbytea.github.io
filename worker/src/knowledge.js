@@ -994,7 +994,7 @@ export const APPS = [
   "page": "https://neuralbytea.github.io/apps/nb_ai_chatbot/"
  },
  {
-  "id": "payment_provider_ngenius",
+  "id": "payment_ngenius",
   "title": "N-Genius Payment Provider",
   "line": "Payments",
   "edition": "Community & Enterprise",
@@ -1003,8 +1003,8 @@ export const APPS = [
    {
     "odoo": "19",
     "price": "Free",
-    "module_version": "1.1.1",
-    "store": "https://apps.odoo.com/apps/modules/19.0/payment_provider_ngenius/"
+    "module_version": "1.1.2",
+    "store": "https://apps.odoo.com/apps/modules/19.0/payment_ngenius/"
    }
   ],
   "summary": "N-Genius card payments in Odoo: hosted checkout, webhooks, sandbox and full refunds",
@@ -1019,7 +1019,7 @@ export const APPS = [
    "Payment Providers",
    "Invoicing"
   ],
-  "page": "https://neuralbytea.github.io/apps/payment_provider_ngenius/"
+  "page": "https://neuralbytea.github.io/apps/payment_ngenius/"
  }
 ];
 export const COMPANY = {
