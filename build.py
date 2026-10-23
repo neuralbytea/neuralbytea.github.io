@@ -35,6 +35,7 @@ def _scramble(key):
 VERS = yaml.safe_load((ROOT / "data/versions.yaml").read_text())  # from scan_versions.py
 SERIES = ["19.0", "18.0", "17.0"]  # newest first
 NAME = SITE["name"]
+
 STORE = SITE["store"]
 e = lambda v: html.escape(str(v if v is not None else ""), quote=True)
 
@@ -44,9 +45,17 @@ FAMILIES = [
     ("HR & Payroll", "👥", "hr", "Employee loans with payroll deduction, attendance and leave Gantt, self-service HR."),
     ("Dashboards", "📊", "dash", "Owl dashboards for sales, invoices, payments and payroll with Excel and PDF export."),
     ("AI Assistant", "🤖", "ai", "An AI chat bubble inside Odoo: bring your own ChatGPT, Claude or Gemini key and chat with your data."),
+    ("Education", "🎓", "edu", "School and course management: students, admissions, fees, parent portal, timetable and training batches."),
     ("Backend UI", "🧩", "ui", "AI list search, split view, chatter workspace, home menu and sidebar navigation."),
 ]
 FAM_CLASS = {f[0]: f[2] for f in FAMILIES}
+WORDS = {3: "Three", 4: "Four", 5: "Five", 6: "Six", 7: "Seven", 8: "Eight", 9: "Nine", 10: "Ten"}
+_fill = lambda s: s.replace("{n}", str(len(APPS))).replace("{lines}", str(len(FAMILIES)))
+SITE["description"] = _fill(SITE["description"])
+for _h in D["hire"]:
+    _h["v"], _h["n"] = _fill(_h["v"]), _fill(_h["n"])
+for _s in D["stats"]:
+    _s["value"] = _fill(str(_s["value"]))
 
 
 def family(app):
@@ -180,6 +189,7 @@ FAQS = [
     ("How do I get support?", "Use the contact form or the app's page on the Odoo Apps Store. We reply by email."),
     ("Does the AI Chat Assistant send my data to an AI provider?", "You connect your own AI model with your own API key (for example ChatGPT, Claude, Gemini, Groq or a local Ollama). Your questions and the records the assistant looks up are sent to the provider you choose, and it only sees what the signed-in user is allowed to see."),
     ("Who can use Employee Self Service?", "Your internal users. Employee records, time off, attendance, expenses and payslips are internal data, so the pages require an internal user and turn external users away."),
+    ("Do you have school or training-center software?", "Yes. The Education line is a full school management suite for Odoo 19: student records, admissions, monthly fee slips with one invoice per family, a parent portal, teachers, a timetable and principal dashboards, plus course management for training batches with seats, waiting lists and installment fees. Install the free School Management System to get the whole school suite, or pick single modules."),
     ("Where are you based?", f"{CONTACT['location']}, working remotely with customers worldwide."),
 ]
 VALUE = [
@@ -215,7 +225,22 @@ def home():
     fams = [f'<a class="card fam" href="apps/?line={c}"><div class="ico">{ico}</div><h3>{n}</h3><p>{d}</p><span class="more">{n_apps(n)} <i>→</i></span></a>' for n, ico, c, d in FAMILIES]
     tech = "".join(f"<span>{t}</span>" for t in ["Odoo 17", "Odoo 18", "Odoo 19", "Python", "OWL", "JavaScript", "PostgreSQL", "QWeb", "Portals", "Payments", "HR & Payroll", "Accounting", "Purchase", "Sales"])
     why = "".join(f'<div class="glass reveal"><div class="num">{n}</div><h3>{t}</h3><p>{p}</p></div>' for n, t, p in VALUE)
-    qs = ["Which apps work on Odoo 19?", "Is there a free app?", "How much is Vendor Portal Pro?", "I need a custom module"]
+    suite = next((a for a in APPS if a["id"] == "nb_school_management_system"), None)
+    edu = ""
+    if suite:
+        mods = [a for a in APPS if family(a) == "Education" and a is not suite]
+        shot = (suite.get("screenshots") or [{"src": ""}])[0]["src"]
+        for s in suite.get("screenshots", []):
+            if "parent-portal" in s["src"]:
+                shot = s["src"]
+        chips_e = "".join(f'<a href="apps/{a["id"]}/">{e(a["title"])}</a>' for a in mods)
+        edu = f"""<section class="wrap sec"><div class="edu reveal"><div class="edu-copy"><span class="eyebrow">New · Education</span>
+ <h2>School and course management on Odoo 19</h2>
+ <p>One install gives a school its student records, admissions, family fee invoices, parent portal, teachers, timetable and dashboards. Run short courses and training batches next to your classes, with seats, waiting lists and installment fees.</p>
+ <div class="edu-chips">{chips_e}</div>
+ <div class="btn-row"><a class="btn btn-primary" href="apps/{suite['id']}/">See the school suite</a><a class="btn btn-ghost" href="apps/?line=edu">All {len(mods) + 1} education apps →</a></div></div>
+ <a class="edu-shot" href="apps/{suite['id']}/"><img src="{shot}" alt="School Management System for Odoo 19: parent portal with children and fee summary" loading="lazy" width="1200" height="750"></a></div></section>"""
+    qs = ["Which apps work on Odoo 19?", "Is there a free app?", "Do you have school management software?", "I need a custom module"]
     askai = ("""<section class="wrap sec askai-sec"><div class="askai reveal"><div class="askai-copy"><span class="eyebrow">AI assistant</span>
  <h2>Ask our AI assistant</h2><p>Get instant answers about our apps, Odoo versions, prices and custom development. In English, Urdu or Roman Urdu.</p>
  <div class="askai-chips">""" + "".join(f'<button type="button" data-nbc-ask="{e(q)}">{e(q)}</button>' for q in qs) + """</div>
@@ -228,7 +253,7 @@ def home():
  <div class="hero-copy">
   <span class="pill"><i class="dot"></i>{len(APPS)} apps live on the Odoo Apps Store</span>
   <h1>Odoo apps that <em>empower</em> your team and customers.</h1>
-  <p class="lead">{NAME} builds production-ready Odoo apps for versions 17, 18 and 19: portals, payments, HR and payroll, dashboards and an AI assistant. Install from the store, or let us build it for you.</p>
+  <p class="lead">{NAME} builds production-ready Odoo apps for versions 17, 18 and 19: portals, payments, HR and payroll, dashboards, school management and an AI assistant. Install from the store, or let us build it for you.</p>
   <div class="btn-row"><a class="btn btn-primary" href="apps/">Browse the apps</a><a class="btn btn-ghost" href="contact/">Talk to us →</a></div>
   <ul class="trust"><li>Odoo 17 · 18 · 19</li><li>Community &amp; Enterprise</li><li>OPL-1 licensed</li><li>Store-published</li></ul>
  </div>
@@ -238,7 +263,8 @@ def home():
 {askai}<section class="wrap"><div class="marquee" aria-hidden="true"><div class="track">{tech}{tech}</div></div></section>
 <section class="wrap sec"><div class="sec-head reveal"><span class="eyebrow">Top picks</span><h2>Where most customers start</h2><p>Our most-used portals, payments and AI tools.</p><a class="see" href="apps/">All {len(APPS)} apps →</a></div>
  {car([app_card(a, root, reveal=False, lazy=False) for a in featured])}</section>
-<section class="wrap sec"><div class="sec-head reveal"><span class="eyebrow">Product lines</span><h2>Browse by product line</h2><p>Six families, each app doing one job well.</p></div>
+{edu}
+<section class="wrap sec"><div class="sec-head reveal"><span class="eyebrow">Product lines</span><h2>Browse by product line</h2><p>{WORDS[len(FAMILIES)]} families, each app doing one job well.</p></div>
  {car(fams)}</section>
 <section class="band"><div class="wrap"><div class="sec-head reveal light"><span class="eyebrow">Why NeuralBytea</span><h2>Built to install and forget</h2></div>
  <div class="grid why-grid">{why}</div></div></section>
@@ -352,7 +378,7 @@ def about_page():
  <h1 class="statement">We build Odoo apps that install cleanly and do one job well.</h1>
  <p class="lead">{SITE["description"]}</p><div class="btn-row"><a class="btn btn-primary" href="{root}apps/">Browse the apps</a><a class="btn btn-ghost" href="{root}contact/">Work with us</a></div></div>
  <ul class="facts">{facts}</ul></section>
-<section class="wrap sec"><div class="sec-head"><span class="eyebrow">What we build</span><h2>Six product lines</h2></div><div class="grid fam-grid">{lines}</div></section>
+<section class="wrap sec"><div class="sec-head"><span class="eyebrow">What we build</span><h2>{WORDS[len(FAMILIES)]} product lines</h2></div><div class="grid fam-grid">{lines}</div></section>
 <section class="band"><div class="wrap"><div class="sec-head light"><span class="eyebrow">How custom work goes</span><h2>From a note to a working module</h2></div><div class="steps">{steps}</div></div></section>
 <section class="wrap sec"><div class="sec-head"><span class="eyebrow">Why NeuralBytea</span><h2>The facts behind the apps</h2></div><div class="grid why-grid">{why}</div></section>
 <section class="wrap sec"><div class="sec-head"><span class="eyebrow">Services</span><h2>Apps, custom work and support</h2></div><div class="grid hire-grid">{hire}</div></section>

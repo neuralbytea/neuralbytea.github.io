@@ -47,6 +47,24 @@ nb_ai_chatbot:
     price: 19.0
     updated: '2026-10-07'
     url: https://apps.odoo.com/apps/modules/19.0/nb_ai_chatbot/
+nb_course_admission:
+  '19.0':
+    version: 19.0.1.0.0
+    price: 15.0
+    updated: '2026-10-22'
+    url: https://apps.odoo.com/apps/modules/19.0/nb_course_admission/
+nb_course_core:
+  '19.0':
+    version: 19.0.1.0.0
+    price: 25.0
+    updated: '2026-10-22'
+    url: https://apps.odoo.com/apps/modules/19.0/nb_course_core/
+nb_course_fees:
+  '19.0':
+    version: 19.0.1.0.0
+    price: 15.0
+    updated: '2026-10-22'
+    url: https://apps.odoo.com/apps/modules/19.0/nb_course_fees/
 nb_customer_portal_pro:
   '18.0':
     version: 18.0.1.3.5
@@ -54,9 +72,9 @@ nb_customer_portal_pro:
     updated: '2026-09-02'
     url: https://apps.odoo.com/apps/modules/18.0/nb_customer_portal_pro/
   '19.0':
-    version: 19.0.1.3.5
+    version: 19.0.1.3.6
     price: 99.0
-    updated: '2026-10-01'
+    updated: '2026-10-10'
     url: https://apps.odoo.com/apps/modules/19.0/nb_customer_portal_pro/
 nb_employee_self_service:
   '18.0':
@@ -65,9 +83,9 @@ nb_employee_self_service:
     updated: '2026-09-03'
     url: https://apps.odoo.com/apps/modules/18.0/nb_employee_self_service/
   '19.0':
-    version: 19.0.2.0.4
+    version: 19.0.2.0.6
     price: 119.0
-    updated: '2026-10-07'
+    updated: '2026-10-10'
     url: https://apps.odoo.com/apps/modules/19.0/nb_employee_self_service/
 nb_payroll_dashboard:
   '18.0':
@@ -78,8 +96,56 @@ nb_payroll_dashboard:
   '19.0':
     version: 19.0.1.0.8
     price: 29.0
-    updated: '2026-10-07'
+    updated: '2026-10-08'
     url: https://apps.odoo.com/apps/modules/19.0/nb_payroll_dashboard/
+nb_school_admission:
+  '19.0':
+    version: 19.0.1.0.0
+    price: 25.0
+    updated: '2026-10-22'
+    url: https://apps.odoo.com/apps/modules/19.0/nb_school_admission/
+nb_school_core:
+  '19.0':
+    version: 19.0.1.0.0
+    price: 29.0
+    updated: '2026-10-22'
+    url: https://apps.odoo.com/apps/modules/19.0/nb_school_core/
+nb_school_dashboard:
+  '19.0':
+    version: 19.0.1.0.0
+    price: 0.0
+    updated: '2026-10-22'
+    url: https://apps.odoo.com/apps/modules/19.0/nb_school_dashboard/
+nb_school_fees:
+  '19.0':
+    version: 19.0.1.0.0
+    price: 39.0
+    updated: '2026-10-22'
+    url: https://apps.odoo.com/apps/modules/19.0/nb_school_fees/
+nb_school_hr:
+  '19.0':
+    version: 19.0.1.0.0
+    price: 15.0
+    updated: '2026-10-22'
+    url: https://apps.odoo.com/apps/modules/19.0/nb_school_hr/
+nb_school_management_system:
+  '19.0':
+    version: 19.0.1.0.0
+    price: 0.0
+    updated: '2026-10-22'
+    url: https://apps.odoo.com/apps/modules/19.0/nb_school_management_system/
+nb_school_portal:
+  '19.0':
+    version: 19.0.1.0.0
+    price: 39.0
+    updated: '2026-10-22'
+    url: https://apps.odoo.com/apps/modules/19.0/nb_school_portal/
+nb_school_timetable:
+  '19.0':
+    version: 19.0.1.0.0
+    price: 25.0
+    updated: '2026-10-22'
+    url: https://apps.odoo.com/apps/modules/19.0/nb_school_timetable/
 nb_services_billing_pro:
   '18.0':
     version: 18.0.1.0.7
@@ -87,9 +153,9 @@ nb_services_billing_pro:
     updated: '2026-09-22'
     url: https://apps.odoo.com/apps/modules/18.0/nb_services_billing_pro/
   '19.0':
-    version: 19.0.1.0.7
+    version: 19.0.1.0.10
     price: 99.0
-    updated: '2026-10-07'
+    updated: '2026-10-10'
     url: https://apps.odoo.com/apps/modules/19.0/nb_services_billing_pro/
 nb_smart_list_search_pro:
   '18.0':
@@ -109,9 +175,9 @@ nb_vendor_portal_pro:
     updated: '2026-09-02'
     url: https://apps.odoo.com/apps/modules/18.0/nb_vendor_portal_pro/
   '19.0':
-    version: 19.0.1.8.5
+    version: 19.0.1.8.6
     price: 99.0
-    updated: '2026-10-01'
+    updated: '2026-10-10'
     url: https://apps.odoo.com/apps/modules/19.0/nb_vendor_portal_pro/
 pane_split_view:
   '18.0':
@@ -148,9 +214,9 @@ portal_ext:
     updated: '2026-09-22'
     url: https://apps.odoo.com/apps/modules/18.0/portal_ext/
   '19.0':
-    version: 19.0.1.0.7
+    version: 19.0.1.0.8
     price: 49.0
-    updated: '2026-10-01'
+    updated: '2026-10-10'
     url: https://apps.odoo.com/apps/modules/19.0/portal_ext/
 sale_payment_dashboard:
   '17.0':
@@ -166,18 +232,18 @@ sale_payment_dashboard:
   '19.0':
     version: 19.0.1.2.4
     price: 49.0
-    updated: '2026-10-07'
+    updated: '2026-10-08'
     url: https://apps.odoo.com/apps/modules/19.0/sale_payment_dashboard/
 salesperson_portal:
   '18.0':
     version: 18.0.2.5.0
     price: 99.0
-    updated: '2026-09-22'
+    updated: '2026-10-10'
     url: https://apps.odoo.com/apps/modules/18.0/salesperson_portal/
   '19.0':
-    version: 19.0.2.5.0
+    version: 19.0.2.5.1
     price: 99.0
-    updated: '2026-10-07'
+    updated: '2026-10-10'
     url: https://apps.odoo.com/apps/modules/19.0/salesperson_portal/
 web_appbar:
   '18.0':

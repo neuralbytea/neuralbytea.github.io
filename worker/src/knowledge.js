@@ -10,7 +10,7 @@ export const APPS = [
    {
     "odoo": "19",
     "price": "$99",
-    "module_version": "1.8.5",
+    "module_version": "1.8.6",
     "store": "https://apps.odoo.com/apps/modules/19.0/nb_vendor_portal_pro/"
    },
    {
@@ -48,7 +48,7 @@ export const APPS = [
    {
     "odoo": "19",
     "price": "$99",
-    "module_version": "2.5.0",
+    "module_version": "2.5.1",
     "store": "https://apps.odoo.com/apps/modules/19.0/salesperson_portal/"
    },
    {
@@ -85,7 +85,7 @@ export const APPS = [
    {
     "odoo": "19",
     "price": "$99",
-    "module_version": "1.0.7",
+    "module_version": "1.0.10",
     "store": "https://apps.odoo.com/apps/modules/19.0/nb_services_billing_pro/"
    },
    {
@@ -123,7 +123,7 @@ export const APPS = [
    {
     "odoo": "19",
     "price": "$99",
-    "module_version": "1.3.5",
+    "module_version": "1.3.6",
     "store": "https://apps.odoo.com/apps/modules/19.0/nb_customer_portal_pro/"
    },
    {
@@ -151,6 +151,366 @@ export const APPS = [
   "page": "https://neuralbytea.github.io/apps/nb_customer_portal_pro/"
  },
  {
+  "id": "nb_school_management_system",
+  "title": "School Management System",
+  "line": "Education",
+  "edition": "Community & Enterprise",
+  "licence": "OPL-1",
+  "versions": [
+   {
+    "odoo": "19",
+    "price": "Free",
+    "module_version": "1.0.0",
+    "store": "https://apps.odoo.com/apps/modules/19.0/nb_school_management_system/"
+   }
+  ],
+  "summary": "Complete school ERP for Odoo 19: students, admissions, family fee invoices, parent portal, teachers",
+  "about": "School management system for Odoo 19. One install gives a school its student records, admissions, fee invoices, parent portal, teachers, timetable and dashboards, all on the standard Odoo Invoicing, Employees and Contacts apps.",
+  "features": [
+   "Student Information System: Students, families, guardians, classes, sections, academic years and roll numbers.",
+   "School Admission Management: Enquiry, documents, entrance test, offers with expiry, seat limits and a waiting list.",
+   "School Fee Management: Monthly fee slips, one invoice per family, sibling concessions and late fees.",
+   "School Parent Portal: Parents see fees and invoices and upload admission documents online.",
+   "School Teacher Management: Teacher profiles, subject allocation, class teachers and workload limits.",
+   "School Timetable: Daily periods, class and teacher timetables with clash checks and one-click generation.",
+   "School Dashboard: Admissions, fees, staff and student dashboards for the principal.",
+   "Role-Based Access: Principal, registrar, fee manager, teacher and parent each see only their own part."
+  ],
+  "works_with": [
+   "Student Information System",
+   "School Teacher Management",
+   "School Fee Management",
+   "School Admission Management",
+   "School Parent Portal",
+   "School Timetable",
+   "School Dashboard"
+  ],
+  "page": "https://neuralbytea.github.io/apps/nb_school_management_system/"
+ },
+ {
+  "id": "nb_school_core",
+  "title": "Student Information System",
+  "line": "Education",
+  "edition": "Community & Enterprise",
+  "licence": "OPL-1",
+  "versions": [
+   {
+    "odoo": "19",
+    "price": "$29",
+    "module_version": "1.0.0",
+    "store": "https://apps.odoo.com/apps/modules/19.0/nb_school_core/"
+   }
+  ],
+  "summary": "Student records, families, guardians, classes, sections, academic years and enrollment roll numbers",
+  "about": "School management for Odoo 19. Student records, families and guardians, classes and sections, academic years and terms, and yearly enrollment with roll numbers, for schools, academies and training institutes that run on Odoo Community or Enterprise.",
+  "features": [
+   "Student Records with a Status Workflow: One permanent record per student: applicant, active, suspended, transferred, withdrawn, graduated or alumni, with join and leave dates.",
+   "Families and Guardians as the Billing Unit: A family groups guardians and children. Guardians and students are child contacts of the family contact, ready for invoices and portal logins.",
+   "Academic Years and Terms: Open and close years with terms. A closed year is locked, so history cannot change by accident.",
+   "Grades, Sections and Capacity: Programs, grades with a promotion path, sections with seats. Choose to block, warn or ignore a full section.",
+   "Subjects and Curriculum: A curriculum per grade, with optional electives chosen per student.",
+   "Yearly Enrollment with Roll Numbers: One active enrollment per student and year, automatic or manual roll numbers, and the change-of-section history.",
+   "Bulk Enrollment Wizards: Bulk enroll a list into a section, assign roll numbers, or move a student to another section during the year.",
+   "Roles and Multi-Company: School Staff, Registrar and Principal, with record rules per company so campuses stay separate."
+  ],
+  "works_with": [
+   "Contacts",
+   "Discuss",
+   "Contacts",
+   "Install Request"
+  ],
+  "page": "https://neuralbytea.github.io/apps/nb_school_core/"
+ },
+ {
+  "id": "nb_school_admission",
+  "title": "School Admission Management",
+  "line": "Education",
+  "edition": "Community & Enterprise",
+  "licence": "OPL-1",
+  "versions": [
+   {
+    "odoo": "19",
+    "price": "$25",
+    "module_version": "1.0.0",
+    "store": "https://apps.odoo.com/apps/modules/19.0/nb_school_admission/"
+   }
+  ],
+  "summary": "Admission pipeline: enquiry, documents, entrance test, offers with expiry, seat limits, waiting list",
+  "about": "School admission management for Odoo 19. Follow every family from the first inquiry to an enrolled student: application, document checklist, entrance test, offer, waiting list, admission fee and admission into a section.",
+  "features": [
+   "Admission Pipeline: Inquiry, applied, test, offered, accepted and admitted, plus waiting list, rejected and withdrawn, with a kanban board.",
+   "Document Checklist: Mandatory and optional documents per grade, with verified, received, pending or promised-by-date states.",
+   "Entrance Test and Interview: A pass mark per grade and a score on the application. A failed test blocks the offer.",
+   "Seats and Waiting List: Seats are capacity minus enrolled students and open offers. The waiting list is ordered by test result, then by date.",
+   "Offer Expiry: An offer expires after the configured days and the seat goes to the first applicant waiting.",
+   "Family Matching and Duplicate Warning: Finds an existing family by phone or email and warns about a student with the same name and birth date.",
+   "Admission Fee Invoice: When the offer is accepted, the grade's admission fee is invoiced. Admit before payment only by override.",
+   "Admit into a Section: The registrar enrolls the accepted applicant in a section, with a suggested section that has the most free seats."
+  ],
+  "works_with": [
+   "Student Information System",
+   "School Fee Management"
+  ],
+  "page": "https://neuralbytea.github.io/apps/nb_school_admission/"
+ },
+ {
+  "id": "nb_school_fees",
+  "title": "School Fee Management",
+  "line": "Education",
+  "edition": "Community & Enterprise",
+  "licence": "OPL-1",
+  "versions": [
+   {
+    "odoo": "19",
+    "price": "$39",
+    "module_version": "1.0.0",
+    "store": "https://apps.odoo.com/apps/modules/19.0/nb_school_fees/"
+   }
+  ],
+  "summary": "Monthly school fee slips, one invoice per family, concessions and late fees on Odoo Invoicing",
+  "about": "School fee management for Odoo 19. Generate the month's fee slips at month end, add one-off charges or deductions, invoice each family once, apply late fees on the slip and follow payments, defaulters and concessions, all on standard Odoo invoices.",
+  "features": [
+   "Month-by-Month Fee Slips: Generate the slips due in a chosen month, like a payroll run, so leavers and corrections never create advance bills. Running it twice never duplicates.",
+   "Extra Fee Lines and Deductions: Add a one-off charge (trip, books) or a negative deduction to all selected students for one month.",
+   "One Invoice per Family: Slips of all children of a family are merged into one invoice per month, with a choice of the earliest or latest due date.",
+   "Create Invoice from a Fee Slip: A button on the slip invoices it, together with its late fee.",
+   "Late Fee on the Slip: Press Apply Late Fee on an overdue slip: the late fee becomes an extra line on its unpaid invoice, or a new slip when the invoice already has a payment.",
+   "Concessions and Sibling Reductions: Percent or fixed concessions with approval and validity dates, and sibling tiers by date of birth. Shown as separate negative invoice lines.",
+   "Fee Slips, Invoices, Payments and Defaulters Menus: A School Fees app with Overview, Fee Slips, Invoices, Payments, Defaulters and Analysis.",
+   "Roles that Separate Duties: The Fee Clerk collects and views. The Fee Manager sets up, waives and cancels.",
+   "Real Odoo Invoices: Fees are standard customer invoices to the family contact, tax-exempt unless you set taxes on the fee head."
+  ],
+  "works_with": [
+   "Student Information System",
+   "Invoicing"
+  ],
+  "page": "https://neuralbytea.github.io/apps/nb_school_fees/"
+ },
+ {
+  "id": "nb_school_portal",
+  "title": "School Parent Portal",
+  "line": "Education",
+  "edition": "Community & Enterprise",
+  "licence": "OPL-1",
+  "versions": [
+   {
+    "odoo": "19",
+    "price": "$39",
+    "module_version": "1.0.0",
+    "store": "https://apps.odoo.com/apps/modules/19.0/nb_school_portal/"
+   }
+  ],
+  "summary": "Parents see each child's class, fee statement and invoices, and upload admission documents online",
+  "about": "Parent portal for Odoo 19 schools. Each guardian signs in with a personal login and sees only their own family: children and class, fee statement with payment status, invoices with Pay Now, and the admission checklist with document upload.",
+  "features": [
+   "One Login per Guardian for the Whole Family: A personal login covers every child. Each parent has their own.",
+   "Children Overview: Class, section, roll number, status, a fees-paid bar and the amount to pay for each child.",
+   "Fee Statement with Payment Status: Upcoming, due, overdue, partly paid, paid or waived, with filters and a row that shows how the amount is made.",
+   "Invoices and Pay Now: Uses the standard portal invoice pages: download and pay online with your payment provider.",
+   "Admission Application Tracker: A step tracker, a next-step message and the offer validity.",
+   "Admission Document Upload: PDF, JPG, PNG, WEBP, DOC or DOCX up to 8 MB (settable), up to 5 files per document, with a promise date for later.",
+   "Invite from the Back Office: A Portal Access button on every guardian to invite, resend or revoke the login.",
+   "Private by Design: Another family's pages return not found, the school data is not readable through the web client, and internal notes are never shown."
+  ],
+  "works_with": [
+   "Portal",
+   "Student Information System",
+   "School Fee Management",
+   "School Admission Management"
+  ],
+  "page": "https://neuralbytea.github.io/apps/nb_school_portal/"
+ },
+ {
+  "id": "nb_school_hr",
+  "title": "School Teacher Management",
+  "line": "Education",
+  "edition": "Community & Enterprise",
+  "licence": "OPL-1",
+  "versions": [
+   {
+    "odoo": "19",
+    "price": "$15",
+    "module_version": "1.0.0",
+    "store": "https://apps.odoo.com/apps/modules/19.0/nb_school_hr/"
+   }
+  ],
+  "summary": "Teacher profiles on HR employees, subject allocation, class teachers and weekly workload limits",
+  "about": "Teacher management for Odoo 19 schools. Teachers are normal Odoo employees, so attendance, time off and payroll keep working from the HR apps, while the school adds teaching assignments, class teachers, subjects a teacher can teach and weekly workload limits.",
+  "features": [
+   "Teacher Profile on the Odoo Employee: Qualification, specialization, experience, employment type and the subjects the teacher is qualified for.",
+   "Teaching Assignments: Teacher, subject, section and periods per week for the open year.",
+   "Class Teacher per Section: One class teacher per section and year, with access to the class parents.",
+   "Weekly Workload Limits: Maximum periods per week and per day. Block, warn or ignore when an assignment goes over.",
+   "Automatic Teacher Role: Ticking Teacher on the employee gives their login the Teacher role. Unticking removes it.",
+   "Teachers See Only Their Classes: Record rules limit sections, students, enrollments, grades, subjects and parent contacts to the teacher's own classes.",
+   "Teacher Directory Without HR Access: Teachers and staff can open the Teachers list and profiles without any HR rights."
+  ],
+  "works_with": [
+   "Student Information System",
+   "Employees"
+  ],
+  "page": "https://neuralbytea.github.io/apps/nb_school_hr/"
+ },
+ {
+  "id": "nb_school_timetable",
+  "title": "School Timetable",
+  "line": "Education",
+  "edition": "Community & Enterprise",
+  "licence": "OPL-1",
+  "versions": [
+   {
+    "odoo": "19",
+    "price": "$25",
+    "module_version": "1.0.0",
+    "store": "https://apps.odoo.com/apps/modules/19.0/nb_school_timetable/"
+   }
+  ],
+  "summary": "Weekly class and teacher timetable with daily periods, clash checks and one-click generation",
+  "about": "Timetable for Odoo 19 schools. Define the daily periods once, then place every subject of every class by its periods per week. The class timetable and the teacher timetable come from the same lessons, so a teacher can never be in two classes at once.",
+  "features": [
+   "Daily Periods and Breaks: Define the school day once, with start and end times and breaks that never take a lesson.",
+   "Weekly Timetable per Class: One lesson per class, day and period, with the classroom.",
+   "Teacher Timetable: Each teacher sees their own week with the class they teach in every period.",
+   "Clash Protection: A teacher cannot be in two classes at once, and cannot exceed the daily limit set on the profile.",
+   "One-Click Generation: Places every subject by its periods per week, spread over the days, and lists what does not fit.",
+   "Periods Still to Place: Each class shows how many lessons of its teaching assignments are not on the timetable yet.",
+   "Printable Timetables: A4 landscape PDF for a class or for a teacher.",
+   "Teachers See Only Their Lessons: Record rules limit teachers to their own lessons and their class; staff see the whole school."
+  ],
+  "works_with": [
+   "School Teacher Management"
+  ],
+  "page": "https://neuralbytea.github.io/apps/nb_school_timetable/"
+ },
+ {
+  "id": "nb_school_dashboard",
+  "title": "School Dashboard",
+  "line": "Education",
+  "edition": "Community & Enterprise",
+  "licence": "OPL-1",
+  "versions": [
+   {
+    "odoo": "19",
+    "price": "Free",
+    "module_version": "1.0.0",
+    "store": "https://apps.odoo.com/apps/modules/19.0/nb_school_dashboard/"
+   }
+  ],
+  "summary": "Principal dashboards for admissions, fee collection, staff and students. Free with the school suite",
+  "about": "School dashboard for Odoo 19. Four ready-made dashboards show admissions, fee collection, staff and students, built on the standard Odoo Dashboards app and the data of the school modules.",
+  "features": [
+   "Admissions Dashboard: Applications, in pipeline, admitted and rejected or withdrawn, by stage, grade, month and source.",
+   "Fees Dashboard: Gross fees, concessions, net fees and not yet invoiced, by month due, fee head, grade and status.",
+   "Staff Dashboard: Staff and teaching assignments, periods per week, by department, job position, teacher and grade.",
+   "Student Batches Dashboard: Enrolled students, sections, seat capacity and closed enrollments, by grade, section and gender.",
+   "Standard Odoo Dashboards: Built on the Odoo Dashboards app, so filters, sharing and the drill-down work as usual.",
+   "Live Data: Figures read the records of the school modules, with no export or copy.",
+   "Role-Based Access: Only the Principal, the Registrar and the Administrator see the school dashboards."
+  ],
+  "works_with": [
+   "Dashboards",
+   "Student Information System",
+   "School Admission Management",
+   "School Fee Management",
+   "School Teacher Management"
+  ],
+  "page": "https://neuralbytea.github.io/apps/nb_school_dashboard/"
+ },
+ {
+  "id": "nb_course_core",
+  "title": "Course Management",
+  "line": "Education",
+  "edition": "Community & Enterprise",
+  "licence": "OPL-1",
+  "versions": [
+   {
+    "odoo": "19",
+    "price": "$25",
+    "module_version": "1.0.0",
+    "store": "https://apps.odoo.com/apps/modules/19.0/nb_course_core/"
+   }
+  ],
+  "summary": "Short courses and training batches with seats, trainers, learners and an automatic waiting list",
+  "about": "Course management for Odoo 19. Run short courses next to your classes: a course catalog, batches with dates, trainers and seats, learners with the family that pays, and an automatic waiting list that fills a seat when someone drops out.",
+  "features": [
+   "Course Catalog: Categories, level, mode (on site, online, blended), hours, price, seats and minimum to run.",
+   "Batches with Trainers and a Coordinator: Dates, schedule, venue, seats, trainers and one coordinator per batch.",
+   "Seats and Automatic Waiting List: A full batch queues the learner. A free seat or more seats enrolls the longest-waiting learner.",
+   "Rolling Intake: Learners can join a batch that is already running.",
+   "Learners Are Students, the Family Pays: One record for classes and courses. An adult learner gets a family of their own, and a company can pay for many.",
+   "Batch Life Cycle: Planned, open, running and completed or cancelled. Starting needs the minimum learners.",
+   "Roles That Follow the Assignment: A Batch Coordinator sees only their batches. A trainer sees only the batches they train. The office sees all.",
+   "Calendar, Pivot and Waiting List Views: Batch calendar, enrollment analysis and a waiting list menu."
+  ],
+  "works_with": [
+   "Student Information System",
+   "School Teacher Management"
+  ],
+  "page": "https://neuralbytea.github.io/apps/nb_course_core/"
+ },
+ {
+  "id": "nb_course_admission",
+  "title": "Course Enrollment and Admission",
+  "line": "Education",
+  "edition": "Community & Enterprise",
+  "licence": "OPL-1",
+  "versions": [
+   {
+    "odoo": "19",
+    "price": "$15",
+    "module_version": "1.0.0",
+    "store": "https://apps.odoo.com/apps/modules/19.0/nb_course_admission/"
+   }
+  ],
+  "summary": "Applications for course batches with seat limits, waiting list, offers and enrollment on admit",
+  "about": "Course admission for Odoo 19. Take applications for short-course batches in the same pipeline as your class admissions: document checklist, offer, batch seats, waiting list and, when admitted, enrollment in the batch and its fee slips.",
+  "features": [
+   "Applications for Course Batches: An application has a type, class or course, and a course application names the batch.",
+   "Batch Seats Reserved by Offers: Seats are the batch seats minus enrolled learners and open offers.",
+   "Waiting List and Offer Expiry per Batch: Ordered by date. A released seat creates an activity for the officer.",
+   "Enrollment on Admit: Admitting enrolls the learner in the batch and creates the fee slips from the installment plan.",
+   "Same Checklist, Same Roles: The document checklist, family matching and roles are the school's own.",
+   "Coordinator May Admit Course Applicants: A Course Coordinator admits course applications. Class admissions stay with the registrar.",
+   "Works Alone or Together: Without this module class admissions are unchanged. With it you can run classes, courses or both."
+  ],
+  "works_with": [
+   "School Admission Management",
+   "Course Fee Installments"
+  ],
+  "page": "https://neuralbytea.github.io/apps/nb_course_admission/"
+ },
+ {
+  "id": "nb_course_fees",
+  "title": "Course Fee Installments",
+  "line": "Education",
+  "edition": "Community & Enterprise",
+  "licence": "OPL-1",
+  "versions": [
+   {
+    "odoo": "19",
+    "price": "$15",
+    "module_version": "1.0.0",
+    "store": "https://apps.odoo.com/apps/modules/19.0/nb_course_fees/"
+   }
+  ],
+  "summary": "Installment plans and fee slips for course enrollments, billed to the family or the paying company",
+  "about": "Course fee installments for Odoo 19. Split a course fee into a deposit and equal parts, create fee slips when a learner is enrolled, invoice the family or company that pays, and use the same late fees, concessions and payments as class fees.",
+  "features": [
+   "Installment Plans: Percentages of the fee, each counted from enrollment, batch start or batch end plus or minus days. Three plans included.",
+   "Fee Slips on Enrollment: Confirming an enrollment, or taking a seat from the waiting list, creates its slips. Running it again never duplicates.",
+   "Exact Totals: The last installment takes the rounding remainder, and a due date is never before the enrollment day.",
+   "Payer Family or Company: Invoices go to the Billed To family, and a company that pays for several learners gets one merged invoice.",
+   "Same Late Fees, Concessions and Payments: Course slips use the school fee engine: Apply Late Fee, Create Invoice, concessions and payment tracking.",
+   "No Fee Access Needed to Enroll: The slips are created as a system step, so coordinators never see fee data.",
+   "Cancel on Drop: Slips that are not invoiced yet are cancelled when a learner is dropped or the batch is cancelled."
+  ],
+  "works_with": [
+   "Course Management",
+   "School Fee Management"
+  ],
+  "page": "https://neuralbytea.github.io/apps/nb_course_fees/"
+ },
+ {
   "id": "nb_employee_self_service",
   "title": "Employee Self Service",
   "line": "Portals",
@@ -160,7 +520,7 @@ export const APPS = [
    {
     "odoo": "19",
     "price": "$119",
-    "module_version": "2.0.4",
+    "module_version": "2.0.6",
     "store": "https://apps.odoo.com/apps/modules/19.0/nb_employee_self_service/"
    },
    {
@@ -199,7 +559,7 @@ export const APPS = [
    {
     "odoo": "19",
     "price": "$49",
-    "module_version": "1.0.7",
+    "module_version": "1.0.8",
     "store": "https://apps.odoo.com/apps/modules/19.0/portal_ext/"
    },
    {
