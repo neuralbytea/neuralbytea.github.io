@@ -34,7 +34,7 @@ mail_ext:
   '18.0':
     version: 18.0.2.1.1
     price: 29.0
-    updated: '2026-09-02'
+    updated: '2026-10-27'
     url: https://apps.odoo.com/apps/modules/18.0/mail_ext/
   '19.0':
     version: 19.0.2.1.2
@@ -45,7 +45,7 @@ nb_ai_chatbot:
   '19.0':
     version: 19.0.1.0.1
     price: 19.0
-    updated: '2026-10-07'
+    updated: '2026-10-29'
     url: https://apps.odoo.com/apps/modules/19.0/nb_ai_chatbot/
 nb_course_admission:
   '19.0':
@@ -87,6 +87,17 @@ nb_employee_self_service:
     price: 119.0
     updated: '2026-10-10'
     url: https://apps.odoo.com/apps/modules/19.0/nb_employee_self_service/
+nb_mcp_server:
+  '18.0':
+    version: 18.0.1.0.0
+    price: 55.0
+    updated: '2026-10-29'
+    url: https://apps.odoo.com/apps/modules/18.0/nb_mcp_server/
+  '19.0':
+    version: 19.0.1.0.0
+    price: 55.0
+    updated: '2026-10-29'
+    url: https://apps.odoo.com/apps/modules/19.0/nb_mcp_server/
 nb_payroll_dashboard:
   '18.0':
     version: 18.0.1.0.7

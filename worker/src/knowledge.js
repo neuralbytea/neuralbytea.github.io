@@ -151,6 +151,47 @@ export const APPS = [
   "page": "https://neuralbytea.github.io/apps/nb_customer_portal_pro/"
  },
  {
+  "id": "nb_mcp_server",
+  "title": "MCP Server for Odoo",
+  "line": "AI Assistant",
+  "edition": "Community & Enterprise",
+  "licence": "OPL-1",
+  "versions": [
+   {
+    "odoo": "19",
+    "price": "$55",
+    "module_version": "1.0.0",
+    "store": "https://apps.odoo.com/apps/modules/19.0/nb_mcp_server/"
+   },
+   {
+    "odoo": "18",
+    "price": "$55",
+    "module_version": "1.0.0",
+    "store": "https://apps.odoo.com/apps/modules/18.0/nb_mcp_server/"
+   }
+  ],
+  "summary": "Let Claude and other AI assistants read Odoo data with each user's own rights, read only by default",
+  "about": "MCP server for Odoo 19. This module turns your Odoo database into a Model Context Protocol server, so Claude and other AI assistants can answer questions from your sales, invoices, contacts and any other model, including your own custom ones. It runs inside Odoo with no extra server, and each person connects with their own Odoo login.",
+  "features": [
+   "Works for Any Model: Search, count and total records of any model the user may read, including custom models and fields.",
+   "Sign In With Odoo: claude.ai connectors sign users in on an Odoo page. Access tokens last one hour and refresh on their own.",
+   "Personal Keys: A key made only for the connector, shown once, with an expiry date. It cannot be used for the Odoo API.",
+   "User Rights Always Apply: Access rights, record rules and field groups of the user apply to every answer.",
+   "Read Only by Default: Writing needs a setting and each write tool switched on. A failed change leaves nothing behind.",
+   "Tool Control Panel: Switch single tools on or off, and see how often each was used.",
+   "Blocked Data: Users, API keys, system settings and mail servers are always blocked. Add more models to block or allow only some.",
+   "Activity Log and Limits: Every call is logged. Set the most records per answer and the calls per minute for each user.",
+   "Topics and Prompts: Instructions, tool sets and ready-made prompts for chosen groups, shown to the user in claude.ai.",
+   "Date and Context Help: The AI is told today's date, the user and the company, with ready ranges for last month, last quarter and last year.",
+   "Saved Filters and Links: The AI can use the saved filters people already have, and gives a link that opens each record in Odoo.",
+   "Behind a Proxy: Works behind a reverse proxy or on Odoo.sh. Set a public address if Odoo cannot see its own."
+  ],
+  "works_with": [
+   "Settings"
+  ],
+  "page": "https://neuralbytea.github.io/apps/nb_mcp_server/"
+ },
+ {
   "id": "nb_school_management_system",
   "title": "School Management System",
   "line": "Education",

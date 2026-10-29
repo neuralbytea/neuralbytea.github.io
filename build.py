@@ -175,7 +175,7 @@ def app_card(app, root, reveal=True, lazy=True):
     q = (app["title"] + " " + app["short_desc"] + " " + " ".join(app["tags"])).lower()
     return f"""<a class="card app{' reveal' if reveal else ''}" href="{root}apps/{slug(app)}/" data-line="{FAM_CLASS[family(app)]}" data-ver="{' '.join(s.split('.')[0] for s, _ in vers(app))}" data-price="{price_value(app):g}" data-updated="{updated(app)}" data-rank="{RANK[app['id']]}" data-name="{e(app['title'].lower())}" data-q="{e(q)}">
 {cover(app, root, lazy=lazy)}
-<div class="app-body"><div class="app-top"><span class="chip fam-{FAM_CLASS[family(app)]}">{e(family(app))}</span><span class="price">{price_label(latest(app)[1])}</span></div>
+<div class="app-body"><div class="app-top"><span class="chip fam-{FAM_CLASS[family(app)]}">{e(family(app))}</span>{'<span class="chip-new">New</span>' if app.get("new") else ""}<span class="price">{price_label(latest(app)[1])}</span></div>
 <h3>{e(app['title'])}</h3><p>{e(app['short_desc'])}</p>
 <div class="app-foot"><span class="more">View details <i>→</i></span><span class="vbs" title="Odoo versions">{ver_chips(app)}</span></div></div></a>"""
 
@@ -190,6 +190,7 @@ FAQS = [
     ("How do I get support?", "Use the contact form or the app's page on the Odoo Apps Store. We reply by email."),
     ("Does the AI Chat Assistant send my data to an AI provider?", "You connect your own AI model with your own API key (for example ChatGPT, Claude, Gemini, Groq or a local Ollama). Your questions and the records the assistant looks up are sent to the provider you choose, and it only sees what the signed-in user is allowed to see."),
     ("Who can use Employee Self Service?", "Your internal users. Employee records, time off, attendance, expenses and payslips are internal data, so the pages require an internal user and turn external users away."),
+    ("Can I connect Claude or another AI assistant to my Odoo data?", "Yes. MCP Server for Odoo ($55, Odoo 18 and 19) turns your Odoo database into a Model Context Protocol server, so Claude and other AI assistants can answer questions from your sales, invoices, contacts and other models. It runs inside Odoo, each person signs in with their own Odoo login, the user's access rights apply to every answer, it is read-only by default, and every call is logged."),
     ("Do you have school or training-center software?", "Yes. The Education line is a full school management suite for Odoo 19: student records, admissions, monthly fee slips with one invoice per family, a parent portal, teachers, a timetable and principal dashboards, plus course management for training batches with seats, waiting lists and installment fees. Install the free School Management System to get the whole school suite, or pick single modules."),
     ("Where are you based?", f"{CONTACT['location']}, working remotely with customers worldwide."),
 ]

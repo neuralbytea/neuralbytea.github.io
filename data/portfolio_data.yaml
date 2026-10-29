@@ -187,6 +187,60 @@ projects:
   - Invoices and payments in one place
   - Support tickets and portal alerts with read tracking
   - Scheduled mail notifications
+- id: nb_mcp_server
+  title: MCP Server for Odoo
+  category: odoo
+  featured: true
+  year: 2026
+  client: NeuralBytea
+  role: Community & Enterprise · $55 · OPL-1
+  odoo_version: Odoo 19.0
+  image: assets/images/apps/nb_mcp_server.jpg
+  store_url: https://apps.odoo.com/apps/modules/19.0/nb_mcp_server/
+  short_desc: Let Claude and other AI assistants read Odoo data with each user's own rights, read only by default
+  metric: $55
+  metric_label: one-time price
+  full_desc: MCP server for Odoo 19. This module turns your Odoo database into a Model Context Protocol server, so Claude and other AI assistants can answer questions from your sales, invoices, contacts and any other model, including your own custom ones. It runs inside Odoo with no extra server, and each person connects with their own Odoo login.
+  tags:
+  - AI Assistant
+  - MCP
+  - Claude
+  modules:
+  - Settings
+  tech_stack:
+  - Python
+  - Odoo ORM
+  - QWeb
+  - OWL / JavaScript
+  highlights:
+  - 'Works for Any Model: Search, count and total records of any model the user may read, including custom models and fields.'
+  - 'Sign In With Odoo: claude.ai connectors sign users in on an Odoo page. Access tokens last one hour and refresh on their own.'
+  - 'Personal Keys: A key made only for the connector, shown once, with an expiry date. It cannot be used for the Odoo API.'
+  - 'User Rights Always Apply: Access rights, record rules and field groups of the user apply to every answer.'
+  - 'Read Only by Default: Writing needs a setting and each write tool switched on. A failed change leaves nothing behind.'
+  - 'Tool Control Panel: Switch single tools on or off, and see how often each was used.'
+  - 'Blocked Data: Users, API keys, system settings and mail servers are always blocked. Add more models to block or allow only some.'
+  - 'Activity Log and Limits: Every call is logged. Set the most records per answer and the calls per minute for each user.'
+  - 'Topics and Prompts: Instructions, tool sets and ready-made prompts for chosen groups, shown to the user in claude.ai.'
+  - 'Date and Context Help: The AI is told today''s date, the user and the company, with ready ranges for last month, last quarter and last year.'
+  - 'Saved Filters and Links: The AI can use the saved filters people already have, and gives a link that opens each record in Odoo.'
+  - 'Behind a Proxy: Works behind a reverse proxy or on Odoo.sh. Set a public address if Odoo cannot see its own.'
+  screenshots:
+  - src: images/apps/shots/nb_mcp_server/odoo-ai-connector-activity-log-every-call.jpg
+    caption: Odoo AI activity log listing every call by user and tool
+  - src: images/apps/shots/nb_mcp_server/odoo-ai-connector-claude-sign-in-allow-access.jpg
+    caption: Odoo page asking the user to allow Claude to connect
+  - src: images/apps/shots/nb_mcp_server/odoo-ai-connector-connect-assistant-key-claude-code.jpg
+    caption: Odoo form to create a personal key for an AI assistant
+  - src: images/apps/shots/nb_mcp_server/odoo-ai-connector-connected-ai-apps-disconnect.jpg
+    caption: Odoo list of connected AI apps with disconnect
+  - src: images/apps/shots/nb_mcp_server/odoo-ai-connector-settings-read-only-limits-blocked-models.jpg
+    caption: Odoo AI connector settings with read only mode, limits and blocked models
+  - src: images/apps/shots/nb_mcp_server/odoo-ai-connector-tool-control-panel-enable-disable.jpg
+    caption: Odoo AI connector tool control panel with a switch for each tool
+  - src: images/apps/shots/nb_mcp_server/odoo-ai-connector-topics-prompts-instructions.jpg
+    caption: Odoo AI topic with instructions and prompts for a sales team
+  new: true
 - id: nb_school_management_system
   title: School Management System
   category: odoo
