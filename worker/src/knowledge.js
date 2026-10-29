@@ -23,11 +23,14 @@ export const APPS = [
   "summary": "Vendor portal: onboarding, RFQ quoting, PO acknowledgment, vendor bills and payments",
   "about": "A full supplier self-service portal for Odoo Purchase. Vendors onboard themselves, quote on RFQs, acknowledge purchase orders, send advance shipping notices, upload compliance documents and track bills and payments, while buyers keep scorecards, disputes and price comparisons inside Odoo.",
   "features": [
-   "Vendor onboarding with compliance documents and versioning",
-   "RFQ quoting, price requests and side-by-side price comparison",
-   "PO acknowledgment, advance shipping notices (ASN) and dispute handling",
-   "Vendor scorecards, alerts and read receipts",
-   "Vendor bills and payment visibility in the portal"
+   "A unified dashboard (/my/vendor) with KPI cards for RFQs awaiting a",
+   "When a purchase order is confirmed the vendor is asked to acknowledge it",
+   "The vendor edits unit price, delivery date and remarks on an RFQ and",
+   "The vendor submits a bill against a purchase order from the portal",
+   "A payments & remittance page shows the supplier which bills each payment",
+   "A self-service onboarding page where the vendor maintains their company,",
+   "A computed alerts banner on the portal home and dashboard - POs awaiting",
+   "The vendor declares a shipment (items, quantities, carrier, tracking, ETA)"
   ],
   "works_with": [
    "Purchase",
@@ -58,14 +61,17 @@ export const APPS = [
     "store": "https://apps.odoo.com/apps/modules/18.0/salesperson_portal/"
    }
   ],
-  "summary": "Field sales rep portal: reps book orders for customers from the portal, no user seat",
+  "summary": "Field sales rep portal: reps book orders for customers from the portal, no user seat.",
   "about": "Lets field sales reps book orders for their customers from the Odoo portal without consuming an internal user seat. Includes catalog and cart, credit checks, discounts and rewards, customer creation, invoices, support tickets and a commission engine with plans and rules.",
   "features": [
-   "Reps work as portal users, so no internal user seat is needed",
-   "Catalog, cart, credit check and discount / reward handling",
-   "Commission plans and rules with commission lines",
-   "Customers, invoices, offers and support tickets from one dashboard",
-   "Automated test suite covering the ordering flow"
+   "Customer picker - search every customer contact, or create a new one on",
+   "Product catalog - browse, search, filter by category, paginate. Prices",
+   "Cart - quantities, delivery / invoice address, the requested delivery",
+   "My bookings - the orders and invoices this rep booked, with a customer",
+   "Customer credit status - limit, outstanding balance and what this booking",
+   "Commission for field reps - rules, an accrual ledger with its own states,",
+   "Promo codes and a capped rep price reduction - codes are validated by",
+   "Customer order history - what this customer bought before and whether"
   ],
   "works_with": [
    "Sales",
@@ -98,12 +104,12 @@ export const APPS = [
   "summary": "Employee rate cards, automatic margin per timesheet line, portal timer and order-based billing",
   "about": "Adds multi-tier rate cards (billing rate and cost rate per employee, customer, project and service type) to Odoo timesheets. Every timesheet line gets its margin automatically, employees log time from a portal timer, and non-billable work can be hidden or shown on the invoice at zero price.",
   "features": [
-   "Rate cards by employee, customer, project, service type and date range",
-   "Automatic billing amount, cost amount and margin on each timesheet line",
-   "Portal timer and manual time entry",
-   "Margin report and team overview for managers",
-   "Non-billable time shown at 0.00 on the invoice, or hidden",
-   "Cost rates never exposed to customers"
+   "Employee Rate Cards - multi-tier precedence, billing + cost rate, date versioning",
+   "Automatic margin - billing_amount, cost_amount, margin, margin_pct on every line",
+   "Non-billable logic - billable, or free work whose cost is tracked but never charged",
+   "Portal timer + manual entry at /my/timetracker, and portal task stage/edit for assignees",
+   "Margin dashboard, tax card and margin report with invoiced vs rate-card figures",
+   "Sales-order billing: every billable timesheet lands on an order line to confirm and invoice"
   ],
   "works_with": [
    "Sales Timesheet",
@@ -136,11 +142,14 @@ export const APPS = [
   "summary": "Customer portal: self-service ordering, order-to-cash dashboard, invoices, payments, tickets",
   "about": "Turns the Odoo customer portal into a self-service workspace: customers place orders, follow the order-to-cash flow on a dashboard, view invoices and payments, receive alerts and raise support tickets.",
   "features": [
-   "Self-service ordering from the portal",
-   "Order-to-cash dashboard",
-   "Invoices and payments in one place",
-   "Support tickets and portal alerts with read tracking",
-   "Scheduled mail notifications"
+   "A portal classification on every contact (Customer / None) that turns",
+   "A website sign-up choice - \"I'm signing up as Company or Customer\"",
+   "A one-click Make Portal User button on the contact form (native",
+   "A Settings toggle to pick the onboarding mode: self sign-up, admin",
+   "A unified dashboard (/my/dashboard) with KPI cards for quotations,",
+   "A self-service \"Place Order\" flow (/my/order/new) - a website-free",
+   "A payments history page (/my/payments) scoped server-side to the",
+   "An order-to-cash flow stepper (Order -> Delivery -> Invoice -> Payment) on"
   ],
   "works_with": [
    "Sales",
@@ -152,7 +161,7 @@ export const APPS = [
  },
  {
   "id": "nb_mcp_server",
-  "title": "MCP Server for Odoo",
+  "title": "Claude Connector for Odoo",
   "line": "AI Assistant",
   "edition": "Community & Enterprise",
   "licence": "OPL-1",
@@ -170,8 +179,8 @@ export const APPS = [
     "store": "https://apps.odoo.com/apps/modules/18.0/nb_mcp_server/"
    }
   ],
-  "summary": "Let Claude and other AI assistants read Odoo data with each user's own rights, read only by default",
-  "about": "MCP server for Odoo 19. This module turns your Odoo database into a Model Context Protocol server, so Claude and other AI assistants can answer questions from your sales, invoices, contacts and any other model, including your own custom ones. It runs inside Odoo with no extra server, and each person connects with their own Odoo login.",
+  "summary": "Claude and Odoo server link: on premises Claude connector, MCP, read only, each user's own rights",
+  "about": "Claude connector for Odoo 19. This Claude MCP server lets Claude answer from your own Odoo data: sales, invoices, contacts and any custom model. It is an on premises Claude connector as much as a cloud one, and a community Claude Odoo connector too: it runs inside Odoo Community and Enterprise with no extra server, and each person connects with their own Odoo login.",
   "features": [
    "Works for Any Model: Search, count and total records of any model the user may read, including custom models and fields.",
    "Sign In With Odoo: claude.ai connectors sign users in on an Odoo page. Access tokens last one hour and refresh on their own.",
@@ -610,12 +619,17 @@ export const APPS = [
     "store": "https://apps.odoo.com/apps/modules/18.0/portal_ext/"
    }
   ],
-  "summary": "Collapsible sidebar, live dashboard and redesigned My Account for the Odoo customer portal",
+  "summary": "Collapsible sidebar, live dashboard tiles and card-styled My Account for the Odoo customer portal",
   "about": "A collapsible, auto-built sidebar for the Odoo portal /my area, a redesigned home dashboard and cleaner My Details and Security pages. Pairs with the NeuralBytea portals.",
   "features": [
-   "Collapsible sidebar built from the portal entries",
-   "Live portal home dashboard",
-   "Redesigned My Details and Security pages"
+   "Collapsible sidebar navigation for the Odoo customer portal",
+   "Auto-built menu from portal document types (orders, invoices, projects...)",
+   "Live dashboard tiles with real-time record counts on /my/home",
+   "Card styling for My Details (/my/account) and the Security page (/my/security)",
+   "Mobile overlay drawer with tap-to-close backdrop",
+   "Collapse state persisted in the browser - no flicker on reload",
+   "QWeb inheritance and frontend assets - no new models",
+   "Works with Community and Enterprise, depends only on portal module"
   ],
   "works_with": [
    "Portal"
@@ -642,13 +656,15 @@ export const APPS = [
     "store": "https://apps.odoo.com/apps/modules/18.0/payment_Mastercard/"
    }
   ],
-  "summary": "Mastercard (MPGS) Hosted Checkout payment provider for secure online payments",
+  "summary": "Mastercard MPGS Hosted Checkout for invoice payments with auto posting and reconciliation",
   "about": "Payment provider for the Mastercard Payment Gateway Services (MPGS) Hosted Checkout with 3-D Secure. Payments are posted automatically and reconciled with invoices.",
   "features": [
-   "Hosted Checkout, so card data never touches your server",
-   "3-D Secure support",
-   "Automatic payment posting and invoice reconciliation",
-   "Standard Odoo payment provider configuration"
+   "Adds \"Mastercard\" as a native Odoo payment provider.",
+   "MPGS Hosted Checkout integration (INITIATE_CHECKOUT / PURCHASE).",
+   "Configurable Host, Merchant ID, User Name and API Password per provider.",
+   "Server-side order status verification before marking a transaction done.",
+   "Automatic customer payment creation, posting and invoice reconciliation.",
+   "Branded payment result pages for success, cancellation and error states."
   ],
   "works_with": [
    "Payment Providers",
@@ -727,11 +743,13 @@ export const APPS = [
   "summary": "Color-coded attendance and leave Gantt: office, remote and hybrid, click-to-edit, KPIs",
   "about": "A colour-coded Gantt board of attendance and leave that separates office, remote and hybrid days, with click-to-edit, remote-work periods on contracts and on-site versus remote KPIs.",
   "features": [
-   "Gantt of attendance and leave in one view",
-   "Office, remote and hybrid classification",
-   "Click-to-edit from the board",
-   "Remote work periods on contracts",
-   "On-site vs remote KPI dashboard"
+   "Each cell is colour-coded by status: Present - valid check-in AND check-out",
+   "Attendance KPI cards: Total Present, Total Absent, Late Arrivals (with a",
+   "Leave KPI cards: requests grouped by workflow stage, Half-day Leave and",
+   "Trend charts (Chart.js): Present / Absent / Late over time and Leave by stage.",
+   "Filters: Company, Department, Employee (multi), Status, Date Range, Leave Type.",
+   "Multi-timezone aware: check-in/out stored in UTC are converted to each",
+   "Schedule aware: working days and shift starts come from each employee's"
   ],
   "works_with": [
    "Attendances",
@@ -761,7 +779,7 @@ export const APPS = [
     "store": "https://apps.odoo.com/apps/modules/18.0/nb_payroll_dashboard/"
    }
   ],
-  "summary": "Owl payroll dashboard and Excel/PDF salary report, zero configuration",
+  "summary": "Owl payroll dashboard and Excel/PDF salary report for Odoo 19, zero configuration",
   "about": "A zero-configuration payroll dashboard built with Owl, plus a wizard that exports salary reports to Excel and PDF.",
   "features": [
    "Owl dashboard over payslip data",
@@ -776,7 +794,7 @@ export const APPS = [
  },
  {
   "id": "sale_payment_dashboard",
-  "title": "Sales & Payment Dashboard",
+  "title": "Sales and Payment Dashboard",
   "line": "Dashboards",
   "edition": "Community & Enterprise",
   "licence": "OPL-1",
@@ -837,10 +855,14 @@ export const APPS = [
   "summary": "Sticky column filters, AI search ranks and groups your Odoo list data instantly",
   "about": "Adds sticky column filters to Odoo list views and an AI search that ranks and groups records. Supports multiple AI model providers with per-company credentials and saved search profiles.",
   "features": [
-   "Sticky per-column filters on list views",
-   "AI-assisted search that ranks and groups results",
-   "Choice of AI providers and models",
-   "Saved search profiles"
+   "Sticky column filter row on every list view - stays pinned while you scroll",
+   "Field-type aware operators that mirror Odoo's native Add Custom Filter logic",
+   "Sub-field drill-down - filter Customer > State, Customer > Country, one level deep",
+   "Up to 6 conditions per column with independent AND/OR, plus a global AND/OR",
+   "AI natural-language search - filter OR aggregate (group + rank by count or value)",
+   "Bring your own AI: OpenAI, Anthropic, Gemini, NVIDIA NIM, OpenCode Zen, or local Ollama",
+   "Encrypted API keys (Fernet), AI Search User group gating, per-user rate limiting",
+   "Saved search profiles - save filters + group-by, reload/rename/update, share with the team"
   ],
   "works_with": [
    "Web",
@@ -871,11 +893,14 @@ export const APPS = [
   "summary": "Hide, resize chatter with per-user memory; admin layout rules; preview toggle",
   "about": "Lets users hide and resize the chatter with their choice remembered per user, while admins set layout rules per model and company.",
   "features": [
-   "Hide and resize chatter",
-   "Per-user memory of layout",
-   "Admin layout rules",
-   "Preview toggle",
-   "Translated (3 languages)"
+   "Chatter toggle button in the chatter topbar, plus a floating restore",
+   "Independent attachment-preview toggle next to the existing pop-out",
+   "Automatic full-width form while the chatter or attachment preview is",
+   "Remembers your last hide/show choice per user and syncs it across your",
+   "Keyboard shortcuts: Alt+C toggles the chatter, Alt+P toggles the",
+   "Resizable chatter panel, width remembered per user.",
+   "Long chatter messages collapse with a Show more / Show less control.",
+   "Optional rounded, card-style chatter panel and rounded message avatars -"
   ],
   "works_with": [
    "Discuss"
@@ -902,11 +927,16 @@ export const APPS = [
     "store": "https://apps.odoo.com/apps/modules/18.0/pane_split_view/"
    }
   ],
-  "summary": "Master-detail split pane for every Odoo list view, preview and edit side by side",
+  "summary": "Master-detail split pane for every Odoo 19 list view - preview and edit side by side",
   "about": "A master-detail split pane for Odoo list views so you can preview and edit records beside the list.",
   "features": [
-   "Split pane on list views",
-   "Preview and edit side by side"
+   "Zero configuration. A permanent toggle button sits next to the view-switcher",
+   "Real, editable form. The right pane embeds the genuine form view (chatter,",
+   "Navigate the whole list. The pane form's pager spans the records in the list",
+   "Drag to resize. A divider between the two panes lets you give more room to the",
+   "Readable in a narrow pane. The chatter is stacked below the form so the whole",
+   "Works everywhere. Standard lists, grouped lists, lists with a search-panel",
+   "\"Open Form\" maximizes the previewed record to the full-screen form view."
   ],
   "works_with": [
    "Web"
@@ -933,7 +963,7 @@ export const APPS = [
     "store": "https://apps.odoo.com/apps/modules/18.0/web_home_menu/"
    }
   ],
-  "summary": "Enterprise-like Home Menu for Community Edition",
+  "summary": "Home menu for Community: full-screen app grid with clock, opened from the navbar apps button",
   "about": "Brings an Enterprise-style home menu to Odoo Community.",
   "features": [
    "Enterprise-like app grid home menu for Community"
@@ -963,7 +993,7 @@ export const APPS = [
     "store": "https://apps.odoo.com/apps/modules/18.0/web_appbar/"
    }
   ],
-  "summary": "Collapsible sidebar and appbar navigation with modern design for Odoo",
+  "summary": "Sidebar app navigation: collapsible left app sidebar and mobile menu for the Odoo backend",
   "about": "A collapsible sidebar and appbar navigation with a modern design. Works with Web UI Extensions.",
   "features": [
    "Collapsible sidebar navigation",
@@ -995,7 +1025,7 @@ export const APPS = [
     "store": "https://apps.odoo.com/apps/modules/18.0/web_ext/"
    }
   ],
-  "summary": "Modern UI enhancements and customizations for Odoo web interface",
+  "summary": "Web UI extensions: rounded search bar, kanban, list and form styling and a dark navy theme",
   "about": "Shared UI enhancements for the Odoo web client. Required by Sidebar App Navigation.",
   "features": [
    "Modern UI enhancements for the web client"
@@ -1007,7 +1037,7 @@ export const APPS = [
  },
  {
   "id": "nb_ai_chatbot",
-  "title": "AI Chat Assistant",
+  "title": "AI Chat Community",
   "line": "AI Assistant",
   "edition": "Community & Enterprise",
   "licence": "OPL-1",
@@ -1019,14 +1049,17 @@ export const APPS = [
     "store": "https://apps.odoo.com/apps/modules/19.0/nb_ai_chatbot/"
    }
   ],
-  "summary": "AI chatbot for Odoo: ChatGPT, Claude and Gemini query your data and create records on confirm",
+  "summary": "AI chatbot for Odoo: ChatGPT, Claude, Gemini query your data and create records on confirm",
   "about": "A floating AI chat bubble on every screen of Odoo Community and Enterprise. Connect your own AI model with your own API key, then chat with your Odoo data. The assistant always runs with the access rights of the signed-in user.",
   "features": [
-   "Bring your own AI agent in 10 seconds: pick a provider, paste the API key",
-   "OpenAI (ChatGPT), Claude, Gemini, Groq, NVIDIA NIM, OpenCode Zen, Ollama or any OpenAI-compatible API",
-   "Ask questions about your data: it searches, counts and totals records",
-   "Every answer lists the records it used, with a link to open them",
-   "Create or update records by asking, confirming each change with one click"
+   "Bring your own AI agent in 10 seconds: pick a provider, paste the API key, done",
+   "OpenAI (ChatGPT), Anthropic (Claude), Google Gemini, Groq, NVIDIA NIM, OpenCode Zen, Ollama, or any OpenAI-compatible API",
+   "Ask questions about your data: the assistant searches, counts and totals records",
+   "Every answer lists the records it used, with a link to open them in Odoo",
+   "Ask it to create or update records: you confirm each change with one click",
+   "Always runs with the access rights of the logged-in user",
+   "Switch between your AI agents in the middle of a chat",
+   "Save chats to Discuss and resume them later"
   ],
   "works_with": [
    "Discuss",
@@ -1051,9 +1084,9 @@ export const APPS = [
   "summary": "N-Genius card payments in Odoo: hosted checkout, webhooks, sandbox and full refunds",
   "about": "Accept online payments in Odoo with N-Genius Online by Network International. Customers pay on a secure hosted checkout, payment status updates automatically, and you can refund in full from Odoo. Requires an active N-Genius merchant account.",
   "features": [
-   "Secure hosted checkout",
+   "Secure hosted checkout experience",
    "Sandbox and production environments",
-   "Automatic payment status updates through webhooks",
+   "Automatic payment status updates in Odoo",
    "Full refund support from Odoo"
   ],
   "works_with": [
