@@ -245,6 +245,14 @@ projects:
     caption: Odoo form to create a personal key for Claude Code on an on premises server
   - src: images/apps/shots/nb_mcp_server/claude-connector-odoo-activity-log-every-call.jpg
     caption: Claude MCP server activity log in Odoo listing every call by user and tool
+  - src: images/apps/shots/nb_mcp_server/claude-connector-odoo-chat-monthly-sales-top-customers.jpg
+    caption: Real Claude connector chat showing monthly sales totals and top 10 customers from Odoo
+  - src: images/apps/shots/nb_mcp_server/claude-connector-odoo-chat-outstanding-customer-invoices-links.jpg
+    caption: Real Claude MCP chat listing the customers with the most outstanding invoices from Odoo
+  - src: images/apps/shots/nb_mcp_server/claude-connector-odoo-chat-rice-orders-invoices-payments-chart.jpg
+    caption: Real Claude connector chat in claude.ai asking Odoo for confirmed orders, invoices and payments with a chart
+  - src: images/apps/shots/nb_mcp_server/claude-connector-odoo-chat-sales-by-company-dashboard.jpg
+    caption: Real Claude and Odoo chat building a 2026 sales by company dashboard with top customers
   - src: images/apps/shots/nb_mcp_server/claude-connector-odoo-connected-apps-disconnect.jpg
     caption: Odoo list of Claude connector apps with a disconnect button
   - src: images/apps/shots/nb_mcp_server/claude-connector-odoo-settings-read-only-limits-blocked-models.jpg
