@@ -91,6 +91,14 @@ def latest(app):
     return v[0] if v else (app["odoo_version"].split()[-1], {"price": None, "url": app["store_url"], "version": ""})
 
 
+def licences(app):
+    """Distinct licences across the published versions, e.g. {'OPL-1': ['19', '18'], 'LGPL-3': ['17']}."""
+    out = {}
+    for s, i in vers(app):
+        out.setdefault(i.get("license") or meta(app)["licence"], []).append(s.split(".")[0])
+    return out
+
+
 def ver_chips(app):
     return "".join(f'<i class="vb">{s.split(".")[0]}</i>' for s, _ in reversed(vers(app)))
 
@@ -192,7 +200,7 @@ FAQS = [
     ("Which Odoo versions do you support?", "Our apps are built for Odoo {VTXT}. Each app page shows which versions exist, with a store link, version number and price for each. Odoo 19 has the full range, and Odoo 20 is available for the apps marked 20."),
     ("Community or Enterprise?", "Most apps work on both. Employee Loan Pro, Attendance Leave Gantt and Payroll Dashboard Pro need Enterprise features such as Payroll or Contracts. The edition is listed on every app page."),
     ("How do I install an app?", "Get it from the Odoo Apps Store like any other app. Each app page has a button that opens the right store listing for your Odoo version."),
-    ("How are the apps licensed and priced?", "Paid apps use the OPL-1 licence and a one-time price per app, with no subscription. The N-Genius payment provider is free."),
+    ("How are the apps licensed and priced?", "Paid apps use the OPL-1 licence (the Odoo 17 versions of Employee Loan Pro, Attendance Leave Gantt and Sales and Payment Dashboard are LGPL-3) and a one-time price per app, with no subscription. The N-Genius payment provider is free."),
     ("Can you build something custom?", "Yes. We build custom Odoo modules, portals, payment and API integrations, dashboards and migrations, at a fixed price or hourly."),
     ("How do I get support?", "Use the contact form or the app's page on the Odoo Apps Store. We reply by email."),
     ("Does the AI Chat Assistant send my data to an AI provider?", "You connect your own AI model with your own API key (for example ChatGPT, Claude, Gemini, Groq or a local Ollama). Your questions and the records the assistant looks up are sent to the provider you choose, and it only sees what the signed-in user is allowed to see."),
@@ -265,7 +273,7 @@ def home():
   <h1>Odoo apps that <em>empower</em> your team and customers.</h1>
   <p class="lead">{NAME} builds production-ready Odoo apps for versions {VTXT}: portals, payments, HR and payroll, dashboards, school management and an AI assistant. Install from the store, or let us build it for you.</p>
   <div class="btn-row"><a class="btn btn-primary" href="apps/">Browse the apps</a><a class="btn btn-ghost" href="contact/">Talk to us →</a></div>
-  <ul class="trust"><li>Odoo {VDOT}</li><li>Community &amp; Enterprise</li><li>OPL-1 licensed</li><li>Store-published</li></ul>
+  <ul class="trust"><li>Odoo {VDOT}</li><li>Community &amp; Enterprise</li><li>OPL-1 / LGPL-3 licensed</li><li>Store-published</li></ul>
  </div>
  <div class="hero-art" aria-hidden="true"><div class="glow"></div>{stack}</div>
 </section>
@@ -323,11 +331,13 @@ def app_page(i, app):
     gallery = ('<h2 class="h3">Screenshots</h2><div class="gallery">' + "".join(
         f'<figure><a href="{root}{s["src"]}" target="_blank" rel="noopener"><img src="{root}{s["src"]}" alt="{e(app["title"])}: {e(s["caption"])}" loading="lazy" width="1440" height="900"></a>'
         f'<figcaption>{e(s["caption"])}</figcaption></figure>' for s in shots) + "</div>") if shots else ""
+    L = licences(app) or {m["licence"]: []}
+    lic_html = e(m["licence"]) if len(L) <= 1 else "<br>".join(f"{e(k)} <small class='muted'>(Odoo {', '.join(sorted(v, key=int))})</small>" for k, v in L.items())
     lat_s, lat = latest(app)
     price_num = str(float(lat.get("price") or 0))
     vlist = "".join(
         f'<a class="vrow{" new" if i == 0 else ""}" href="{info["url"]}" target="_blank" rel="noopener"><b>Odoo {s.split(".")[0]}</b>'
-        f'<span>v{info["version"].split(".", 2)[2]} · {price_label(info)}</span><i>Get ↗</i></a>' for i, (s, info) in enumerate(vers(app)))
+        f'<span><span class="nw">v{info["version"].split(".", 2)[2]}</span> · <span class="nw">{price_label(info)}</span>{(" · <span class=nw>" + e(info.get("license")) + "</span>") if len(L) > 1 and info.get("license") else ""}</span><i>Get ↗</i></a>' for i, (s, info) in enumerate(vers(app)))
     body = f"""<section class="wrap page-hero slim"><div class="crumb"><a href="{root}">Home</a> / <a href="{root}apps/">Apps</a> / {e(app['title'])}</div></section>
 <section class="wrap detail">
  <div class="detail-main">
@@ -342,7 +352,7 @@ def app_page(i, app):
   <h4>Get it for your Odoo version</h4>
   <div class="vlist">{vlist}</div>
   <a class="btn btn-ghost block" href="{root}contact/?subject={e(app['title'])}">Ask a question</a>
-  <dl><dt>Odoo versions</dt><dd>{" · ".join(s.split(".")[0] for s, _ in reversed(vers(app)))}</dd><dt>Edition</dt><dd>{e(m['edition'])}</dd><dt>Licence</dt><dd>{e(m['licence'])}</dd><dt>Publisher</dt><dd>{NAME}</dd></dl>
+  <dl><dt>Odoo versions</dt><dd>{" · ".join(s.split(".")[0] for s, _ in reversed(vers(app)))}</dd><dt>Edition</dt><dd>{e(m['edition'])}</dd><dt>Licence</dt><dd>{lic_html}</dd><dt>Publisher</dt><dd>{NAME}</dd></dl>
   <h4>Works with</h4><div class="tags">{mods}</div><h4>Tech stack</h4><div class="tags">{tech}</div></div></aside>
 </section>
 <section class="wrap sec"><div class="sec-head"><h2>Related apps</h2></div><div class="grid app-grid">{''.join(app_card(a, root) for a in related)}</div>
@@ -474,7 +484,7 @@ def write_knowledge():
     facts = [
         f"Apps are built for Odoo {VTXT}; Odoo 19 has the full range, Odoo 20 has the apps marked 20 on their pages, Odoo 17 has only Employee Loan Pro, Attendance Leave Gantt and Sales & Payment Dashboard.",
         "Most apps run on Community and Enterprise; Employee Loan Pro, Attendance Leave Gantt and Payroll Dashboard Pro need Enterprise features (Payroll or Contracts).",
-        "Install from the Odoo Apps Store like any app. Paid apps: one-time price per app, OPL-1 licence, no subscription. N-Genius payment provider is free (LGPL-3).",
+        "Install from the Odoo Apps Store like any app. Paid apps: one-time price per app, OPL-1 licence (Odoo 17 versions of three apps are LGPL-3), no subscription. N-Genius payment provider is free (LGPL-3).",
         "Custom development: custom Odoo modules, portals, payment and API integrations, dashboards and migrations, fixed price or hourly.",
         "Support: contact form or the app's store page; replies by email.",
         "Employee Self Service needs internal users. The AI Chat Assistant uses the customer's own AI provider and API key and respects each user's access rights."]

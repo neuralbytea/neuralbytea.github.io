@@ -398,3 +398,5 @@ a.nbc-card:hover{border-color:var(--a);background:#eef2ff}
 
 /* "New" badge on app cards */
 .chip-new{margin-right:auto;margin-left:8px;padding:3px 10px;border-radius:99px;background:var(--grad);color:#fff;font:700 11px Sora;letter-spacing:.06em;text-transform:uppercase;box-shadow:0 6px 14px -6px rgba(47,91,255,.8)}
+
+.vrow .nw{white-space:nowrap}

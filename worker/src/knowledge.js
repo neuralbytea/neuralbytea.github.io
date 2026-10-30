@@ -1158,7 +1158,7 @@ export const COMPANY = {
  "facts": [
   "Apps are built for Odoo 17, 18, 19 and 20; Odoo 19 has the full range, Odoo 20 has the apps marked 20 on their pages, Odoo 17 has only Employee Loan Pro, Attendance Leave Gantt and Sales & Payment Dashboard.",
   "Most apps run on Community and Enterprise; Employee Loan Pro, Attendance Leave Gantt and Payroll Dashboard Pro need Enterprise features (Payroll or Contracts).",
-  "Install from the Odoo Apps Store like any app. Paid apps: one-time price per app, OPL-1 licence, no subscription. N-Genius payment provider is free (LGPL-3).",
+  "Install from the Odoo Apps Store like any app. Paid apps: one-time price per app, OPL-1 licence (Odoo 17 versions of three apps are LGPL-3), no subscription. N-Genius payment provider is free (LGPL-3).",
   "Custom development: custom Odoo modules, portals, payment and API integrations, dashboards and migrations, fixed price or hourly.",
   "Support: contact form or the app's store page; replies by email.",
   "Employee Self Service needs internal users. The AI Chat Assistant uses the customer's own AI provider and API key and respects each user's access rights."
