@@ -167,6 +167,12 @@ export const APPS = [
   "licence": "OPL-1",
   "versions": [
    {
+    "odoo": "20",
+    "price": "$55",
+    "module_version": "1.0.0",
+    "store": "https://apps.odoo.com/apps/modules/20.0/nb_mcp_server/"
+   },
+   {
     "odoo": "19",
     "price": "$55",
     "module_version": "1.0.0",
@@ -180,7 +186,7 @@ export const APPS = [
    }
   ],
   "summary": "Claude and Odoo server link: on premises Claude connector, MCP, read only, each user's own rights",
-  "about": "Claude connector for Odoo 19. This Claude MCP server lets Claude answer from your own Odoo data: sales, invoices, contacts and any custom model. It is an on premises Claude connector as much as a cloud one, and a community Claude Odoo connector too: it runs inside Odoo Community and Enterprise with no extra server, and each person connects with their own Odoo login.",
+  "about": "Claude connector for Odoo. This Claude MCP server lets Claude answer from your own Odoo data: sales, invoices, contacts and any custom model. It is an on premises Claude connector as much as a cloud one, and a community Claude Odoo connector too: it runs inside Odoo Community and Enterprise with no extra server, and each person connects with their own Odoo login.",
   "features": [
    "Works for Any Model: Search, count and total records of any model the user may read, including custom models and fields.",
    "Sign In With Odoo: claude.ai connectors sign users in on an Odoo page. Access tokens last one hour and refresh on their own.",
@@ -779,7 +785,7 @@ export const APPS = [
     "store": "https://apps.odoo.com/apps/modules/18.0/nb_payroll_dashboard/"
    }
   ],
-  "summary": "Owl payroll dashboard and Excel/PDF salary report for Odoo 19, zero configuration",
+  "summary": "Owl payroll dashboard and Excel/PDF salary report for Odoo, zero configuration",
   "about": "A zero-configuration payroll dashboard built with Owl, plus a wizard that exports salary reports to Excel and PDF.",
   "features": [
    "Owl dashboard over payslip data",
@@ -840,19 +846,25 @@ export const APPS = [
   "licence": "OPL-1",
   "versions": [
    {
+    "odoo": "20",
+    "price": "$59",
+    "module_version": "1.0.4",
+    "store": "https://apps.odoo.com/apps/modules/20.0/nb_smart_list_search_pro/"
+   },
+   {
     "odoo": "19",
     "price": "$59",
-    "module_version": "1.0.3",
+    "module_version": "1.0.4",
     "store": "https://apps.odoo.com/apps/modules/19.0/nb_smart_list_search_pro/"
    },
    {
     "odoo": "18",
     "price": "$59",
-    "module_version": "1.0.1",
+    "module_version": "1.0.2",
     "store": "https://apps.odoo.com/apps/modules/18.0/nb_smart_list_search_pro/"
    }
   ],
-  "summary": "Sticky column filters, AI search ranks and groups your Odoo list data instantly",
+  "summary": "Column wise search, filter row and AI filter for list view search, saved filters, sticky filter",
   "about": "Adds sticky column filters to Odoo list views and an AI search that ranks and groups records. Supports multiple AI model providers with per-company credentials and saved search profiles.",
   "features": [
    "Sticky column filter row on every list view - stays pinned while you scroll",
@@ -877,6 +889,12 @@ export const APPS = [
   "edition": "Community & Enterprise",
   "licence": "OPL-1",
   "versions": [
+   {
+    "odoo": "20",
+    "price": "$29",
+    "module_version": "2.1.2",
+    "store": "https://apps.odoo.com/apps/modules/20.0/mail_ext/"
+   },
    {
     "odoo": "19",
     "price": "$29",
@@ -915,6 +933,12 @@ export const APPS = [
   "licence": "OPL-1",
   "versions": [
    {
+    "odoo": "20",
+    "price": "$24.99",
+    "module_version": "1.0.5",
+    "store": "https://apps.odoo.com/apps/modules/20.0/pane_split_view/"
+   },
+   {
     "odoo": "19",
     "price": "$24.99",
     "module_version": "1.0.5",
@@ -927,7 +951,7 @@ export const APPS = [
     "store": "https://apps.odoo.com/apps/modules/18.0/pane_split_view/"
    }
   ],
-  "summary": "Master-detail split pane for every Odoo 19 list view - preview and edit side by side",
+  "summary": "Master-detail split pane for every Odoo list view - preview and edit side by side",
   "about": "A master-detail split pane for Odoo list views so you can preview and edit records beside the list.",
   "features": [
    "Zero configuration. A permanent toggle button sits next to the view-switcher",
@@ -950,6 +974,12 @@ export const APPS = [
   "edition": "Community",
   "licence": "OPL-1",
   "versions": [
+   {
+    "odoo": "20",
+    "price": "$20",
+    "module_version": "1.0.5",
+    "store": "https://apps.odoo.com/apps/modules/20.0/web_home_menu/"
+   },
    {
     "odoo": "19",
     "price": "$20",
@@ -975,29 +1005,39 @@ export const APPS = [
  },
  {
   "id": "web_appbar",
-  "title": "Sidebar App Navigation",
+  "title": "Sidebar Menu",
   "line": "Backend UI",
   "edition": "Community & Enterprise",
   "licence": "OPL-1",
   "versions": [
    {
+    "odoo": "20",
+    "price": "$15",
+    "module_version": "1.0.8",
+    "store": "https://apps.odoo.com/apps/modules/20.0/web_appbar/"
+   },
+   {
     "odoo": "19",
     "price": "$15",
-    "module_version": "1.0.7",
+    "module_version": "1.0.8",
     "store": "https://apps.odoo.com/apps/modules/19.0/web_appbar/"
    },
    {
     "odoo": "18",
     "price": "$10",
-    "module_version": "1.0.6",
+    "module_version": "1.0.7",
     "store": "https://apps.odoo.com/apps/modules/18.0/web_appbar/"
    }
   ],
-  "summary": "Sidebar app navigation: collapsible left app sidebar and mobile menu for the Odoo backend",
+  "summary": "Responsive sidebar menu and app sidebar navigation for Odoo: icon rail, left sidebar, mobile menu",
   "about": "A collapsible sidebar and appbar navigation with a modern design. Works with Web UI Extensions.",
   "features": [
-   "Collapsible sidebar navigation",
-   "Modern appbar design"
+   "Sidebar menu with the icon and name of each app the user may open.",
+   "Collapsible sidebar: 220 pixels wide, or an 86 pixel icon rail on desktop.",
+   "Responsive sidebar: under 768 pixels it becomes an off-canvas menu with a dimmed page.",
+   "The navbar shows the icon and name of the open app next to the app menus.",
+   "Built for Odoo Community.",
+   "No settings screen, no new groups and nothing stored in the database."
   ],
   "works_with": [
    "Web",
@@ -1012,6 +1052,12 @@ export const APPS = [
   "edition": "Community & Enterprise",
   "licence": "OPL-1",
   "versions": [
+   {
+    "odoo": "20",
+    "price": "$5",
+    "module_version": "1.0.6",
+    "store": "https://apps.odoo.com/apps/modules/20.0/web_ext/"
+   },
    {
     "odoo": "19",
     "price": "$5",
@@ -1042,6 +1088,12 @@ export const APPS = [
   "edition": "Community & Enterprise",
   "licence": "OPL-1",
   "versions": [
+   {
+    "odoo": "20",
+    "price": "$19",
+    "module_version": "1.0.1",
+    "store": "https://apps.odoo.com/apps/modules/20.0/nb_ai_chatbot/"
+   },
    {
     "odoo": "19",
     "price": "$19",
@@ -1104,7 +1156,7 @@ export const COMPANY = {
  "store": "https://apps.odoo.com/apps/browse?repo_maintainer_id=1172096",
  "contact_page": "https://neuralbytea.github.io/contact/",
  "facts": [
-  "Apps are built for Odoo 17, 18 and 19; Odoo 19 has the full range, Odoo 17 has only Employee Loan Pro, Attendance Leave Gantt and Sales & Payment Dashboard.",
+  "Apps are built for Odoo 17, 18, 19 and 20; Odoo 19 has the full range, Odoo 20 has the apps marked 20 on their pages, Odoo 17 has only Employee Loan Pro, Attendance Leave Gantt and Sales & Payment Dashboard.",
   "Most apps run on Community and Enterprise; Employee Loan Pro, Attendance Leave Gantt and Payroll Dashboard Pro need Enterprise features (Payroll or Contracts).",
   "Install from the Odoo Apps Store like any app. Paid apps: one-time price per app, OPL-1 licence, no subscription. N-Genius payment provider is free (LGPL-3).",
   "Custom development: custom Odoo modules, portals, payment and API integrations, dashboards and migrations, fixed price or hourly.",

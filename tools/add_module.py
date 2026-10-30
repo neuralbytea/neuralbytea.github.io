@@ -4,7 +4,7 @@
     python3 tools/add_module.py nb_mcp_server --line "AI Assistant" --tags "AI Assistant,MCP,Claude" --new --featured --position 4
     python3 tools/add_module.py nb_elearning_video --line "Education" --tags "Education,eLearning,Video"
 
-It finds the module under odoo19 (falling back to odoo18) env_neural/addons/Neural_Byte_Modules, reads the manifest,
+It finds the module under odoo19 (then odoo20, odoo18) env_neural/addons/Neural_Byte_Modules, reads the manifest,
 store description (feature list, screenshot captions), banner and screenshots, writes web-sized images under
 src/static/images/apps and replaces the entry (by id) in data/portfolio_data.yaml. Then run scan_versions.py and build.py.
 The store-version check in scan_versions.py hides a module that is not published yet, so adding it early is harmless.
@@ -27,7 +27,7 @@ def clean(s):
 
 
 def find(mod):
-    for v in ("19", "18"):
+    for v in ("19", "20", "18"):
         base = PROJ / f"odoo{v}/env/env_neural/addons/Neural_Byte_Modules"
         for m in base.rglob(f"{mod}/__manifest__.py"):
             if "node_modules" not in m.parts:

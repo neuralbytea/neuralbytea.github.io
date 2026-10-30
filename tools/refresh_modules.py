@@ -9,7 +9,7 @@ Kept from the site: id, product line/tags, featured, position, "new" badge, tech
 Safety rules: a feature list is only replaced when the new one is at least as good (>= 4 items, or not shorter);
 the page title can be overridden below; removed screenshots are deleted from the site folder.
 """
-import argparse, ast, os, re, shutil, sys
+import argparse, ast, hashlib, os, re, shutil, sys
 from pathlib import Path
 import yaml
 from PIL import Image
@@ -25,12 +25,28 @@ FRIENDLY = {"base": "Contacts", "base_setup": "Settings", "mail": "Discuss", "co
 clean = lambda s: re.sub(r"\s+", " ", s).strip()
 
 
-def find(mod):
-    for v in ("19", "18"):
+VERS = yaml.safe_load((ROOT / "data/versions.yaml").read_text()) if (ROOT / "data/versions.yaml").exists() else {}
+
+
+def find(mod, prefer="newest"):
+    """Module folder for a PUBLISHED series (versions.yaml), falling back to 19 then 18. BBT folders are never used.
+    prefer="newest": newest series (banner); prefer="text": 19 first, then 20, 18 (title, summary, features: one wording for all series)."""
+    pub = sorted((k.split(".")[0] for k in VERS.get(mod, {})), key=int, reverse=True)
+    order = pub if prefer == "newest" else [x for x in ("19", "20", "18", "17") if x in pub]
+    for v in order + [x for x in ("19", "18") if x not in order]:
         for m in (PROJ / f"odoo{v}/env/env_neural/addons/Neural_Byte_Modules").rglob(f"{mod}/__manifest__.py"):
-            if "node_modules" not in m.parts:
+            if "node_modules" not in m.parts and "BBT" not in m.parts:
                 return m.parent
     return None
+
+
+def multi(mod):
+    return len(VERS.get(mod, {})) > 1
+
+
+def neutral(text, mod):
+    """An app that spans several Odoo series must not claim one of them: 'every Odoo 20 list view' -> 'every Odoo list view'."""
+    return re.sub(r"Odoo (17|18|19|20)(\.0)?\b", "Odoo", text) if multi(mod) else text
 
 
 def features(desc):
@@ -55,7 +71,8 @@ def jpg(src, dst, size=None, q=84):
 
 
 def refresh(p, apply):
-    mod, d = p["id"], find(p["id"])
+    mod, d = p["id"], find(p["id"], "text")
+    bd = find(p["id"], "newest") or d      # banner comes from the newest published series
     if not d:
         return None, ["module not found in the repos, left as it is"]
     mf = ast.literal_eval((d / "__manifest__.py").read_text())
@@ -70,9 +87,10 @@ def refresh(p, apply):
     price = float(mf.get("price") or 0)
     pstr = "Free" if not price else ("$%g" % price if price == int(price) else "$%.2f" % price)
     new = dict(p)
+    new["_src"] = str(d.relative_to(PROJ)).split("/")[0]
     new["title"] = TITLE_OVERRIDE.get(mod) or clean(mf["name"].split("|")[0])
-    new["short_desc"] = clean(mf["summary"])
-    new["full_desc"] = re.sub(r"\*\*", "", about)
+    new["short_desc"] = neutral(clean(mf["summary"]), mod)
+    new["full_desc"] = neutral(re.sub(r"\*\*", "", about), mod)
     edition, _, lic = [x.strip() for x in (p["role"].split("·") + ["", ""])[:3]]
     new["role"] = f"{edition} · {pstr} · {mf.get('license') or lic}"     # edition stays as on the site, price and licence follow the manifest
     new["metric"] = pstr if p.get("metric", "").startswith(("$", "Free")) else p.get("metric")
@@ -86,7 +104,22 @@ def refresh(p, apply):
             shots.append({"src": f"images/apps/shots/{mod}/{f[:-4]}.jpg", "caption": cap, "_f": f})
     if p.get("screenshots") and shots:      # only refresh galleries that already exist on the site
         new["screenshots"] = [{k: v for k, v in s.items() if k != "_f"} for s in shots]
+    ban = bd / "static/description/banner.png"
+    if ban.exists():
+        sha = hashlib.sha1(ban.read_bytes()).hexdigest()[:12]
+        site_jpg = IMG / f"{mod}.jpg"
+        was = p.get("banner_sha")
+        if was != sha and (was or not site_jpg.exists() or ban.stat().st_mtime > site_jpg.stat().st_mtime):
+            new["banner_sha"] = sha
+            banner_changed = True
+        else:
+            new["banner_sha"] = sha
+            banner_changed = False
+    else:
+        banner_changed = False
     changes = []
+    if banner_changed:
+        changes.append("banner/logo changed in the module")
     for k, label in (("title", "title"), ("short_desc", "summary"), ("full_desc", "about text"), ("role", "price/edition")):
         if new[k] != p.get(k):
             changes.append(f"{label}: '{str(p.get(k))[:70]}' -> '{str(new[k])[:70]}'")
@@ -98,13 +131,14 @@ def refresh(p, apply):
     if p.get("screenshots") and [s["src"] for s in new.get("screenshots", [])] != old_s:
         changes.append(f"screenshots: {len(old_s)} -> {len(new.get('screenshots', []))}")
     if apply:
-        ban = sd / "banner.png"
-        if ban.exists():
+        ban = bd / "static/description/banner.png"
+        if ban.exists() and banner_changed:
             jpg(ban, IMG / f"{mod}.jpg", (1000, 500), 88)
         if p.get("screenshots") and shots:
             shutil.rmtree(IMG / "shots" / mod, ignore_errors=True)
             for s in shots:
                 jpg(sd / s["_f"], IMG / "shots" / mod / (s["_f"][:-4] + ".jpg"))
+    new.pop("_src", None)
     return new, changes
 
 

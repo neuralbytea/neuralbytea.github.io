@@ -1,7 +1,7 @@
 site:
   name: NeuralBytea
   tagline: Odoo apps and custom development
-  description: 'NeuralBytea builds production-ready apps for Odoo 17, 18 and 19: vendor, customer and employee portals, payment providers, HR and payroll tools, dashboards, backend UI upgrades, an AI assistant and school and course management. {n} apps on the Odoo Apps Store.'
+  description: 'NeuralBytea builds production-ready apps for Odoo {vtxt}: vendor, customer and employee portals, payment providers, HR and payroll tools, dashboards, backend UI upgrades, an AI assistant and school and course management. {n} apps on the Odoo Apps Store.'
   url: https://neuralbytea.github.io/neuralbyteai.github.io
   available_for_work: true
   chat_endpoint: ''
@@ -16,7 +16,7 @@ contact:
 hire:
 - k: Odoo Apps Store
   v: '{n} apps'
-  n: Built for Odoo 17, 18 and 19 and installable straight from the store.
+  n: Built for Odoo {vtxt} and installable straight from the store.
 - k: Custom development
   v: Modules & portals
   n: Custom Odoo modules, portals, payment and API integrations, dashboards and migrations.
@@ -30,7 +30,7 @@ stats:
 - label: Apps on the Odoo store
   value: '{n}'
 - label: Odoo versions
-  value: 17 · 18 · 19
+  value: '{vdot}'
 - label: Product lines
   value: '{lines}'
 - label: Editions
@@ -74,6 +74,7 @@ projects:
   - A self-service onboarding page where the vendor maintains their company,
   - A computed alerts banner on the portal home and dashboard - POs awaiting
   - The vendor declares a shipment (items, quantities, carrier, tracking, ETA)
+  banner_sha: 314dd08d378f
 - id: salesperson_portal
   title: Field Sales Booking
   category: odoo
@@ -111,6 +112,7 @@ projects:
   - Commission for field reps - rules, an accrual ledger with its own states,
   - Promo codes and a capped rep price reduction - codes are validated by
   - Customer order history - what this customer bought before and whether
+  banner_sha: a958108d6a22
 - id: nb_services_billing_pro
   title: Services Billing Pro
   category: odoo
@@ -165,6 +167,7 @@ projects:
     caption: Odoo project form with Billing and Margin smart buttons showing invoiced and margin totals
   - src: images/apps/shots/nb_services_billing_pro/services-billing-timesheets-rate-status-and-margin.jpg
     caption: Odoo timesheets list with billable type, rate status, billing rate, billing amount, cost rate, cost amount and margin per line
+  banner_sha: e8789d30a114
 - id: nb_customer_portal_pro
   title: Customer Portal Pro
   category: odoo
@@ -202,6 +205,7 @@ projects:
   - A self-service "Place Order" flow (/my/order/new) - a website-free
   - A payments history page (/my/payments) scoped server-side to the
   - An order-to-cash flow stepper (Order -> Delivery -> Invoice -> Payment) on
+  banner_sha: bc97494b0b64
 - id: nb_mcp_server
   title: Claude Connector for Odoo
   category: odoo
@@ -215,7 +219,7 @@ projects:
   short_desc: 'Claude and Odoo server link: on premises Claude connector, MCP, read only, each user''s own rights'
   metric: $55
   metric_label: one-time price
-  full_desc: 'Claude connector for Odoo 19. This Claude MCP server lets Claude answer from your own Odoo data: sales, invoices, contacts and any custom model. It is an on premises Claude connector as much as a cloud one, and a community Claude Odoo connector too: it runs inside Odoo Community and Enterprise with no extra server, and each person connects with their own Odoo login.'
+  full_desc: 'Claude connector for Odoo. This Claude MCP server lets Claude answer from your own Odoo data: sales, invoices, contacts and any custom model. It is an on premises Claude connector as much as a cloud one, and a community Claude Odoo connector too: it runs inside Odoo Community and Enterprise with no extra server, and each person connects with their own Odoo login.'
   tags:
   - AI Assistant
   - MCP
@@ -264,6 +268,7 @@ projects:
   - src: images/apps/shots/nb_mcp_server/claude-mcp-odoo-topics-prompts-instructions.jpg
     caption: Claude MCP topic in Odoo with instructions and prompts for a sales team
   new: true
+  banner_sha: daeb282ca46c
 - id: nb_school_management_system
   title: School Management System
   category: odoo
@@ -317,6 +322,7 @@ projects:
     caption: School management system student list with enrollment status
   - src: images/apps/shots/nb_school_management_system/school-suite-teachers-directory-qualification-workload.jpg
     caption: School teacher directory with workload
+  banner_sha: 1e4053dcbab3
 - id: nb_school_core
   title: Student Information System
   category: odoo
@@ -365,6 +371,7 @@ projects:
     caption: Student record with family, guardians and enrollment history in Odoo school management
   - src: images/apps/shots/nb_school_core/school-students-list-enrollment-status-family.jpg
     caption: School management student list with status, section and family
+  banner_sha: 8708fc3c8e24
 - id: nb_school_admission
   title: School Admission Management
   category: odoo
@@ -409,6 +416,7 @@ projects:
     caption: School admission pipeline kanban by stage
   - src: images/apps/shots/nb_school_admission/school-admission-seat-availability-grade-waiting-list.jpg
     caption: School admission seat availability by grade and waiting list
+  banner_sha: 7d0aa5bb6262
 - id: nb_school_fees
   title: School Fee Management
   category: odoo
@@ -458,6 +466,7 @@ projects:
     caption: School fee structure with fee heads and amounts per grade
   - src: images/apps/shots/nb_school_fees/school-fees-overview-billed-owed-by-month.jpg
     caption: School fees overview of billed and owed amounts by month
+  banner_sha: 42fd9535fa6d
 - id: nb_school_portal
   title: School Parent Portal
   category: odoo
@@ -506,6 +515,7 @@ projects:
     caption: School parent portal with children cards and fee summary
   - src: images/apps/shots/nb_school_portal/school-parent-portal-fees-overdue-paid-filter.jpg
     caption: School parent portal family fees with overdue and paid filter
+  banner_sha: 4d8482863d2e
 - id: nb_school_hr
   title: School Teacher Management
   category: odoo
@@ -549,6 +559,7 @@ projects:
     caption: School teacher directory with qualification and workload in Odoo HR
   - src: images/apps/shots/nb_school_hr/school-teaching-assignments-subject-section-periods.jpg
     caption: School teaching assignments by subject and section
+  banner_sha: 7d687421c46a
 - id: nb_school_timetable
   title: School Timetable
   category: odoo
@@ -594,6 +605,7 @@ projects:
     caption: Timetable lesson form with teacher and classroom
   - src: images/apps/shots/nb_school_timetable/school-timetable-lessons-by-section-teacher-period.jpg
     caption: School timetable lessons by class, teacher and period
+  banner_sha: 3f3f935d588a
 - id: nb_school_dashboard
   title: School Dashboard
   category: odoo
@@ -640,6 +652,7 @@ projects:
     caption: School staff dashboard with teaching load by teacher
   - src: images/apps/shots/nb_school_dashboard/school-dashboard-students-by-grade-section-capacity.jpg
     caption: School student dashboard with students by grade and section
+  banner_sha: f84ee84c8009
 - id: nb_course_core
   title: Course Management
   category: odoo
@@ -686,6 +699,7 @@ projects:
     caption: Course enrollment analysis by status
   - src: images/apps/shots/nb_course_core/course-enrollment-waiting-list-by-batch.jpg
     caption: Course enrollment waiting list by batch
+  banner_sha: c140bd488854
 - id: nb_course_admission
   title: Course Enrollment and Admission
   category: odoo
@@ -729,6 +743,7 @@ projects:
     caption: Course and class admission pipeline kanban
   - src: images/apps/shots/nb_course_admission/course-admission-waiting-list-by-batch-list.jpg
     caption: Course admission waiting list by batch
+  banner_sha: 604e81f505e3
 - id: nb_course_fees
   title: Course Fee Installments
   category: odoo
@@ -772,6 +787,7 @@ projects:
     caption: Course form with installment plan and fee head
   - src: images/apps/shots/nb_course_fees/course-installment-plans-percent-due-dates.jpg
     caption: Course installment plan with percentages and due dates
+  banner_sha: b3696d30b670
 - id: nb_employee_self_service
   title: Employee Self Service
   category: odoo
@@ -824,6 +840,7 @@ projects:
     caption: Odoo employee portal new time off request form with leave type, from and to dates and a description field
   - src: images/apps/shots/nb_employee_self_service/employee-self-service-timesheets-hours-on-projects.jpg
     caption: Odoo employee portal My Timesheets page listing hours logged per date, project and task
+  banner_sha: f2a101bd8121
 - id: portal_ext
   title: Portal Sidebar Pro
   category: odoo
@@ -857,6 +874,7 @@ projects:
   - Collapse state persisted in the browser - no flicker on reload
   - QWeb inheritance and frontend assets - no new models
   - Works with Community and Enterprise, depends only on portal module
+  banner_sha: 87e978068430
 - id: payment_Mastercard
   title: Mastercard MPGS Payment
   category: odoo
@@ -889,6 +907,7 @@ projects:
   - Server-side order status verification before marking a transaction done.
   - Automatic customer payment creation, posting and invoice reconciliation.
   - Branded payment result pages for success, cancellation and error states.
+  banner_sha: ac6b8016b60d
 - id: employee_loan_management_enterprise
   title: Employee Loan Pro
   category: odoo
@@ -921,6 +940,7 @@ projects:
   - Loan rescheduling wizard
   - Accounting integration and configuration
   - Analytics dashboard and portal access
+  banner_sha: 2dcee5f08c3b
 - id: hr_attendance_board
   title: Attendance Leave Gantt
   category: odoo
@@ -956,6 +976,7 @@ projects:
   - 'Filters: Company, Department, Employee (multi), Status, Date Range, Leave Type.'
   - 'Multi-timezone aware: check-in/out stored in UTC are converted to each'
   - 'Schedule aware: working days and shift starts come from each employee''s'
+  banner_sha: 76b192feb458
 - id: nb_payroll_dashboard
   title: Payroll Dashboard Pro
   category: odoo
@@ -966,7 +987,7 @@ projects:
   odoo_version: Odoo 18.0
   image: assets/images/apps/nb_payroll_dashboard.jpg
   store_url: https://apps.odoo.com/apps/modules/18.0/nb_payroll_dashboard/
-  short_desc: Owl payroll dashboard and Excel/PDF salary report for Odoo 19, zero configuration
+  short_desc: Owl payroll dashboard and Excel/PDF salary report for Odoo, zero configuration
   metric: $29
   metric_label: one-time price
   full_desc: A zero-configuration payroll dashboard built with Owl, plus a wizard that exports salary reports to Excel and PDF.
@@ -985,6 +1006,7 @@ projects:
   - Owl dashboard over payslip data
   - Excel and PDF salary report
   - No setup needed after install
+  banner_sha: 4a4bf88453e0
 - id: sale_payment_dashboard
   title: Sales and Payment Dashboard
   category: odoo
@@ -1016,6 +1038,7 @@ projects:
   - Recovery tracking for outstanding amounts
   - Customer revenue ranking and category mix
   - 12-month trends
+  banner_sha: c4530e104c27
 - id: nb_smart_list_search_pro
   title: Smart List Search Pro
   category: odoo
@@ -1026,7 +1049,7 @@ projects:
   odoo_version: Odoo 18.0
   image: assets/images/apps/nb_smart_list_search_pro.jpg
   store_url: https://apps.odoo.com/apps/modules/18.0/nb_smart_list_search_pro/
-  short_desc: Sticky column filters, AI search ranks and groups your Odoo list data instantly
+  short_desc: Column wise search, filter row and AI filter for list view search, saved filters, sticky filter
   metric: $59
   metric_label: one-time price
   full_desc: Adds sticky column filters to Odoo list views and an AI search that ranks and groups records. Supports multiple AI model providers with per-company credentials and saved search profiles.
@@ -1050,6 +1073,7 @@ projects:
   - 'Bring your own AI: OpenAI, Anthropic, Gemini, NVIDIA NIM, OpenCode Zen, or local Ollama'
   - Encrypted API keys (Fernet), AI Search User group gating, per-user rate limiting
   - Saved search profiles - save filters + group-by, reload/rename/update, share with the team
+  banner_sha: 9bb325965468
 - id: mail_ext
   title: Chatter Workspace Pro
   category: odoo
@@ -1082,6 +1106,7 @@ projects:
   - Resizable chatter panel, width remembered per user.
   - Long chatter messages collapse with a Show more / Show less control.
   - Optional rounded, card-style chatter panel and rounded message avatars -
+  banner_sha: 330b8dc509fd
 - id: pane_split_view
   title: Split View Pro
   category: odoo
@@ -1092,7 +1117,7 @@ projects:
   odoo_version: Odoo 18.0
   image: assets/images/apps/pane_split_view.jpg
   store_url: https://apps.odoo.com/apps/modules/18.0/pane_split_view/
-  short_desc: Master-detail split pane for every Odoo 19 list view - preview and edit side by side
+  short_desc: Master-detail split pane for every Odoo list view - preview and edit side by side
   metric: $24.99
   metric_label: one-time price
   full_desc: A master-detail split pane for Odoo list views so you can preview and edit records beside the list.
@@ -1113,6 +1138,7 @@ projects:
   - Readable in a narrow pane. The chatter is stacked below the form so the whole
   - Works everywhere. Standard lists, grouped lists, lists with a search-panel
   - '"Open Form" maximizes the previewed record to the full-screen form view.'
+  banner_sha: 4c6d437895c7
 - id: web_home_menu
   title: Home Menu Enterprise UI
   category: odoo
@@ -1139,8 +1165,9 @@ projects:
   - OWL / JavaScript
   highlights:
   - Enterprise-like app grid home menu for Community
+  banner_sha: e605f48c275e
 - id: web_appbar
-  title: Sidebar App Navigation
+  title: Sidebar Menu
   category: odoo
   featured: false
   year: 2026
@@ -1149,7 +1176,7 @@ projects:
   odoo_version: Odoo 18.0
   image: assets/images/apps/web_appbar.jpg
   store_url: https://apps.odoo.com/apps/modules/18.0/web_appbar/
-  short_desc: 'Sidebar app navigation: collapsible left app sidebar and mobile menu for the Odoo backend'
+  short_desc: 'Responsive sidebar menu and app sidebar navigation for Odoo: icon rail, left sidebar, mobile menu'
   metric: $15
   metric_label: one-time price
   full_desc: A collapsible sidebar and appbar navigation with a modern design. Works with Web UI Extensions.
@@ -1165,8 +1192,13 @@ projects:
   - QWeb
   - OWL / JavaScript
   highlights:
-  - Collapsible sidebar navigation
-  - Modern appbar design
+  - Sidebar menu with the icon and name of each app the user may open.
+  - 'Collapsible sidebar: 220 pixels wide, or an 86 pixel icon rail on desktop.'
+  - 'Responsive sidebar: under 768 pixels it becomes an off-canvas menu with a dimmed page.'
+  - The navbar shows the icon and name of the open app next to the app menus.
+  - Built for Odoo Community.
+  - No settings screen, no new groups and nothing stored in the database.
+  banner_sha: dd654c11e5a4
 - id: web_ext
   title: Web UI Extensions
   category: odoo
@@ -1193,6 +1225,7 @@ projects:
   - OWL / JavaScript
   highlights:
   - Modern UI enhancements for the web client
+  banner_sha: 7e49f66c8265
 - id: nb_ai_chatbot
   title: AI Chat Community
   category: odoo
@@ -1226,6 +1259,7 @@ projects:
   - Always runs with the access rights of the logged-in user
   - Switch between your AI agents in the middle of a chat
   - Save chats to Discuss and resume them later
+  banner_sha: ad20d13c0a52
 - id: payment_ngenius
   title: N-Genius Payment Provider
   category: odoo
@@ -1264,3 +1298,4 @@ projects:
     caption: 'How the N-Genius Payment Provider connects Odoo 19 invoices to N-Genius Online: hosted checkout, webhooks, sandbox and live, full refunds'
   - src: images/apps/shots/payment_ngenius/n-genius-provider-credentials-test-mode-odoo.jpg
     caption: N-Genius payment provider credentials tab in Odoo with API Key, Outlet Reference and webhook header fields
+  banner_sha: 7ae2942b705e

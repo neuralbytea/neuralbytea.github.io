@@ -33,7 +33,14 @@ def _scramble(key):
     n = -(-len(b) // 4)
     return [b[i:i + n] for i in range(0, len(b), n)]
 VERS = yaml.safe_load((ROOT / "data/versions.yaml").read_text())  # from scan_versions.py
-SERIES = ["19.0", "18.0", "17.0"]  # newest first
+SERIES = ["20.0", "19.0", "18.0", "17.0"]  # newest first
+# Odoo series that really have at least one published app (so a new series appears on the site by itself)
+LIVE_SERIES = sorted({s.split(".")[0] for v in VERS.values() for s in v}, key=int)
+_names = {1: "One", 2: "Two", 3: "Three", 4: "Four", 5: "Five", 6: "Six"}
+VTXT = ", ".join(LIVE_SERIES[:-1]) + " and " + LIVE_SERIES[-1]          # 17, 18, 19 and 20
+VDOT = " · ".join(LIVE_SERIES)                                          # 17 · 18 · 19 · 20
+VAMP = ", ".join(LIVE_SERIES[:-1]) + " & " + LIVE_SERIES[-1]            # 17, 18, 19 & 20
+NEWEST = LIVE_SERIES[-1]
 NAME = SITE["name"]
 
 STORE = SITE["store"]
@@ -51,7 +58,7 @@ FAMILIES = [
 FAM_CLASS = {f[0]: f[2] for f in FAMILIES}
 REDIRECTS = {"payment_provider_ngenius": "payment_ngenius"}  # old page address -> current one
 WORDS = {3: "Three", 4: "Four", 5: "Five", 6: "Six", 7: "Seven", 8: "Eight", 9: "Nine", 10: "Ten"}
-_fill = lambda s: s.replace("{n}", str(len(APPS))).replace("{lines}", str(len(FAMILIES)))
+_fill = lambda s: s.replace("{n}", str(len(APPS))).replace("{lines}", str(len(FAMILIES))).replace("{vtxt}", VTXT).replace("{vdot}", VDOT).replace("{nv}", _names.get(len(LIVE_SERIES), str(len(LIVE_SERIES))))
 SITE["description"] = _fill(SITE["description"])
 for _h in D["hire"]:
     _h["v"], _h["n"] = _fill(_h["v"]), _fill(_h["n"])
@@ -182,7 +189,7 @@ def app_card(app, root, reveal=True, lazy=True):
 
 # --------------------------------------------------------------------------- pages
 FAQS = [
-    ("Which Odoo versions do you support?", "Our apps are built for Odoo 17, 18 and 19. Each app page shows which versions exist, with a store link, version number and price for each. Odoo 19 has the full range."),
+    ("Which Odoo versions do you support?", "Our apps are built for Odoo {VTXT}. Each app page shows which versions exist, with a store link, version number and price for each. Odoo 19 has the full range, and Odoo 20 is available for the apps marked 20."),
     ("Community or Enterprise?", "Most apps work on both. Employee Loan Pro, Attendance Leave Gantt and Payroll Dashboard Pro need Enterprise features such as Payroll or Contracts. The edition is listed on every app page."),
     ("How do I install an app?", "Get it from the Odoo Apps Store like any other app. Each app page has a button that opens the right store listing for your Odoo version."),
     ("How are the apps licensed and priced?", "Paid apps use the OPL-1 licence and a one-time price per app, with no subscription. The N-Genius payment provider is free."),
@@ -194,9 +201,10 @@ FAQS = [
     ("Do you have school or training-center software?", "Yes. The Education line is a full school management suite for Odoo 19: student records, admissions, monthly fee slips with one invoice per family, a parent portal, teachers, a timetable and principal dashboards, plus course management for training batches with seats, waiting lists and installment fees. Install the free School Management System to get the whole school suite, or pick single modules."),
     ("Where are you based?", f"{CONTACT['location']}, working remotely with customers worldwide."),
 ]
+FAQS = [(q, a.replace("{VTXT}", VTXT)) for q, a in FAQS]
 VALUE = [
     (f"{len(APPS)}", "Apps on the Odoo Apps Store", "Install the way you install any Odoo app. Every listing links to its store page."),
-    ("17 · 18 · 19", "Three Odoo versions", "Pick your series on each app page. Odoo 19 has the full range."),
+    (VDOT, f"{_names.get(len(LIVE_SERIES))} Odoo versions", "Pick your series on each app page. Odoo 19 has the full range and Odoo 20 is arriving app by app."),
     ("Both", "Community and Enterprise", "Most apps run on both. The few that need Enterprise features say so."),
     ("One-time", "Simple pricing", "Pay once per app, with no subscription. One app is free."),
 ]
@@ -225,7 +233,7 @@ def home():
         c = sum(1 for a in APPS if family(a) == n)
         return f'{c} app{"" if c == 1 else "s"}'
     fams = [f'<a class="card fam" href="apps/?line={c}"><div class="ico">{ico}</div><h3>{n}</h3><p>{d}</p><span class="more">{n_apps(n)} <i>→</i></span></a>' for n, ico, c, d in FAMILIES]
-    tech = "".join(f"<span>{t}</span>" for t in ["Odoo 17", "Odoo 18", "Odoo 19", "Python", "OWL", "JavaScript", "PostgreSQL", "QWeb", "Portals", "Payments", "HR & Payroll", "Accounting", "Purchase", "Sales"])
+    tech = "".join(f"<span>{t}</span>" for t in [f"Odoo {x}" for x in LIVE_SERIES] + ["Python", "OWL", "JavaScript", "PostgreSQL", "QWeb", "Portals", "Payments", "HR & Payroll", "Accounting", "Purchase", "Sales"])
     why = "".join(f'<div class="glass reveal"><div class="num">{n}</div><h3>{t}</h3><p>{p}</p></div>' for n, t, p in VALUE)
     suite = next((a for a in APPS if a["id"] == "nb_school_management_system"), None)
     edu = ""
@@ -255,9 +263,9 @@ def home():
  <div class="hero-copy">
   <span class="pill"><i class="dot"></i>{len(APPS)} apps live on the Odoo Apps Store</span>
   <h1>Odoo apps that <em>empower</em> your team and customers.</h1>
-  <p class="lead">{NAME} builds production-ready Odoo apps for versions 17, 18 and 19: portals, payments, HR and payroll, dashboards, school management and an AI assistant. Install from the store, or let us build it for you.</p>
+  <p class="lead">{NAME} builds production-ready Odoo apps for versions {VTXT}: portals, payments, HR and payroll, dashboards, school management and an AI assistant. Install from the store, or let us build it for you.</p>
   <div class="btn-row"><a class="btn btn-primary" href="apps/">Browse the apps</a><a class="btn btn-ghost" href="contact/">Talk to us →</a></div>
-  <ul class="trust"><li>Odoo 17 · 18 · 19</li><li>Community &amp; Enterprise</li><li>OPL-1 licensed</li><li>Store-published</li></ul>
+  <ul class="trust"><li>Odoo {VDOT}</li><li>Community &amp; Enterprise</li><li>OPL-1 licensed</li><li>Store-published</li></ul>
  </div>
  <div class="hero-art" aria-hidden="true"><div class="glow"></div>{stack}</div>
 </section>
@@ -275,7 +283,7 @@ def home():
  <div class="btn-row center"><a class="btn btn-primary" href="contact/">Contact us</a><a class="btn btn-ghost" href="{STORE}" target="_blank" rel="noopener">Odoo Apps Store ↗</a></div></div></section>"""
     ld = {"@context": "https://schema.org", "@type": "Organization", "name": NAME, "url": SITE_URL + "/", "email": CONTACT["email"],
           "logo": SITE_URL + "/images/mark-512.png", "description": SITE["description"]}
-    return page(f"{NAME} | Odoo 17, 18 & 19 Apps and Custom Odoo Development", SITE["description"], "", "home", body,
+    return page(f"{NAME} | Odoo {VAMP} Apps and Custom Odoo Development", SITE["description"], "", "home", body,
                 f'<script type="application/ld+json">{json.dumps(ld)}</script>')
 
 
@@ -288,7 +296,7 @@ def apps_page():
     upd_o = opt([("all", "Any date"), ("7", "Past 7 days"), ("30", "Past 30 days"), ("90", "Past 90 days")])
     sort_o = opt([("top", "Top picks"), ("latest", "Latest updated"), ("price-asc", "Price: low to high"), ("price-desc", "Price: high to low"), ("name", "Name A to Z")])
     body = f"""<section class="wrap cat-head"><div><div class="crumb"><a href="{root}">Home</a> / Apps</div><h1>All Odoo apps</h1></div>
-<p class="muted">{len(APPS)} apps · Odoo 17, 18 and 19 · every app is on the Odoo Apps Store</p></section>
+<p class="muted">{len(APPS)} apps · Odoo {VTXT} · every app is on the Odoo Apps Store</p></section>
 <section class="wrap">
 <form class="filters sticky" role="search" onsubmit="return false"><input id="q" type="search" placeholder="Search apps…" aria-label="Search apps">
 <select id="f-ver" aria-label="Odoo version">{vers_o}</select><select id="f-line" aria-label="Product line">{line_o}</select>
@@ -298,8 +306,8 @@ def apps_page():
 <section class="wrap"><div class="grid app-grid" id="app-grid">{''.join(app_card(a, root, reveal=False) for a in APPS)}</div>
 <p id="none" class="muted center" hidden>No apps match these filters. <a href="#" id="clear" style="color:var(--a)">Clear filters</a></p>
 <nav class="pager" id="pager" aria-label="Pagination"></nav></section>"""
-    return page(f"Odoo 17, 18 & 19 Apps by {NAME} | Portals, Payments, HR, AI",
-                f"Browse {len(APPS)} Odoo apps for versions 17, 18 and 19 by {NAME}: portals, payments, HR and payroll, dashboards, AI assistant and backend UI.",
+    return page(f"Odoo {VAMP} Apps by {NAME} | Portals, Payments, HR, AI",
+                f"Browse {len(APPS)} Odoo apps for versions {VTXT} by {NAME}: portals, payments, HR and payroll, dashboards, AI assistant and backend UI.",
                 "apps/", "apps", body)
 
 
@@ -370,12 +378,12 @@ def contact_page():
 
 def about_page():
     root = "../"
-    facts = "".join(f"<li><b>{a}</b><span>{b}</span></li>" for a, b in [(f"{len(APPS)} apps", "on the Odoo Apps Store"), ("Odoo 17 · 18 · 19", "Odoo 19 has the full range"), ("Community + Enterprise", "most apps run on both"), (CONTACT["location"], "working remotely worldwide")])
+    facts = "".join(f"<li><b>{a}</b><span>{b}</span></li>" for a, b in [(f"{len(APPS)} apps", "on the Odoo Apps Store"), (f"Odoo {VDOT}", "Odoo 19 has the full range"), ("Community + Enterprise", "most apps run on both"), (CONTACT["location"], "working remotely worldwide")])
     lines = "".join(f'<a class="card fam" href="{root}apps/?line={c}"><div class="ico">{ico}</div><h3>{n}</h3><p>{d}</p></a>' for n, ico, c, d in FAMILIES)
     steps = "".join(f'<div class="glass"><h3>{t}</h3><p>{p}</p></div>' for t, p in STEPS)
     why = "".join(f'<div class="card why"><div class="num">{n}</div><h3>{t}</h3><p>{p}</p></div>' for n, t, p in VALUE)
     hire = "".join(f'<div class="card hire"><small>{e(h["k"])}</small><b>{e(h["v"])}</b><p>{e(h["n"])}</p></div>' for h in D["hire"])
-    tech = "".join(f'<span class="tag">{t}</span>' for t in ["Odoo 17", "Odoo 18", "Odoo 19", "Python", "Odoo ORM", "OWL", "JavaScript", "QWeb", "PostgreSQL", "Portals", "Payments", "HR & Payroll", "Accounting", "Purchase", "Sales", "Timesheets"])
+    tech = "".join(f'<span class="tag">{t}</span>' for t in [f"Odoo {x}" for x in LIVE_SERIES] + ["Python", "Odoo ORM", "OWL", "JavaScript", "QWeb", "PostgreSQL", "Portals", "Payments", "HR & Payroll", "Accounting", "Purchase", "Sales", "Timesheets"])
     body = f"""<section class="wrap about-intro"><div><span class="eyebrow">About {NAME}</span>
  <h1 class="statement">We build Odoo apps that install cleanly and do one job well.</h1>
  <p class="lead">{SITE["description"]}</p><div class="btn-row"><a class="btn btn-primary" href="{root}apps/">Browse the apps</a><a class="btn btn-ghost" href="{root}contact/">Work with us</a></div></div>
@@ -387,7 +395,7 @@ def about_page():
 <section class="wrap sec"><div class="sec-head"><span class="eyebrow">Technology</span><h2>What we work with</h2></div><div class="tags">{tech}</div></section>
 <section class="wrap"><div class="cta"><h2>Have an Odoo project in mind?</h2><p>Send a short note and we will reply with how we would approach it.</p>
  <div class="btn-row center"><a class="btn btn-primary" href="{root}contact/">Contact us</a></div></div></section>"""
-    return page(f"About {NAME} | Odoo apps and custom development", f"About {NAME}: Odoo apps for versions 17, 18 and 19 and custom Odoo development from {CONTACT['location']}.", "about/", "about", body)
+    return page(f"About {NAME} | Odoo apps and custom development", f"About {NAME}: Odoo apps for versions {VTXT} and custom Odoo development from {CONTACT['location']}.", "about/", "about", body)
 
 
 def faq_page():
@@ -464,7 +472,7 @@ def write_knowledge():
             "summary": a["short_desc"], "about": a["full_desc"], "features": a.get("highlights", []), "works_with": a.get("modules", []),
             "page": f"{SITE_URL}/apps/{slug(a)}/"})
     facts = [
-        "Apps are built for Odoo 17, 18 and 19; Odoo 19 has the full range, Odoo 17 has only Employee Loan Pro, Attendance Leave Gantt and Sales & Payment Dashboard.",
+        f"Apps are built for Odoo {VTXT}; Odoo 19 has the full range, Odoo 20 has the apps marked 20 on their pages, Odoo 17 has only Employee Loan Pro, Attendance Leave Gantt and Sales & Payment Dashboard.",
         "Most apps run on Community and Enterprise; Employee Loan Pro, Attendance Leave Gantt and Payroll Dashboard Pro need Enterprise features (Payroll or Contracts).",
         "Install from the Odoo Apps Store like any app. Paid apps: one-time price per app, OPL-1 licence, no subscription. N-Genius payment provider is free (LGPL-3).",
         "Custom development: custom Odoo modules, portals, payment and API integrations, dashboards and migrations, fixed price or hourly.",

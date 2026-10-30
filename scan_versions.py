@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Scan the per-version NeuralBytea repos and write data/versions.yaml.
 
-For every module found under odoo{17,18,19}/env/env_neural/addons/Neural_Byte_Modules
+For every module found under odoo{17,18,19,20}/env/env_neural/addons/Neural_Byte_Modules
 it records the manifest version and price, and keeps a version only if the module's
 Odoo Apps Store page for that series really exists (HTTP 200).
 
@@ -15,9 +15,11 @@ from pathlib import Path
 import yaml
 
 PROJ = Path(os.environ.get("ODOO_PROJ", Path.home() / "development/odoo_proj"))
-SERIES = ["17.0", "18.0", "19.0"]
+SERIES = ["17.0", "18.0", "19.0", "20.0"]
 # technical name in the repo -> technical name on the store, where they differ
 STORE_NAME = {}
+# only NeuralBytea modules are ever listed: BBT (Big Binary Tech) modules sit in their own folder and use the bbt_ prefix
+NOT_OURS = ("bbt_",)
 # modules in the repos that must not be listed (not published)
 # payment_provider_ngenius is a different author's Odoo 18 module that sits in the Odoo 18 repo; it is not a NeuralBytea app
 SKIP = {"nb_employee_portal", "payment_provider_ngenius"}
@@ -39,7 +41,7 @@ def last_updated(module_dir):
 def manifests(series):
     base = PROJ / f"odoo{series.split('.')[0]}/env/env_neural/addons/Neural_Byte_Modules"
     for m in base.rglob("__manifest__.py"):
-        if "node_modules" in m.parts:
+        if "node_modules" in m.parts or "BBT" in m.parts:
             continue
         try:
             mf = ast.literal_eval(m.read_text())
@@ -64,7 +66,7 @@ def main():
     for s in SERIES:
         for name, mf in manifests(s):
             sname = STORE_NAME.get(name, name)
-            if sname in SKIP or name in SKIP:
+            if sname in SKIP or name in SKIP or name.startswith(NOT_OURS):
                 continue
             ver = str(mf.get("version", ""))
             # a few 17.0 copies still carry an 18.0 manifest: not a real 17.0 port
