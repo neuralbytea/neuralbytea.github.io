@@ -30,7 +30,7 @@ def find(mod):
     for v in ("19", "20", "18"):
         base = PROJ / f"odoo{v}/env/env_neural/addons/Neural_Byte_Modules"
         for m in base.rglob(f"{mod}/__manifest__.py"):
-            if "node_modules" not in m.parts:
+            if "node_modules" not in m.parts and "neural_elearning" not in m.parts:   # neural_elearning is an old backup copy
                 return m.parent
     sys.exit(f"{mod}: not found in the odoo19 or odoo18 neural repos")
 

@@ -35,7 +35,7 @@ def find(mod, prefer="newest"):
     order = pub if prefer == "newest" else [x for x in ("19", "20", "18", "17") if x in pub]
     for v in order + [x for x in ("19", "18") if x not in order]:
         for m in (PROJ / f"odoo{v}/env/env_neural/addons/Neural_Byte_Modules").rglob(f"{mod}/__manifest__.py"):
-            if "node_modules" not in m.parts and "BBT" not in m.parts:
+            if "node_modules" not in m.parts and "BBT" not in m.parts and "neural_elearning" not in m.parts:
                 return m.parent
     return None
 
