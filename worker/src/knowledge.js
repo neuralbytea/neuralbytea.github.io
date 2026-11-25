@@ -8,19 +8,25 @@ export const APPS = [
   "licence": "OPL-1",
   "versions": [
    {
+    "odoo": "20",
+    "price": "$99",
+    "module_version": "1.8.9",
+    "store": "https://apps.odoo.com/apps/modules/20.0/nb_vendor_portal_pro/"
+   },
+   {
     "odoo": "19",
     "price": "$99",
-    "module_version": "1.8.8",
+    "module_version": "1.8.9",
     "store": "https://apps.odoo.com/apps/modules/19.0/nb_vendor_portal_pro/"
    },
    {
     "odoo": "18",
     "price": "$99",
-    "module_version": "1.8.7",
+    "module_version": "1.8.8",
     "store": "https://apps.odoo.com/apps/modules/18.0/nb_vendor_portal_pro/"
    }
   ],
-  "summary": "Vendor portal: onboarding, RFQ quoting, PO acknowledgment, vendor bills and payments",
+  "summary": "Vendor self service portal: onboarding, RFQ quoting, PO acknowledgment, vendor bills and payments",
   "about": "A full supplier self-service portal for Odoo Purchase. Vendors onboard themselves, quote on RFQs, acknowledge purchase orders, send advance shipping notices, upload compliance documents and track bills and payments, while buyers keep scorecards, disputes and price comparisons inside Odoo.",
   "features": [
    "Vendor Dashboard: Counters for requests to quote, orders to acknowledge, open bills and payments, a six month chart and recent activity, scoped to the signed-in supplier.",
@@ -49,25 +55,31 @@ export const APPS = [
  },
  {
   "id": "salesperson_portal",
-  "title": "Field Sales Booking",
+  "title": "Salesperson Portal",
   "line": "Portals",
   "edition": "Community & Enterprise",
   "licence": "OPL-1",
   "versions": [
    {
+    "odoo": "20",
+    "price": "$99",
+    "module_version": "2.5.3",
+    "store": "https://apps.odoo.com/apps/modules/20.0/salesperson_portal/"
+   },
+   {
     "odoo": "19",
     "price": "$99",
-    "module_version": "2.5.4",
+    "module_version": "2.5.5",
     "store": "https://apps.odoo.com/apps/modules/19.0/salesperson_portal/"
    },
    {
     "odoo": "18",
     "price": "$99",
-    "module_version": "2.5.3",
+    "module_version": "2.5.4",
     "store": "https://apps.odoo.com/apps/modules/18.0/salesperson_portal/"
    }
   ],
-  "summary": "Field sales rep portal: reps book orders for customers from the portal, no user seat.",
+  "summary": "Salesperson portal for field sales reps to book a portal sale order for customers, no user seat",
   "about": "Lets field sales reps book orders for their customers from the Odoo portal without consuming an internal user seat. Includes catalog and cart, credit checks, discounts and rewards, customer creation, invoices, support tickets and a commission engine with plans and rules.",
   "features": [
    "Field Sales Rep Group: Reps are portal users in the Field Sales Rep group. They never take an internal seat, and the group, not the interface, decides what they can read.",
@@ -101,31 +113,40 @@ export const APPS = [
   "licence": "OPL-1",
   "versions": [
    {
+    "odoo": "20",
+    "price": "$99",
+    "module_version": "1.1.3",
+    "store": "https://apps.odoo.com/apps/modules/20.0/nb_services_billing_pro/"
+   },
+   {
     "odoo": "19",
     "price": "$99",
-    "module_version": "1.0.12",
+    "module_version": "1.1.2",
     "store": "https://apps.odoo.com/apps/modules/19.0/nb_services_billing_pro/"
    },
    {
     "odoo": "18",
     "price": "$99",
-    "module_version": "1.0.8",
+    "module_version": "1.1.2",
     "store": "https://apps.odoo.com/apps/modules/18.0/nb_services_billing_pro/"
    }
   ],
-  "summary": "Employee rate cards, automatic margin per timesheet line, portal timer and order-based billing",
+  "summary": "Timesheet portal with billing rate cards, margin per line, portal timer, sales orders from tasks",
   "about": "Adds multi-tier rate cards (billing rate and cost rate per employee, customer, project and service type) to Odoo timesheets. Every timesheet line gets its margin automatically, employees log time from a portal timer, and non-billable work can be hidden or shown on the invoice at zero price.",
   "features": [
    "Employee Rate Cards: Billing and cost rate per employee, limited by customer, project, service type and dates. Hourly, daily or fixed, with its own currency.",
    "Most Specific Card Wins: Eight scope ranks decide the match, from customer, project and service type down to the employee default. Ties go to the latest Valid From.",
    "Margin on Every Line: Billing amount, cost amount, margin and margin percent computed on each timesheet line, with a rate status badge.",
-   "Non-billable Work: Mark time as billable, non-billable hidden or non-billable shown at 0. Cost is still tracked, so the cost of free work is visible.",
+   "Free of Charge Lines: Switch on Show non-billable time on the invoice at 0.00 on a project, and the time marked Non-billable (show at 0) appears on the order and on the native invoice with its hours at 0.00. Off by default; its cost is still tracked and never printed.",
    "Portal Time Tracker: Timer with pause and resume, manual entries and a weekly view at /my/timetracker for portal employees.",
    "Sales Orders from Tasks: Create Sales Order on a task, with one line at the average price or one per person at their own rate.",
    "Invoiced Lines Locked: Posting the invoice marks the timesheets as invoiced and locks them against edits.",
    "Team Overview: Revenue, margin, hours, invoiced and ready to invoice, utilization and alerts for managers.",
    "Margin Dashboard and Reports: Graph, pivot and list of margin, and two PDF reports.",
-   "Cost and Margin Stay Internal: Cost rate and margin fields are limited to the Billing Manager group and are never shown on the portal."
+   "Cost and Margin Stay Internal: Cost rate and margin fields are limited to the Billing Manager group and are never shown on the portal.",
+   "Rate Card History: The rate card chatter logs changes of billing rate, dates and scope with old and new value. The cost rate stays out of the chatter and is kept in a manager only Cost History.",
+   "Cost Rate from Salary: Optional wizard with preview that turns the monthly wage into an hourly cost rate. Needs HR Manager rights and never changes a salary.",
+   "Hourly Cost Fallback: Optional company setting, off by default: when a rate card has no cost rate, the line takes the employee's hourly cost from HR, converted to the company currency. A cost rate on the card always wins. Managers see the cost on the lines, never the hourly cost field."
   ],
   "works_with": [
    "Sales Timesheet",
@@ -143,19 +164,25 @@ export const APPS = [
   "licence": "OPL-1",
   "versions": [
    {
+    "odoo": "20",
+    "price": "$99",
+    "module_version": "1.3.9",
+    "store": "https://apps.odoo.com/apps/modules/20.0/nb_customer_portal_pro/"
+   },
+   {
     "odoo": "19",
     "price": "$99",
-    "module_version": "1.3.8",
+    "module_version": "1.3.11",
     "store": "https://apps.odoo.com/apps/modules/19.0/nb_customer_portal_pro/"
    },
    {
     "odoo": "18",
     "price": "$99",
-    "module_version": "1.3.7",
+    "module_version": "1.3.9",
     "store": "https://apps.odoo.com/apps/modules/18.0/nb_customer_portal_pro/"
    }
   ],
-  "summary": "Customer portal: self-service ordering, order-to-cash dashboard, invoices, payments, tickets",
+  "summary": "Customer portal dashboard with B2B portal, order to cash, portal invoices, tickets and payments",
   "about": "Turns the Odoo customer portal into a self-service workspace: customers place orders, follow the order-to-cash flow on a dashboard, view invoices and payments, receive alerts and raise support tickets.",
   "features": [
    "Sign-up and Classification: A Company or Customer choice on the sign-up form, and a Customer or None classification on every contact.",
@@ -183,8 +210,103 @@ export const APPS = [
   "page": "https://neuralbytea.github.io/apps/nb_customer_portal_pro/"
  },
  {
+  "id": "nb_employee_portal_dashboard",
+  "title": "Employee Dashboard",
+  "line": "Portals",
+  "edition": "Community & Enterprise",
+  "licence": "OPL-1",
+  "versions": [
+   {
+    "odoo": "20",
+    "price": "$99",
+    "module_version": "1.4.0",
+    "store": "https://apps.odoo.com/apps/modules/20.0/nb_employee_portal_dashboard/"
+   },
+   {
+    "odoo": "19",
+    "price": "$99",
+    "module_version": "1.4.0",
+    "store": "https://apps.odoo.com/apps/modules/19.0/nb_employee_portal_dashboard/"
+   },
+   {
+    "odoo": "18",
+    "price": "$99",
+    "module_version": "1.4.0",
+    "store": "https://apps.odoo.com/apps/modules/18.0/nb_employee_portal_dashboard/"
+   }
+  ],
+  "summary": "Employee dashboard: check in, time off, payslips, expenses, team calendar and manager approvals",
+  "about": "Employee dashboard for Odoo. Employee Dashboard gives every employee one place for check in, attendance, time off, payslips and expenses, and gives managers a team calendar and one list to approve time off and missing attendance. Each area is its own group on the user form, and appears only when its Odoo app is installed.",
+  "features": [
+   "Employee Dashboard: Hours, attendance gaps, time off counters and shortcuts on one page.",
+   "Time Off: Balances, requests limited to the allocation, month and year filters and an approval list for managers.",
+   "Attendance and Check In: Month timeline, check in and out as its own group, for companies without attendance devices.",
+   "Missing Attendance: Employees add a forgotten entry, the manager approves or rejects it.",
+   "Team Calendar: Expected and present people per day, shifts, leave and login and logout times.",
+   "Hierarchy: The team as a structure of who reports to whom.",
+   "Payslips: List, PDF preview, download and a year filter when the Payroll app is installed.",
+   "Expense Receipts: Log an expense, attach expense receipts, follow its stages and confirm the reimbursement, with month and year filters,",
+   "Expense Approval: Managers approve or refuse the expenses of their team by month, with counts, filters and a card on My Team.",
+   "Groups per Area: Each area, and each kind of approval, is switched on per user.",
+   "Own Records Only: Every page reads only the signed-in employee, and managers see their own team."
+  ],
+  "works_with": [
+   "Portal",
+   "Employees",
+   "Discuss",
+   "Hr Expense"
+  ],
+  "page": "https://neuralbytea.github.io/apps/nb_employee_portal_dashboard/"
+ },
+ {
+  "id": "nb_salesperson_customer_access",
+  "title": "Salesperson Own Customers",
+  "line": "Portals",
+  "edition": "Community & Enterprise",
+  "licence": "OPL-1",
+  "versions": [
+   {
+    "odoo": "20",
+    "price": "$29",
+    "module_version": "1.0.0",
+    "store": "https://apps.odoo.com/apps/modules/20.0/nb_salesperson_customer_access/"
+   },
+   {
+    "odoo": "19",
+    "price": "$29",
+    "module_version": "1.0.0",
+    "store": "https://apps.odoo.com/apps/modules/19.0/nb_salesperson_customer_access/"
+   },
+   {
+    "odoo": "18",
+    "price": "$29",
+    "module_version": "1.0.0",
+    "store": "https://apps.odoo.com/apps/modules/18.0/nb_salesperson_customer_access/"
+   }
+  ],
+  "summary": "Each salesperson sees only their assigned customers, quotations, invoices and payments",
+  "about": "Show each Odoo salesperson only their own customers, quotations, invoices and payments. Salesperson Own Customers adds an Own Customers Only group and an Assigned Salespersons field on every customer. Members of the group see the customers assigned to them and the sales orders, invoices, payments and reports of those customers, and nothing else, while sales managers and administrators keep the standard view and their own contacts stay hidden from the salespersons. The restriction is enforced on the server, so it holds for search, direct links, exports and API calls.",
+  "features": [
+   "Own Customers Only Group: One group in the Sales access rights. Only members are restricted, so managers and everybody else keep the standard view.",
+   "Several Salespersons per Customer: The Assigned Salespersons field takes any number of internal users. The standard Salesperson field counts as well.",
+   "Contacts Follow the Account: Contacts, delivery and invoice addresses belong to the same salespersons as the customer they sit under.",
+   "Quotations and Orders: Quotations, sales orders and their lines are limited to the assigned customers, plus the orders the user created or is the salesperson of.",
+   "Invoices, Bills and Payments: Invoices, vendor bills, journal items and payments follow the customer too, so the accounting menus show the same slice.",
+   "Reports Included: The sales analysis and invoice analysis reports are restricted as well, so totals never include another salesperson's customers.",
+   "Enforced on the Server: The restrictions run in the database layer. They apply to lists, searches, direct links, exports and API calls, not only to menus.",
+   "New Customers Stay Visible: A restricted user who creates a customer is assigned to it automatically, so it does not vanish after saving.",
+   "Manager and Admin Contacts Hidden: A Manager / Admin Contact checkbox is ticked for administrators and Sales managers and hides those contacts from restricted salespersons.",
+   "Tested on All Editions: Eleven automated tests run on Community and Enterprise for Odoo 18, 19 and 20, including a full sale, invoice and payment flow for two salespersons."
+  ],
+  "works_with": [
+   "Sale Management",
+   "Invoicing"
+  ],
+  "page": "https://neuralbytea.github.io/apps/nb_salesperson_customer_access/"
+ },
+ {
   "id": "nb_mcp_server",
-  "title": "Claude Connector for Odoo",
+  "title": "Odoo Claude Connector",
   "line": "AI Assistant",
   "edition": "Community & Enterprise",
   "licence": "OPL-1",
@@ -192,24 +314,24 @@ export const APPS = [
    {
     "odoo": "20",
     "price": "$31",
-    "module_version": "1.0.3",
+    "module_version": "1.0.5",
     "store": "https://apps.odoo.com/apps/modules/20.0/nb_mcp_server/"
    },
    {
     "odoo": "19",
     "price": "$31",
-    "module_version": "1.0.4",
+    "module_version": "1.0.6",
     "store": "https://apps.odoo.com/apps/modules/19.0/nb_mcp_server/"
    },
    {
     "odoo": "18",
     "price": "$31",
-    "module_version": "1.0.3",
+    "module_version": "1.0.5",
     "store": "https://apps.odoo.com/apps/modules/18.0/nb_mcp_server/"
    }
   ],
-  "summary": "Claude and Odoo server link: on premises Claude connector, MCP, read only, each user's own rights",
-  "about": "Claude connector for Odoo. This Claude MCP server lets Claude answer from your own Odoo data: sales, invoices, contacts and any custom model. It is an on premises Claude connector as much as a cloud one, and a community Claude Odoo connector too: it runs inside Odoo Community and Enterprise with no extra server, and each person connects with their own Odoo login. An administrator switches the connector on and gives people the AI Connector User role. A user adds the connector address to claude.ai, signs in on an Odoo page and clicks Allow. From then on Claude can look up models and fields, search, count and total records, read one record and open saved filters, always with that user's access rights and record rules.",
+  "summary": "On premise Claude connector: MCP server for Odoo, read only by default, each user's own rights",
+  "about": "Odoo Claude connector for Odoo. This Claude MCP server is an Odoo MCP server built on the Model Context Protocol (MCP). It lets Claude answer from your own Odoo data: sales, invoices, contacts and any custom model. As an MCP server for Odoo it is an on premise Claude connector as much as a cloud one, and a community Claude Odoo connector too: it runs inside Odoo Community and Enterprise with no extra server, and each person connects with their own Odoo login. An administrator switches the AI connector on and gives people the AI Connector User role. A user adds the connector address to claude.ai, signs in on an Odoo page and clicks Allow. From then on Claude can look up models and fields, search, count and total records, read one record and open saved filters, always with that user's access rights and record rules.",
   "features": [
    "Works for Any Model: Search, count and total records of any model the user may read, including custom models and fields.",
    "Sign In With Odoo: claude.ai connectors sign users in on an Odoo page. Access tokens last one hour and renew on their own; a connection nobody uses ends after 30 days.",
@@ -230,8 +352,96 @@ export const APPS = [
   "page": "https://neuralbytea.github.io/apps/nb_mcp_server/"
  },
  {
+  "id": "nb_mcp_code_mode",
+  "title": "Odoo MCP Code Mode",
+  "line": "AI Assistant",
+  "edition": "Community & Enterprise",
+  "licence": "OPL-1",
+  "versions": [
+   {
+    "odoo": "20",
+    "price": "$39",
+    "module_version": "1.0.1",
+    "store": "https://apps.odoo.com/apps/modules/20.0/nb_mcp_code_mode/"
+   },
+   {
+    "odoo": "19",
+    "price": "$39",
+    "module_version": "1.0.1",
+    "store": "https://apps.odoo.com/apps/modules/19.0/nb_mcp_code_mode/"
+   },
+   {
+    "odoo": "18",
+    "price": "$39",
+    "module_version": "1.0.1",
+    "store": "https://apps.odoo.com/apps/modules/18.0/nb_mcp_code_mode/"
+   }
+  ],
+  "summary": "MCP Code Mode for Odoo: the AI runs one safe script instead of dozens of tool calls",
+  "about": "Let the AI run one safe script in Odoo instead of dozens of tool calls. Odoo Claude Code Mode adds a code-execution layer to the Odoo Claude Connector. Claude writes a short script, Odoo runs it in a sandbox as the same user, and only the final answer goes back. That keeps big result sets out of the conversation, cuts token use, handles multi-step questions in one call and adds saved skills, budgets, a dry run before any change and a log of every script.",
+  "features": [
+   "One Script per Question: The AI writes a short script and Odoo runs it. Loops, conditions, sorting and totals happen inside Odoo, not in the AI conversation.",
+   "Search Before It Writes: A search tool shows the exact calls and saved skills with their arguments, at name, summary or full detail, so the AI loads only what it needs.",
+   "A Sandbox, Not exec: Scripts are read by a small interpreter of a restricted Python subset. There is no import, no file, no network, no attribute access and no use of eval or exec.",
+   "Same Rights as the User: A script can only call the tools of the AI Connector, as the user of the key. Blocked models, hidden fields and record rules all keep applying.",
+   "Five Budgets per Script: Steps, seconds, tool calls, rows read and answer size are limited. A script that goes over is stopped with a clear message.",
+   "Dry Run Before Changes: Changes by scripts are off by default. When allowed, a script first runs as a dry run that shows what it would change, and only apply=true keeps it.",
+   "Saved Skills: Reviewed, versioned scripts with inputs and a description. The AI runs them by name, and a bad edit is refused before it is saved.",
+   "Hide Fields From the AI: List fields such as email and phone. Their values, and anything that looks like an email or a phone number, become tokens like [EMAIL_1] in the answer.",
+   "Short-Term Workspace: A script can keep a value for 24 hours per user, so a long job can resume across calls.",
+   "Run Log With Savings: Every script is logged with its text, its steps, rows read, data handled, answer size and an estimate of the tokens not used."
+  ],
+  "works_with": [
+   "Mcp Server"
+  ],
+  "page": "https://neuralbytea.github.io/apps/nb_mcp_code_mode/"
+ },
+ {
+  "id": "nb_shopify_connector",
+  "title": "Odoo Shopify Connector",
+  "line": "Integrations",
+  "edition": "Community & Enterprise",
+  "licence": "OPL-1",
+  "versions": [
+   {
+    "odoo": "20",
+    "price": "$180",
+    "module_version": "2.0.3",
+    "store": "https://apps.odoo.com/apps/modules/20.0/nb_shopify_connector/"
+   },
+   {
+    "odoo": "19",
+    "price": "$180",
+    "module_version": "2.0.3",
+    "store": "https://apps.odoo.com/apps/modules/19.0/nb_shopify_connector/"
+   },
+   {
+    "odoo": "18",
+    "price": "$180",
+    "module_version": "2.0.3",
+    "store": "https://apps.odoo.com/apps/modules/18.0/nb_shopify_connector/"
+   }
+  ],
+  "summary": "Odoo Shopify connector and integration: sync products, orders, stock, returns and payouts",
+  "about": "The Odoo Shopify connector links a Shopify store to Odoo and keeps products, orders, stock and money in step. This Shopify Odoo integration works in both directions.",
+  "features": [
+   "Products: import and export listings, variants, collections, tags, product types, categories, images and metafields.",
+   "Catalogs and markets: Shopify catalogs and markets, with bulk queries for large imports.",
+   "Orders: import orders and customers, update order status, cancel orders, and map Shopify payment gateways and delivery carriers.",
+   "Fulfillment and returns: for Shopify fulfillment Odoo sends the tracking number, carrier and quantities from the delivery, and Shopify returns are processed.",
+   "Inventory: export stock per Shopify location and import stock back.",
+   "Payouts: Shopify payout and transaction reconciliation.",
+   "Workflows: the Odoo Shopify sync follows financial and order workflow rules per Shopify store, with webhooks, queue jobs and logs."
+  ],
+  "works_with": [
+   "Stock Delivery",
+   "Sale Management"
+  ],
+  "page": "https://neuralbytea.github.io/apps/nb_shopify_connector/"
+ },
+ {
   "id": "nb_school_management_system",
-  "title": "School Management System",
+  "title": "School Management System for Odoo",
   "line": "Education",
   "edition": "Community & Enterprise",
   "licence": "OPL-1",
@@ -239,17 +449,23 @@ export const APPS = [
    {
     "odoo": "20",
     "price": "Free",
-    "module_version": "1.0.2",
+    "module_version": "1.0.3",
     "store": "https://apps.odoo.com/apps/modules/20.0/nb_school_management_system/"
    },
    {
     "odoo": "19",
     "price": "Free",
-    "module_version": "1.0.2",
+    "module_version": "1.0.3",
     "store": "https://apps.odoo.com/apps/modules/19.0/nb_school_management_system/"
+   },
+   {
+    "odoo": "18",
+    "price": "Free",
+    "module_version": "1.0.1",
+    "store": "https://apps.odoo.com/apps/modules/18.0/nb_school_management_system/"
    }
   ],
-  "summary": "School management system for Odoo: students, admissions, family fees, parent portal, teachers",
+  "summary": "School suite for Odoo: student management system, admissions, family fees, parent portal, teachers",
   "about": "School management system for Odoo. One install gives a school its student records, admissions, fee invoices, parent portal, teachers, timetable and dashboards, all on the standard Odoo Invoicing, Employees and Contacts apps.",
   "features": [
    "Student Information System: Students, families, guardians, classes, sections, academic years and roll numbers, with yearly enrollment and bulk enrollment wizards.",
@@ -285,14 +501,20 @@ export const APPS = [
    {
     "odoo": "20",
     "price": "$29",
-    "module_version": "1.0.3",
+    "module_version": "1.0.4",
     "store": "https://apps.odoo.com/apps/modules/20.0/nb_school_core/"
    },
    {
     "odoo": "19",
     "price": "$29",
-    "module_version": "1.0.3",
+    "module_version": "1.0.4",
     "store": "https://apps.odoo.com/apps/modules/19.0/nb_school_core/"
+   },
+   {
+    "odoo": "18",
+    "price": "$29",
+    "module_version": "1.0.1",
+    "store": "https://apps.odoo.com/apps/modules/18.0/nb_school_core/"
    }
   ],
   "summary": "Student records, families, guardians, classes, sections, academic years and enrollment roll numbers",
@@ -321,7 +543,7 @@ export const APPS = [
  },
  {
   "id": "nb_school_admission",
-  "title": "School Admission Management",
+  "title": "School Admission Management System",
   "line": "Education",
   "edition": "Community & Enterprise",
   "licence": "OPL-1",
@@ -329,17 +551,23 @@ export const APPS = [
    {
     "odoo": "20",
     "price": "$25",
-    "module_version": "1.0.2",
+    "module_version": "1.0.3",
     "store": "https://apps.odoo.com/apps/modules/20.0/nb_school_admission/"
    },
    {
     "odoo": "19",
     "price": "$25",
-    "module_version": "1.0.2",
+    "module_version": "1.0.3",
     "store": "https://apps.odoo.com/apps/modules/19.0/nb_school_admission/"
+   },
+   {
+    "odoo": "18",
+    "price": "$25",
+    "module_version": "1.0.1",
+    "store": "https://apps.odoo.com/apps/modules/18.0/nb_school_admission/"
    }
   ],
-  "summary": "Admission pipeline: enquiry, documents, entrance test, offers with expiry, seat limits, waiting list",
+  "summary": "School enquiry to admission pipeline: entrance test, offers, seats and admission waiting list",
   "about": "School admission management for Odoo. Follow every family from the first inquiry to an enrolled student: application, document checklist, entrance test, offer, waiting list, admission fee and admission into a section.",
   "features": [
    "Admission Pipeline: Inquiry, applied, test, offered, accepted and admitted, plus waiting list, rejected and withdrawn, on a kanban board and in lists.",
@@ -370,17 +598,23 @@ export const APPS = [
    {
     "odoo": "20",
     "price": "$39",
-    "module_version": "1.0.3",
+    "module_version": "1.0.4",
     "store": "https://apps.odoo.com/apps/modules/20.0/nb_school_fees/"
    },
    {
     "odoo": "19",
     "price": "$39",
-    "module_version": "1.0.2",
+    "module_version": "1.0.3",
     "store": "https://apps.odoo.com/apps/modules/19.0/nb_school_fees/"
+   },
+   {
+    "odoo": "18",
+    "price": "$39",
+    "module_version": "1.0.1",
+    "store": "https://apps.odoo.com/apps/modules/18.0/nb_school_fees/"
    }
   ],
-  "summary": "Monthly school fee slips, one invoice per family, concessions and late fees on Odoo Invoicing",
+  "summary": "Monthly fee slips, one family invoice, fee concession and late fees for school billing in Odoo",
   "about": "School fee management for Odoo. Generate the month's fee slips at month end, add one-off charges or deductions, invoice each family once, apply late fees on the slip and follow payments, defaulters and concessions, all on standard Odoo invoices.",
   "features": [
    "Month-by-Month Fee Slips: Generate the slips due in a chosen month, like a payroll run, so leavers and corrections never create advance bills. Running it twice never duplicates a charge. A setting can create the whole year at enrollment instead.",
@@ -415,14 +649,20 @@ export const APPS = [
    {
     "odoo": "20",
     "price": "$39",
-    "module_version": "1.0.2",
+    "module_version": "1.0.3",
     "store": "https://apps.odoo.com/apps/modules/20.0/nb_school_portal/"
    },
    {
     "odoo": "19",
     "price": "$39",
-    "module_version": "1.0.2",
+    "module_version": "1.0.3",
     "store": "https://apps.odoo.com/apps/modules/19.0/nb_school_portal/"
+   },
+   {
+    "odoo": "18",
+    "price": "$39",
+    "module_version": "1.0.1",
+    "store": "https://apps.odoo.com/apps/modules/18.0/nb_school_portal/"
    }
   ],
   "summary": "Parents see each child's class, fee statement and invoices, and upload admission documents online",
@@ -449,6 +689,50 @@ export const APPS = [
   "page": "https://neuralbytea.github.io/apps/nb_school_portal/"
  },
  {
+  "id": "payment_Mastercard_website",
+  "title": "Mastercard Website",
+  "line": "Payments",
+  "edition": "Community & Enterprise",
+  "licence": "OPL-1",
+  "versions": [
+   {
+    "odoo": "20",
+    "price": "$29",
+    "module_version": "1.0.3",
+    "store": "https://apps.odoo.com/apps/modules/20.0/payment_Mastercard_website/"
+   },
+   {
+    "odoo": "19",
+    "price": "$29",
+    "module_version": "1.0.3",
+    "store": "https://apps.odoo.com/apps/modules/19.0/payment_Mastercard_website/"
+   },
+   {
+    "odoo": "18",
+    "price": "$29",
+    "module_version": "1.0.3",
+    "store": "https://apps.odoo.com/apps/modules/18.0/payment_Mastercard_website/"
+   }
+  ],
+  "summary": "Card payment website for shop orders and sales order links; connects to Mastercard MPGS",
+  "about": "Website payment Mastercard for the Odoo website shop and sales orders: MPGS ecommerce checkout by card and a sales order payment link, as a card payment website add-on that connects to Mastercard MPGS. Customers pay a quotation or a shop order by card on the secure Mastercard page. Odoo verifies the payment with Mastercard and confirms the order. It is a small add-on to Mastercard MPGS Payment, which does the gateway work.",
+  "features": [
+   "Website Shop Checkout: Customers pay their shop order with Mastercard at the end of the website checkout.",
+   "Quotation Payment Links: The Accept and Pay button of a quotation in the portal offers Mastercard.",
+   "Same Hosted Page: Card details and 3-D Secure stay on the Mastercard page, exactly as for invoices.",
+   "Order Confirmed by Odoo: When the payment is verified with the gateway, Odoo confirms the quotation with its standard online payment logic.",
+   "A New Order Id Per Attempt: The gateway order id comes from the unique transaction reference, so a second attempt after a failure never collides with the first.",
+   "Works With the Webhook: If you set up the webhook of the main module, an order is also confirmed when the customer never returns to the shop.",
+   "A Small Add-on: One model extension on top of Mastercard MPGS Payment, with no new screens to learn.",
+   "Automated Tests: 2 test methods check the session of a sales order and the confirmation of the paid order against a mock gateway."
+  ],
+  "works_with": [
+   "Payment Mastercard",
+   "Website Sale"
+  ],
+  "page": "https://neuralbytea.github.io/apps/payment_Mastercard_website/"
+ },
+ {
   "id": "nb_school_hr",
   "title": "School Teacher Management",
   "line": "Education",
@@ -458,17 +742,23 @@ export const APPS = [
    {
     "odoo": "20",
     "price": "$15",
-    "module_version": "1.0.2",
+    "module_version": "1.0.3",
     "store": "https://apps.odoo.com/apps/modules/20.0/nb_school_hr/"
    },
    {
     "odoo": "19",
     "price": "$15",
-    "module_version": "1.0.2",
+    "module_version": "1.0.3",
     "store": "https://apps.odoo.com/apps/modules/19.0/nb_school_hr/"
+   },
+   {
+    "odoo": "18",
+    "price": "$15",
+    "module_version": "1.0.1",
+    "store": "https://apps.odoo.com/apps/modules/18.0/nb_school_hr/"
    }
   ],
-  "summary": "Teacher profiles on HR employees, subject allocation, class teachers and weekly workload limits",
+  "summary": "Teacher workload limits, subject allocation and class teachers on HR employee profiles",
   "about": "Teacher management for Odoo schools. Teachers are normal Odoo employees, so attendance, time off and payroll keep working from the HR apps, while the school adds teaching assignments, class teachers, subjects a teacher can teach and weekly workload limits.",
   "features": [
    "Teacher Profile on the Odoo Employee: Tick Teacher on an employee and fill the teacher code, employment type, qualification, specialization, years of experience and the subjects the teacher can teach.",
@@ -499,17 +789,23 @@ export const APPS = [
    {
     "odoo": "20",
     "price": "$25",
-    "module_version": "1.0.1",
+    "module_version": "1.0.2",
     "store": "https://apps.odoo.com/apps/modules/20.0/nb_school_timetable/"
    },
    {
     "odoo": "19",
     "price": "$25",
-    "module_version": "1.0.1",
+    "module_version": "1.0.2",
     "store": "https://apps.odoo.com/apps/modules/19.0/nb_school_timetable/"
+   },
+   {
+    "odoo": "18",
+    "price": "$25",
+    "module_version": "1.0.1",
+    "store": "https://apps.odoo.com/apps/modules/18.0/nb_school_timetable/"
    }
   ],
-  "summary": "Weekly class and teacher timetable with daily periods, clash checks and one-click generation",
+  "summary": "Automatic timetable with daily periods, clash check, teacher schedule and one-click generation",
   "about": "Timetable for Odoo schools. Define the daily periods once, then place every subject of every class by its periods per week. The class timetable and the teacher timetable come from the same lessons, so a teacher can never be in two classes at once.",
   "features": [
    "Daily Periods and Breaks: Define the school day once with start and end times. Recess and lunch are breaks that never take a lesson.",
@@ -540,17 +836,23 @@ export const APPS = [
    {
     "odoo": "20",
     "price": "Free",
-    "module_version": "1.0.1",
+    "module_version": "1.0.4",
     "store": "https://apps.odoo.com/apps/modules/20.0/nb_school_dashboard/"
    },
    {
     "odoo": "19",
     "price": "Free",
-    "module_version": "1.0.1",
+    "module_version": "1.0.4",
     "store": "https://apps.odoo.com/apps/modules/19.0/nb_school_dashboard/"
+   },
+   {
+    "odoo": "18",
+    "price": "Free",
+    "module_version": "1.0.3",
+    "store": "https://apps.odoo.com/apps/modules/18.0/nb_school_dashboard/"
    }
   ],
-  "summary": "Principal dashboards for admissions, fee collection, staff and students. Free with the school suite",
+  "summary": "School dashboard: admissions dashboard, fees dashboard, student dashboard and student analytics",
   "about": "School dashboard for Odoo. Four ready-made dashboards show admissions, fee collection, staff and students, built on the standard Odoo Dashboards app and the data of the school modules.",
   "features": [
    "Admissions Dashboard: Applications, in pipeline, admitted and rejected or withdrawn, by stage, grade, month and source.",
@@ -583,17 +885,23 @@ export const APPS = [
    {
     "odoo": "20",
     "price": "$25",
-    "module_version": "1.0.2",
+    "module_version": "1.0.3",
     "store": "https://apps.odoo.com/apps/modules/20.0/nb_course_core/"
    },
    {
     "odoo": "19",
     "price": "$25",
-    "module_version": "1.0.1",
+    "module_version": "1.0.2",
     "store": "https://apps.odoo.com/apps/modules/19.0/nb_course_core/"
+   },
+   {
+    "odoo": "18",
+    "price": "$25",
+    "module_version": "1.0.1",
+    "store": "https://apps.odoo.com/apps/modules/18.0/nb_course_core/"
    }
   ],
-  "summary": "Short courses and training batches with seats, trainers, learners and an automatic waiting list",
+  "summary": "Course batches and course seats for a coaching center or training institute, trainers, waiting list",
   "about": "Course management for Odoo. Run short courses next to your classes: a course catalog, batches with dates, trainers and seats, learners with the family that pays, and an automatic waiting list that fills a seat when someone drops out.",
   "features": [
    "Course Catalog: Courses with a code, a category, a level (all levels, beginner, intermediate, advanced), a mode (on site, online, blended), the teaching hours, a fee, the seats per batch, a minimum to run and prerequisites.",
@@ -617,7 +925,7 @@ export const APPS = [
  },
  {
   "id": "nb_course_admission",
-  "title": "Course Enrollment and Admission",
+  "title": "Course Enrollment Management",
   "line": "Education",
   "edition": "Community & Enterprise",
   "licence": "OPL-1",
@@ -625,17 +933,23 @@ export const APPS = [
    {
     "odoo": "20",
     "price": "$15",
-    "module_version": "1.0.3",
+    "module_version": "1.0.4",
     "store": "https://apps.odoo.com/apps/modules/20.0/nb_course_admission/"
    },
    {
     "odoo": "19",
     "price": "$15",
-    "module_version": "1.0.3",
+    "module_version": "1.0.4",
     "store": "https://apps.odoo.com/apps/modules/19.0/nb_course_admission/"
+   },
+   {
+    "odoo": "18",
+    "price": "$15",
+    "module_version": "1.0.1",
+    "store": "https://apps.odoo.com/apps/modules/18.0/nb_course_admission/"
    }
   ],
-  "summary": "Applications for course batches with seat limits, waiting list, offers and enrollment on admit",
+  "summary": "Training enrollment and student registration for course batches: seat limit, waiting list, offers",
   "about": "Course admission for Odoo. Take applications for short-course batches in the same pipeline as your class admissions: document checklist, offer, batch seats, waiting list and, when admitted, enrollment in the batch and its fee slips.",
   "features": [
    "Applications for Course Batches: An application has a type, class or course, and a course application names the batch. A course application needs a batch before it can be saved.",
@@ -666,17 +980,23 @@ export const APPS = [
    {
     "odoo": "20",
     "price": "$20",
-    "module_version": "1.0.3",
+    "module_version": "1.0.4",
     "store": "https://apps.odoo.com/apps/modules/20.0/nb_elearning_video/"
    },
    {
     "odoo": "19",
     "price": "$20",
-    "module_version": "1.0.3",
+    "module_version": "1.0.4",
     "store": "https://apps.odoo.com/apps/modules/19.0/nb_elearning_video/"
+   },
+   {
+    "odoo": "18",
+    "price": "$20",
+    "module_version": "1.0.2",
+    "store": "https://apps.odoo.com/apps/modules/18.0/nb_elearning_video/"
    }
   ],
-  "summary": "Upload video file for local video lessons in Odoo eLearning: MP4 and WebM, video player, no download",
+  "summary": "MP4 eLearning with local video lessons in Odoo: upload video file, WebM, video player, no download",
   "about": "Course video upload for Odoo eLearning. Odoo eLearning plays lesson videos from YouTube, Vimeo and Google Drive links only. eLearning Video Upload adds a video you upload from your computer to a Video lesson: it is checked, stored in Odoo and streamed privately to the people who may open the lesson, on the lesson page and in the fullscreen player, with no download button. Made for training centres, schools, academies and course creators that keep their course videos in Odoo.",
   "features": [
    "eLearning Video Upload: Add an MP4 or WebM file to a Video lesson from your computer, instead of a YouTube, Vimeo or Google Drive link.",
@@ -707,17 +1027,23 @@ export const APPS = [
    {
     "odoo": "20",
     "price": "$15",
-    "module_version": "1.0.2",
+    "module_version": "1.0.3",
     "store": "https://apps.odoo.com/apps/modules/20.0/nb_course_fees/"
    },
    {
     "odoo": "19",
     "price": "$15",
-    "module_version": "1.0.1",
+    "module_version": "1.0.2",
     "store": "https://apps.odoo.com/apps/modules/19.0/nb_course_fees/"
+   },
+   {
+    "odoo": "18",
+    "price": "$15",
+    "module_version": "1.0.1",
+    "store": "https://apps.odoo.com/apps/modules/18.0/nb_course_fees/"
    }
   ],
-  "summary": "Installment plans and fee slips for course enrollments, billed to the family or the paying company",
+  "summary": "Course payment plan and course billing: installment fee slips for enrollments, family or company",
   "about": "Course fee installments for Odoo. Split a course fee into a deposit and equal parts, create fee slips when a learner is enrolled, invoice the family or company that pays, and use the same late fees, concessions and payments as class fees.",
   "features": [
    "Installment Plans: Percentages of the fee, each counted from enrollment, batch start or batch end plus or minus days. The percentages must add up to 100. A deposit and equal parts are easy to set up. Three plans are included.",
@@ -739,34 +1065,44 @@ export const APPS = [
  },
  {
   "id": "nb_employee_self_service",
-  "title": "Employee Self Service",
+  "title": "Employee Self Service Portal",
   "line": "Portals",
   "edition": "Community & Enterprise",
   "licence": "OPL-1",
   "versions": [
    {
+    "odoo": "20",
+    "price": "$119",
+    "module_version": "2.0.8",
+    "store": "https://apps.odoo.com/apps/modules/20.0/nb_employee_self_service/"
+   },
+   {
     "odoo": "19",
     "price": "$119",
-    "module_version": "2.0.6",
+    "module_version": "2.0.10",
     "store": "https://apps.odoo.com/apps/modules/19.0/nb_employee_self_service/"
    },
    {
     "odoo": "18",
     "price": "$119",
-    "module_version": "2.0.5",
+    "module_version": "2.0.8",
     "store": "https://apps.odoo.com/apps/modules/18.0/nb_employee_self_service/"
    }
   ],
-  "summary": "Internal self-service portal: profile, time off, attendance, expenses and payslips",
+  "summary": "Employee payslips, attendance correction, time off and expense portal for internal self-service",
   "about": "A single self-service workspace on the standard Odoo /my pages where your internal users handle their own HR admin instead of emailing HR. It installs on any Odoo database and lights up payslips and timesheets automatically when those apps are present.",
   "features": [
-   "My Profile: editable private info, avatar, ID-card scans, resume and skills",
-   "My Time Off: balances, request form, and a filterable manager approval inbox",
-   "My Attendances: check in and out, a full-month timeline and manager-approved corrections",
-   "My Overtime: extra hours by month, comp-off balance and requests",
-   "My Expenses: reports, quick log form and totals",
-   "Payslips with in-page PDF preview (Enterprise) and timesheets, when those apps are installed",
-   "One-click user creation from the employee form"
+   "My Profile: Work details, editable private information, avatar, ID card scans, and resume and skills when the Skills app is installed.",
+   "My Time Off: Leave balances, a request form limited to the allocated balance, and the history of requests.",
+   "Approval Inbox: Time-off approvers see their team's requests with filters and approve or refuse them in the portal.",
+   "Check In and Out: A widget in the portal side panel with Check In, Check Out and a worked-time timer for the open attendance.",
+   "Attendance Timeline: Every day of the month classified as present, absent, on leave, holiday or weekend, with totals and a chart.",
+   "Attendance Corrections: Employees add a forgotten entry or ask to fix wrong times; the manager or the time-off responsible approves or refuses and the attendance is updated on approval.",
+   "Overtime and Comp-Off: Extra hours by month, the comp-off balance, a request for a comp-off day and a team view for managers, when the Attendances app is installed.",
+   "Expenses: Expenses with status and totals, and a quick form to log an expense, when the Expenses app is installed.",
+   "Payslips: A list with PDF preview and download, when the Payroll app is installed.",
+   "Timesheets: Project time entries of the employee, when the Timesheets app is installed.",
+   "Internal Users Only: HR content is shown to internal users and every page reads only the records of the signed-in employee."
   ],
   "works_with": [
    "Employees",
@@ -784,15 +1120,21 @@ export const APPS = [
   "licence": "OPL-1",
   "versions": [
    {
-    "odoo": "19",
+    "odoo": "20",
     "price": "$49",
     "module_version": "1.0.9",
+    "store": "https://apps.odoo.com/apps/modules/20.0/portal_ext/"
+   },
+   {
+    "odoo": "19",
+    "price": "$49",
+    "module_version": "1.0.10",
     "store": "https://apps.odoo.com/apps/modules/19.0/portal_ext/"
    },
    {
     "odoo": "18",
     "price": "$49",
-    "module_version": "1.0.8",
+    "module_version": "1.0.9",
     "store": "https://apps.odoo.com/apps/modules/18.0/portal_ext/"
    }
   ],
@@ -823,19 +1165,25 @@ export const APPS = [
   "licence": "OPL-1",
   "versions": [
    {
+    "odoo": "20",
+    "price": "$49",
+    "module_version": "1.0.3",
+    "store": "https://apps.odoo.com/apps/modules/20.0/payment_Mastercard/"
+   },
+   {
     "odoo": "19",
     "price": "$49",
-    "module_version": "1.0.6",
+    "module_version": "1.0.12",
     "store": "https://apps.odoo.com/apps/modules/19.0/payment_Mastercard/"
    },
    {
     "odoo": "18",
     "price": "$49",
-    "module_version": "1.0.5",
+    "module_version": "1.0.11",
     "store": "https://apps.odoo.com/apps/modules/18.0/payment_Mastercard/"
    }
   ],
-  "summary": "Mastercard MPGS Hosted Checkout for invoice payments with auto posting and reconciliation",
+  "summary": "Mastercard gateway for invoices: MPGS Hosted Checkout, 3D Secure, auto posting and reconciliation",
   "about": "Payment provider for the Mastercard Payment Gateway Services (MPGS) Hosted Checkout with 3-D Secure. Payments are posted automatically and reconciled with invoices.",
   "features": [
    "Mastercard Hosted Checkout: Opens the Mastercard hosted page with an INITIATE_CHECKOUT session for a PURCHASE, so the customer pays on the Mastercard site.",
@@ -846,8 +1194,10 @@ export const APPS = [
    "Portal Pay Now: Customers pay from the invoice in the portal with the standard Odoo payment dialog and the Card method.",
    "Simple Credentials: Host, merchant ID, user name and API password per provider, and the State field for test mode and production.",
    "Multi-company: The provider is found by company on the return, so each company can use its own merchant account.",
+   "Test Connection: One click on the provider checks that the gateway answers and that the merchant ID and the API password are accepted, without creating an order.",
+   "Webhook Confirmation: Mastercard can notify Odoo of a payment. The notification secret is checked, then the order is read from the gateway again, so a payment is settled even if the customer never returns to Odoo.",
    "Branded Result Pages: A success page and an error page with a clear message and buttons to the invoices and the home page.",
-   "Automated Tests: 10 test methods run the whole flow against a mock gateway over HTTP: session, success, failure, wrong amount."
+   "Automated Tests: 14 test methods run the whole flow against a mock gateway over HTTP: session, success, failure, wrong amount, webhook, connection test."
   ],
   "works_with": [
    "Payment Providers",
@@ -857,21 +1207,27 @@ export const APPS = [
  },
  {
   "id": "employee_loan_management_enterprise",
-  "title": "Employee Loan Pro",
+  "title": "Employee Loan Management",
   "line": "HR & Payroll",
   "edition": "Enterprise (needs Payroll)",
   "licence": "OPL-1",
   "versions": [
    {
+    "odoo": "20",
+    "price": "$49",
+    "module_version": "1.0.2",
+    "store": "https://apps.odoo.com/apps/modules/20.0/employee_loan_management_enterprise/"
+   },
+   {
     "odoo": "19",
     "price": "$49",
-    "module_version": "1.0.12",
+    "module_version": "1.0.13",
     "store": "https://apps.odoo.com/apps/modules/19.0/employee_loan_management_enterprise/"
    },
    {
     "odoo": "18",
     "price": "$49",
-    "module_version": "1.0.10",
+    "module_version": "1.0.11",
     "store": "https://apps.odoo.com/apps/modules/18.0/employee_loan_management_enterprise/"
    },
    {
@@ -881,7 +1237,7 @@ export const APPS = [
     "store": "https://apps.odoo.com/apps/modules/17.0/employee_loan_management_enterprise/"
    }
   ],
-  "summary": "Employee loans and salary advances with automatic payroll deduction and analytics",
+  "summary": "Staff loan and salary advances with loan portal, automatic payroll deduction and analytics",
   "about": "Manages employee loans and salary advances end to end: loan types, installment schedules, rescheduling, accounting configuration and automatic deduction on the payslip, with an analytics dashboard.",
   "features": [
    "Loan Types With One-Click Setup: Four buttons create the account configuration, the deduction salary rule, a menu and a number sequence for a loan type.",
@@ -910,15 +1266,21 @@ export const APPS = [
   "licence": "OPL-1",
   "versions": [
    {
+    "odoo": "20",
+    "price": "$24.99",
+    "module_version": "2.1.2",
+    "store": "https://apps.odoo.com/apps/modules/20.0/hr_attendance_board/"
+   },
+   {
     "odoo": "19",
     "price": "$24.99",
-    "module_version": "2.1.0",
+    "module_version": "2.1.2",
     "store": "https://apps.odoo.com/apps/modules/19.0/hr_attendance_board/"
    },
    {
     "odoo": "18",
     "price": "$24.99",
-    "module_version": "2.1.0",
+    "module_version": "2.1.2",
     "store": "https://apps.odoo.com/apps/modules/18.0/hr_attendance_board/"
    },
    {
@@ -928,7 +1290,7 @@ export const APPS = [
     "store": "https://apps.odoo.com/apps/modules/17.0/hr_attendance_board/"
    }
   ],
-  "summary": "Attendance and leave Gantt with late arrivals, remote and hybrid work, click-to-edit and KPIs",
+  "summary": "Employee attendance with late arrivals, remote work and hybrid work, click-to-edit, KPIs",
   "about": "A colour-coded Gantt board of attendance and leave that separates office, remote and hybrid days, with click-to-edit, remote-work periods on contracts and on-site versus remote KPIs.",
   "features": [
    "Attendance and Leave Gantt: Attendance, approved leave and public holidays on one grid for every employee, with day, week and month views.",
@@ -959,19 +1321,25 @@ export const APPS = [
   "licence": "OPL-1",
   "versions": [
    {
+    "odoo": "20",
+    "price": "$29",
+    "module_version": "1.0.3",
+    "store": "https://apps.odoo.com/apps/modules/20.0/nb_payroll_dashboard/"
+   },
+   {
     "odoo": "19",
     "price": "$29",
-    "module_version": "1.1.0",
+    "module_version": "1.1.3",
     "store": "https://apps.odoo.com/apps/modules/19.0/nb_payroll_dashboard/"
    },
    {
     "odoo": "18",
     "price": "$29",
-    "module_version": "1.1.0",
+    "module_version": "1.1.3",
     "store": "https://apps.odoo.com/apps/modules/18.0/nb_payroll_dashboard/"
    }
   ],
-  "summary": "Payroll dashboard with month and batch comparison, salary rule totals and Excel PDF report",
+  "summary": "HR dashboard for payroll: month vs month, payslip analytics, salary rule and Excel report",
   "about": "A zero-configuration payroll dashboard built with Owl, plus a wizard that exports salary reports to Excel and PDF.",
   "features": [
    "Month vs Month Comparison: Compare two months: salary rule totals, difference and percentage, headcount and worked days.",
@@ -999,15 +1367,21 @@ export const APPS = [
   "licence": "OPL-1",
   "versions": [
    {
+    "odoo": "20",
+    "price": "$49",
+    "module_version": "1.0.2",
+    "store": "https://apps.odoo.com/apps/modules/20.0/sale_payment_dashboard/"
+   },
+   {
     "odoo": "19",
     "price": "$49",
-    "module_version": "1.2.6",
+    "module_version": "1.2.7",
     "store": "https://apps.odoo.com/apps/modules/19.0/sale_payment_dashboard/"
    },
    {
     "odoo": "18",
     "price": "$49",
-    "module_version": "1.2.4",
+    "module_version": "1.2.5",
     "store": "https://apps.odoo.com/apps/modules/18.0/sale_payment_dashboard/"
    },
    {
@@ -1017,7 +1391,7 @@ export const APPS = [
     "store": "https://apps.odoo.com/apps/modules/17.0/sale_payment_dashboard/"
    }
   ],
-  "summary": "Sales analytics dashboard with customer churn, retention and invoice payment collection tracking",
+  "summary": "Invoice payment dashboard for sales: customer churn, customer retention and payment collection",
   "about": "Owl dashboards that link sale orders, invoices and payments: live KPIs, recovery tracking, customer revenue ranking, product category mix and 12-month trends.",
   "features": [
    "Sales Analytics Dashboard: Win rate, average order value, buying behaviour, top products and revenue by customer, country and category.",
@@ -1047,19 +1421,19 @@ export const APPS = [
    {
     "odoo": "20",
     "price": "$59",
-    "module_version": "1.0.6",
+    "module_version": "1.0.7",
     "store": "https://apps.odoo.com/apps/modules/20.0/nb_smart_list_search_pro/"
    },
    {
     "odoo": "19",
     "price": "$59",
-    "module_version": "1.0.6",
+    "module_version": "1.0.7",
     "store": "https://apps.odoo.com/apps/modules/19.0/nb_smart_list_search_pro/"
    },
    {
     "odoo": "18",
     "price": "$59",
-    "module_version": "1.0.5",
+    "module_version": "1.0.6",
     "store": "https://apps.odoo.com/apps/modules/18.0/nb_smart_list_search_pro/"
    }
   ],
@@ -1100,23 +1474,23 @@ export const APPS = [
    {
     "odoo": "20",
     "price": "$29",
-    "module_version": "2.1.6",
+    "module_version": "2.1.7",
     "store": "https://apps.odoo.com/apps/modules/20.0/mail_ext/"
    },
    {
     "odoo": "19",
     "price": "$29",
-    "module_version": "2.1.7",
+    "module_version": "2.1.8",
     "store": "https://apps.odoo.com/apps/modules/19.0/mail_ext/"
    },
    {
     "odoo": "18",
     "price": "$29",
-    "module_version": "2.1.5",
+    "module_version": "2.1.6",
     "store": "https://apps.odoo.com/apps/modules/18.0/mail_ext/"
    }
   ],
-  "summary": "Hide, resize chatter with per-user memory; admin layout rules; preview toggle",
+  "summary": "Chatter width, chatter memory and chatter toggle per user, plus admin layout rules",
   "about": "Lets users hide and resize the chatter with their choice remembered per user, while admins set layout rules per model and company.",
   "features": [
    "Chatter Toggle Button: A button in the chatter topbar hides and shows the whole chatter panel on any record.",
@@ -1150,23 +1524,23 @@ export const APPS = [
    {
     "odoo": "20",
     "price": "$24.99",
-    "module_version": "1.0.6",
+    "module_version": "1.0.7",
     "store": "https://apps.odoo.com/apps/modules/20.0/pane_split_view/"
    },
    {
     "odoo": "19",
     "price": "$24.99",
-    "module_version": "1.0.6",
+    "module_version": "1.0.7",
     "store": "https://apps.odoo.com/apps/modules/19.0/pane_split_view/"
    },
    {
     "odoo": "18",
     "price": "$24.99",
-    "module_version": "1.0.5",
+    "module_version": "1.0.6",
     "store": "https://apps.odoo.com/apps/modules/18.0/pane_split_view/"
    }
   ],
-  "summary": "Master-detail split pane for every Odoo list view - preview and edit side by side",
+  "summary": "Side by side view of list and form in Odoo: form preview and list view preview, resizable",
   "about": "A master-detail split pane for Odoo list views so you can preview and edit records beside the list.",
   "features": [
    "Split Pane Toggle Button: A permanent button next to the view switcher opens and closes the pane on every action that has a list view.",
@@ -1198,23 +1572,23 @@ export const APPS = [
    {
     "odoo": "20",
     "price": "$20",
-    "module_version": "1.0.7",
+    "module_version": "1.0.9",
     "store": "https://apps.odoo.com/apps/modules/20.0/web_home_menu/"
    },
    {
     "odoo": "19",
     "price": "$20",
-    "module_version": "1.0.7",
+    "module_version": "1.0.9",
     "store": "https://apps.odoo.com/apps/modules/19.0/web_home_menu/"
    },
    {
     "odoo": "18",
     "price": "$20",
-    "module_version": "1.0.7",
+    "module_version": "1.0.9",
     "store": "https://apps.odoo.com/apps/modules/18.0/web_home_menu/"
    }
   ],
-  "summary": "Home menu for Community: full-screen app grid with clock, opened from the navbar apps button",
+  "summary": "Enterprise home menu for Community: full screen app grid with clock, opened from the navbar button",
   "about": "Brings an Enterprise-style home menu to Odoo Community.",
   "features": [
    "Full-Screen Home Menu: The apps button in the navbar opens a full-screen page, and a back button returns to the page you came from.",
@@ -1245,19 +1619,19 @@ export const APPS = [
    {
     "odoo": "20",
     "price": "$15",
-    "module_version": "1.0.10",
+    "module_version": "1.0.11",
     "store": "https://apps.odoo.com/apps/modules/20.0/web_appbar/"
    },
    {
     "odoo": "19",
     "price": "$15",
-    "module_version": "1.0.11",
+    "module_version": "1.0.12",
     "store": "https://apps.odoo.com/apps/modules/19.0/web_appbar/"
    },
    {
     "odoo": "18",
     "price": "$10",
-    "module_version": "1.0.10",
+    "module_version": "1.0.11",
     "store": "https://apps.odoo.com/apps/modules/18.0/web_appbar/"
    }
   ],
@@ -1291,23 +1665,23 @@ export const APPS = [
    {
     "odoo": "20",
     "price": "$5",
-    "module_version": "1.0.7",
+    "module_version": "1.0.8",
     "store": "https://apps.odoo.com/apps/modules/20.0/web_ext/"
    },
    {
     "odoo": "19",
     "price": "$5",
-    "module_version": "1.0.7",
+    "module_version": "1.0.8",
     "store": "https://apps.odoo.com/apps/modules/19.0/web_ext/"
    },
    {
     "odoo": "18",
     "price": "$5",
-    "module_version": "1.0.6",
+    "module_version": "1.0.7",
     "store": "https://apps.odoo.com/apps/modules/18.0/web_ext/"
    }
   ],
-  "summary": "Web UI extensions: rounded search bar, kanban, list and form styling and a dark navy theme",
+  "summary": "Web extensions for Odoo: rounded search bar, kanban style, list view style and a dark navy theme",
   "about": "Shared UI enhancements for the Odoo web client. Required by Sidebar App Navigation.",
   "features": [
    "Dark Navy Primary Colour: Primary buttons, primary badges, primary text, primary backgrounds and the active status bar step use one dark navy (colour code 1A1A2E), with a slightly lighter hover.",
@@ -1327,7 +1701,7 @@ export const APPS = [
  },
  {
   "id": "nb_ai_chatbot",
-  "title": "AI Chat Community",
+  "title": "Odoo AI Chatbot",
   "line": "AI Assistant",
   "edition": "Community & Enterprise",
   "licence": "OPL-1",
@@ -1335,17 +1709,23 @@ export const APPS = [
    {
     "odoo": "20",
     "price": "$19",
-    "module_version": "1.0.6",
+    "module_version": "1.0.8",
     "store": "https://apps.odoo.com/apps/modules/20.0/nb_ai_chatbot/"
    },
    {
     "odoo": "19",
     "price": "$19",
-    "module_version": "1.0.6",
+    "module_version": "1.0.8",
     "store": "https://apps.odoo.com/apps/modules/19.0/nb_ai_chatbot/"
+   },
+   {
+    "odoo": "18",
+    "price": "$19",
+    "module_version": "1.0.2",
+    "store": "https://apps.odoo.com/apps/modules/18.0/nb_ai_chatbot/"
    }
   ],
-  "summary": "AI chatbot for Odoo: ChatGPT, Claude, Gemini query your data and create records on confirm",
+  "summary": "AI chat assistant for Odoo data: ChatGPT, Claude, Gemini or Ollama; records change on confirm",
   "about": "A floating AI chat bubble on every screen of Odoo Community and Enterprise. Connect your own AI model with your own API key, then chat with your Odoo data. The assistant always runs with the access rights of the signed-in user.",
   "features": [
    "Chat on Every Screen: A floating Ask AI button and chat panel for every internal user. You can make the panel bigger, minimise it or close it.",
@@ -1375,13 +1755,25 @@ export const APPS = [
   "licence": "LGPL-3",
   "versions": [
    {
+    "odoo": "20",
+    "price": "Free",
+    "module_version": "1.0.2",
+    "store": "https://apps.odoo.com/apps/modules/20.0/payment_ngenius/"
+   },
+   {
     "odoo": "19",
     "price": "Free",
-    "module_version": "1.1.2",
+    "module_version": "1.1.4",
     "store": "https://apps.odoo.com/apps/modules/19.0/payment_ngenius/"
+   },
+   {
+    "odoo": "18",
+    "price": "Free",
+    "module_version": "1.2.1",
+    "store": "https://apps.odoo.com/apps/modules/18.0/payment_ngenius/"
    }
   ],
-  "summary": "N-Genius card payments in Odoo: hosted checkout, webhooks, sandbox and full refunds",
+  "summary": "NGenius refund, hosted checkout and webhooks: card payments UAE and KSA with Network International",
   "about": "Accept online payments in Odoo with N-Genius Online by Network International. Customers pay on a secure hosted checkout, payment status updates automatically, and you can refund in full from Odoo. Requires an active N-Genius merchant account.",
   "features": [
    "Secure hosted checkout experience",

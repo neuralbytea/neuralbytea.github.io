@@ -53,6 +53,7 @@ FAMILIES = [
     ("Dashboards", "📊", "dash", "Owl dashboards for sales, invoices, payments and payroll with Excel and PDF export."),
     ("AI Assistant", "🤖", "ai", "An AI chat bubble inside Odoo: bring your own ChatGPT, Claude or Gemini key and chat with your data."),
     ("Education", "🎓", "edu", "School and course management: students, admissions, fees, parent portal, timetable and training batches."),
+    ("Integrations", "🔗", "int", "Connect Odoo to the shops and services you already use: Shopify products, orders, stock and payouts."),
     ("Backend UI", "🧩", "ui", "AI list search, split view, chatter workspace, home menu and sidebar navigation."),
 ]
 FAM_CLASS = {f[0]: f[2] for f in FAMILIES}

@@ -400,3 +400,6 @@ a.nbc-card:hover{border-color:var(--a);background:#eef2ff}
 .chip-new{margin-right:auto;margin-left:8px;padding:3px 10px;border-radius:99px;background:var(--grad);color:#fff;font:700 11px Sora;letter-spacing:.06em;text-transform:uppercase;box-shadow:0 6px 14px -6px rgba(47,91,255,.8)}
 
 .vrow .nw{white-space:nowrap}
+
+.fam-int{background:#e6f9f0;color:#0f766e}
+.cv-int{background:radial-gradient(90% 120% at 90% 0,rgba(20,184,166,.5),transparent),#0d2a2a}

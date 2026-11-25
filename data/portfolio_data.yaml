@@ -46,7 +46,7 @@ projects:
   odoo_version: Odoo 18.0
   image: assets/images/apps/nb_vendor_portal_pro.jpg
   store_url: https://apps.odoo.com/apps/modules/18.0/nb_vendor_portal_pro/
-  short_desc: 'Vendor portal: onboarding, RFQ quoting, PO acknowledgment, vendor bills and payments'
+  short_desc: 'Vendor self service portal: onboarding, RFQ quoting, PO acknowledgment, vendor bills and payments'
   metric: '63'
   metric_label: portal routes
   full_desc: A full supplier self-service portal for Odoo Purchase. Vendors onboard themselves, quote on RFQs, acknowledge purchase orders, send advance shipping notices, upload compliance documents and track bills and payments, while buyers keep scorecards, disputes and price comparisons inside Odoo.
@@ -80,9 +80,9 @@ projects:
   - 'Control Tower: A back-office action queue and needs-attention list, a vendor leaderboard, portal health figures and a bill variance check against the order.'
   - 'Price Comparison Matrix: Products by vendors with the lowest price marked, the spread, stale prices and a way to create or invite an RFQ.'
   - 'Own Records Only: Twelve record rules limit every vendor to the records of their own company; portal writes go through the controllers.'
-  banner_sha: 9538e020ca76
+  banner_sha: c2ac64f2bed5
 - id: salesperson_portal
-  title: Field Sales Booking
+  title: Salesperson Portal
   category: odoo
   featured: true
   year: 2026
@@ -91,7 +91,7 @@ projects:
   odoo_version: Odoo 18.0
   image: assets/images/apps/salesperson_portal.jpg
   store_url: https://apps.odoo.com/apps/modules/18.0/salesperson_portal/
-  short_desc: 'Field sales rep portal: reps book orders for customers from the portal, no user seat.'
+  short_desc: Salesperson portal for field sales reps to book a portal sale order for customers, no user seat
   metric: $99
   metric_label: one-time price
   full_desc: Lets field sales reps book orders for their customers from the Odoo portal without consuming an internal user seat. Includes catalog and cart, credit checks, discounts and rewards, customer creation, invoices, support tickets and a commission engine with plans and rules.
@@ -124,7 +124,7 @@ projects:
   - 'Support Tickets: Reps raise and follow tickets for a booking. With Customer Portal Pro installed the ticket is tracked there.'
   - 'Own Orders Only: Record rules limit a rep to the orders and invoices that carry their own rep id. No rule is placed on the portal group.'
   - 'Coexists With Other Portals: Its own pages under /my/booking, no core route redefined and no core portal helper overridden, checked by a test that ships with the module.'
-  banner_sha: bdbed570b616
+  banner_sha: 8766eede95f1
 - id: nb_services_billing_pro
   title: Services Billing Pro
   category: odoo
@@ -135,7 +135,7 @@ projects:
   odoo_version: Odoo 18.0
   image: assets/images/apps/nb_services_billing_pro.jpg
   store_url: https://apps.odoo.com/apps/modules/18.0/nb_services_billing_pro/
-  short_desc: Employee rate cards, automatic margin per timesheet line, portal timer and order-based billing
+  short_desc: Timesheet portal with billing rate cards, margin per line, portal timer, sales orders from tasks
   metric: $99
   metric_label: one-time price
   full_desc: Adds multi-tier rate cards (billing rate and cost rate per employee, customer, project and service type) to Odoo timesheets. Every timesheet line gets its margin automatically, employees log time from a portal timer, and non-billable work can be hidden or shown on the invoice at zero price.
@@ -157,31 +157,48 @@ projects:
   - 'Employee Rate Cards: Billing and cost rate per employee, limited by customer, project, service type and dates. Hourly, daily or fixed, with its own currency.'
   - 'Most Specific Card Wins: Eight scope ranks decide the match, from customer, project and service type down to the employee default. Ties go to the latest Valid From.'
   - 'Margin on Every Line: Billing amount, cost amount, margin and margin percent computed on each timesheet line, with a rate status badge.'
-  - 'Non-billable Work: Mark time as billable, non-billable hidden or non-billable shown at 0. Cost is still tracked, so the cost of free work is visible.'
+  - 'Free of Charge Lines: Switch on Show non-billable time on the invoice at 0.00 on a project, and the time marked Non-billable (show at 0) appears on the order and on the native invoice with its hours at 0.00. Off by default; its cost is still tracked and never printed.'
   - 'Portal Time Tracker: Timer with pause and resume, manual entries and a weekly view at /my/timetracker for portal employees.'
   - 'Sales Orders from Tasks: Create Sales Order on a task, with one line at the average price or one per person at their own rate.'
   - 'Invoiced Lines Locked: Posting the invoice marks the timesheets as invoiced and locks them against edits.'
   - 'Team Overview: Revenue, margin, hours, invoiced and ready to invoice, utilization and alerts for managers.'
   - 'Margin Dashboard and Reports: Graph, pivot and list of margin, and two PDF reports.'
   - 'Cost and Margin Stay Internal: Cost rate and margin fields are limited to the Billing Manager group and are never shown on the portal.'
+  - 'Rate Card History: The rate card chatter logs changes of billing rate, dates and scope with old and new value. The cost rate stays out of the chatter and is kept in a manager only Cost History.'
+  - 'Cost Rate from Salary: Optional wizard with preview that turns the monthly wage into an hourly cost rate. Needs HR Manager rights and never changes a salary.'
+  - 'Hourly Cost Fallback: Optional company setting, off by default: when a rate card has no cost rate, the line takes the employee''s hourly cost from HR, converted to the company currency. A cost rate on the card always wins. Managers see the cost on the lines, never the hourly cost field.'
   screenshots:
+  - src: images/apps/shots/nb_services_billing_pro/services-billing-create-sales-order-free-of-charge-hours.jpg
+    caption: Odoo 19 Create Sales Order wizard showing the free of charge hours of the task
   - src: images/apps/shots/nb_services_billing_pro/services-billing-margin-dashboard-by-employee.jpg
     caption: Odoo 19 margin dashboard bar chart of margin per employee
+  - src: images/apps/shots/nb_services_billing_pro/services-billing-native-invoice-free-of-charge-line-hours.jpg
+    caption: Odoo 19 customer invoice with the Free of charge line, its hours and a price of 0.00
   - src: images/apps/shots/nb_services_billing_pro/services-billing-portal-time-tracker-day-entries.jpg
     caption: Odoo 19 portal time tracker with a timer form, resume buttons and the entries of each day
   - src: images/apps/shots/nb_services_billing_pro/services-billing-project-billing-and-margin-buttons.jpg
     caption: Odoo 19 project form with Sales Order, Non-billable Hours, Billing and Margin buttons
+  - src: images/apps/shots/nb_services_billing_pro/services-billing-project-show-non-billable-time-at-zero-setting.jpg
+    caption: Odoo 19 project settings tab with the switch Show non-billable time on the invoice at 0.00
+  - src: images/apps/shots/nb_services_billing_pro/services-billing-rate-card-chatter-cost-hidden-from-billing-users.jpg
+    caption: 'Odoo 19 rate card seen by a billing user: no cost rate, no cost history'
+  - src: images/apps/shots/nb_services_billing_pro/services-billing-rate-card-chatter-rate-history-and-cost-history.jpg
+    caption: Odoo 19 rate card form with the chatter history and the manager only Cost History tab
   - src: images/apps/shots/nb_services_billing_pro/services-billing-rate-card-form-scope-and-validity.jpg
     caption: Odoo 19 rate card form with scope, validity dates, rate type, billing rate and cost rate
   - src: images/apps/shots/nb_services_billing_pro/services-billing-rate-cards-list-billing-and-cost-rate.jpg
     caption: Odoo 19 rate cards list with billing rate and cost rate per employee and customer
+  - src: images/apps/shots/nb_services_billing_pro/services-billing-sales-order-free-of-charge-line-at-zero.jpg
+    caption: Odoo 19 sales order with a billable line at the rate and a Free of charge line at 0.00
   - src: images/apps/shots/nb_services_billing_pro/services-billing-settings-portal-time-tracker.jpg
     caption: Odoo 19 settings block of Services Billing with the portal time tracker options
   - src: images/apps/shots/nb_services_billing_pro/services-billing-team-overview-dashboard-margin-utilization.jpg
     caption: Odoo 19 Team Overview dashboard with hours, revenue, margin, utilization bars and a margin trend
   - src: images/apps/shots/nb_services_billing_pro/services-billing-timesheets-rate-status-and-margin.jpg
     caption: Odoo 19 timesheets list with rate status badges, billing amount, cost amount and margin
-  banner_sha: 086e9dfd2dc3
+  - src: images/apps/shots/nb_services_billing_pro/services-billing-update-cost-rate-from-salary-preview.jpg
+    caption: Odoo 19 wizard that previews the hourly cost rate calculated from the monthly wage
+  banner_sha: c1d52e5aff57
 - id: nb_customer_portal_pro
   title: Customer Portal Pro
   category: odoo
@@ -192,7 +209,7 @@ projects:
   odoo_version: Odoo 18.0
   image: assets/images/apps/nb_customer_portal_pro.jpg
   store_url: https://apps.odoo.com/apps/modules/18.0/nb_customer_portal_pro/
-  short_desc: 'Customer portal: self-service ordering, order-to-cash dashboard, invoices, payments, tickets'
+  short_desc: Customer portal dashboard with B2B portal, order to cash, portal invoices, tickets and payments
   metric: '25'
   metric_label: portal routes
   full_desc: 'Turns the Odoo customer portal into a self-service workspace: customers place orders, follow the order-to-cash flow on a dashboard, view invoices and payments, receive alerts and raise support tickets.'
@@ -226,9 +243,124 @@ projects:
   - 'Date Filters: A From and To filter on the portal lists, on a date field the customer picks from a fixed list.'
   - 'Own Account Only: Record rules limit a portal customer to the payments, tickets and orders of their own company account. Portal writes go through controllers that derive the partner on the server.'
   - '24 Settings: Onboarding mode, which pages show, order permissions, price display, delivery date and the urgent surcharge, all on one Settings page.'
-  banner_sha: 45e5371b8bbf
+  banner_sha: c2463750b20c
+- id: nb_employee_portal_dashboard
+  title: Employee Dashboard
+  category: odoo
+  featured: false
+  year: 2026
+  client: NeuralBytea
+  role: Community & Enterprise · $99 · OPL-1
+  odoo_version: Odoo 19.0
+  image: assets/images/apps/nb_employee_portal_dashboard.jpg
+  store_url: https://apps.odoo.com/apps/modules/19.0/nb_employee_portal_dashboard/
+  short_desc: 'Employee dashboard: check in, time off, payslips, expenses, team calendar and manager approvals'
+  metric: $99
+  metric_label: one-time price
+  full_desc: Employee dashboard for Odoo. Employee Dashboard gives every employee one place for check in, attendance, time off, payslips and expenses, and gives managers a team calendar and one list to approve time off and missing attendance. Each area is its own group on the user form, and appears only when its Odoo app is installed.
+  tags:
+  - Portals
+  - HR & Payroll
+  - Employees
+  modules:
+  - Portal
+  - Employees
+  - Discuss
+  - Hr Expense
+  tech_stack:
+  - Python
+  - Odoo ORM
+  - QWeb
+  - OWL / JavaScript
+  highlights:
+  - 'Employee Dashboard: Hours, attendance gaps, time off counters and shortcuts on one page.'
+  - 'Time Off: Balances, requests limited to the allocation, month and year filters and an approval list for managers.'
+  - 'Attendance and Check In: Month timeline, check in and out as its own group, for companies without attendance devices.'
+  - 'Missing Attendance: Employees add a forgotten entry, the manager approves or rejects it.'
+  - 'Team Calendar: Expected and present people per day, shifts, leave and login and logout times.'
+  - 'Hierarchy: The team as a structure of who reports to whom.'
+  - 'Payslips: List, PDF preview, download and a year filter when the Payroll app is installed.'
+  - 'Expense Receipts: Log an expense, attach expense receipts, follow its stages and confirm the reimbursement, with month and year filters,'
+  - 'Expense Approval: Managers approve or refuse the expenses of their team by month, with counts, filters and a card on My Team.'
+  - 'Groups per Area: Each area, and each kind of approval, is switched on per user.'
+  - 'Own Records Only: Every page reads only the signed-in employee, and managers see their own team.'
+  screenshots:
+  - src: images/apps/shots/nb_employee_portal_dashboard/employee-dashboard-attendance.jpg
+    caption: Odoo 19 attendance page with a month timeline and totals
+  - src: images/apps/shots/nb_employee_portal_dashboard/employee-dashboard-expense-approvals.jpg
+    caption: Odoo 19 team expenses for the month with counts and approve and refuse buttons
+  - src: images/apps/shots/nb_employee_portal_dashboard/employee-dashboard-expenses.jpg
+    caption: Odoo 19 My Expenses with a stage line, attached receipts and the reimbursement check
+  - src: images/apps/shots/nb_employee_portal_dashboard/employee-dashboard-home.jpg
+    caption: Odoo 19 employee dashboard with hours worked, time off counters and a Check In button
+  - src: images/apps/shots/nb_employee_portal_dashboard/employee-dashboard-missing-attendance-approvals.jpg
+    caption: Odoo 19 missing attendance approvals with filters, Approve and Reject buttons
+  - src: images/apps/shots/nb_employee_portal_dashboard/employee-dashboard-payslips.jpg
+    caption: Odoo 19 payslips list with a year filter, state and net amount
+  - src: images/apps/shots/nb_employee_portal_dashboard/employee-dashboard-team-calendar.jpg
+    caption: Odoo 19 team calendar with expected and present counts per day and a list of people
+  - src: images/apps/shots/nb_employee_portal_dashboard/employee-dashboard-time-off.jpg
+    caption: Odoo 19 time off page with balances and the request list
+  - src: images/apps/shots/nb_employee_portal_dashboard/employee-dashboard-user-groups.jpg
+    caption: Odoo 19 user form with the Employee Portal groups for each area
+  new: true
+  banner_sha: c293a5b0520d
+- id: nb_salesperson_customer_access
+  title: Salesperson Own Customers
+  category: odoo
+  featured: false
+  year: 2026
+  client: NeuralBytea
+  role: Community & Enterprise · $29 · OPL-1
+  odoo_version: Odoo 19.0
+  image: assets/images/apps/nb_salesperson_customer_access.jpg
+  store_url: https://apps.odoo.com/apps/modules/19.0/nb_salesperson_customer_access/
+  short_desc: Each salesperson sees only their assigned customers, quotations, invoices and payments
+  metric: $29
+  metric_label: one-time price
+  full_desc: Show each Odoo salesperson only their own customers, quotations, invoices and payments. Salesperson Own Customers adds an Own Customers Only group and an Assigned Salespersons field on every customer. Members of the group see the customers assigned to them and the sales orders, invoices, payments and reports of those customers, and nothing else, while sales managers and administrators keep the standard view and their own contacts stay hidden from the salespersons. The restriction is enforced on the server, so it holds for search, direct links, exports and API calls.
+  tags:
+  - Portals
+  - Sales
+  - Access Rights
+  modules:
+  - Sale Management
+  - Invoicing
+  tech_stack:
+  - Python
+  - Odoo ORM
+  - QWeb
+  - OWL / JavaScript
+  highlights:
+  - 'Own Customers Only Group: One group in the Sales access rights. Only members are restricted, so managers and everybody else keep the standard view.'
+  - 'Several Salespersons per Customer: The Assigned Salespersons field takes any number of internal users. The standard Salesperson field counts as well.'
+  - 'Contacts Follow the Account: Contacts, delivery and invoice addresses belong to the same salespersons as the customer they sit under.'
+  - 'Quotations and Orders: Quotations, sales orders and their lines are limited to the assigned customers, plus the orders the user created or is the salesperson of.'
+  - 'Invoices, Bills and Payments: Invoices, vendor bills, journal items and payments follow the customer too, so the accounting menus show the same slice.'
+  - 'Reports Included: The sales analysis and invoice analysis reports are restricted as well, so totals never include another salesperson''s customers.'
+  - 'Enforced on the Server: The restrictions run in the database layer. They apply to lists, searches, direct links, exports and API calls, not only to menus.'
+  - 'New Customers Stay Visible: A restricted user who creates a customer is assigned to it automatically, so it does not vanish after saving.'
+  - 'Manager and Admin Contacts Hidden: A Manager / Admin Contact checkbox is ticked for administrators and Sales managers and hides those contacts from restricted salespersons.'
+  - 'Tested on All Editions: Eleven automated tests run on Community and Enterprise for Odoo 18, 19 and 20, including a full sale, invoice and payment flow for two salespersons.'
+  screenshots:
+  - src: images/apps/shots/nb_salesperson_customer_access/salesperson-assigned-salespersons-customer-form.jpg
+    caption: Odoo customer form with the Assigned Salespersons field
+  - src: images/apps/shots/nb_salesperson_customer_access/salesperson-contacts-list-manager-sees-all.jpg
+    caption: Odoo contacts list of a manager showing every customer
+  - src: images/apps/shots/nb_salesperson_customer_access/salesperson-own-customers-contacts-list-alice.jpg
+    caption: Odoo contacts list of a salesperson showing only the customers assigned to them
+  - src: images/apps/shots/nb_salesperson_customer_access/salesperson-own-customers-contacts-list-bob.jpg
+    caption: Odoo contacts list of a second salesperson showing a different set of customers
+  - src: images/apps/shots/nb_salesperson_customer_access/salesperson-own-customers-only-group-user-form.jpg
+    caption: Odoo user form with the Own Customers Only group in the Sales access rights
+  - src: images/apps/shots/nb_salesperson_customer_access/salesperson-own-invoices-list-alice.jpg
+    caption: Odoo invoices list showing only the invoices of the customers assigned to the salesperson
+  - src: images/apps/shots/nb_salesperson_customer_access/salesperson-own-quotations-list-alice.jpg
+    caption: Odoo quotations and orders list showing only the orders of the customers assigned to the salesperson
+  new: true
+  banner_sha: de53bac9f241
 - id: nb_mcp_server
-  title: Claude Connector for Odoo
+  title: Odoo Claude Connector
   category: odoo
   featured: true
   year: 2026
@@ -237,10 +369,10 @@ projects:
   odoo_version: Odoo 19.0
   image: assets/images/apps/nb_mcp_server.jpg
   store_url: https://apps.odoo.com/apps/modules/19.0/nb_mcp_server/
-  short_desc: 'Claude and Odoo server link: on premises Claude connector, MCP, read only, each user''s own rights'
+  short_desc: 'On premise Claude connector: MCP server for Odoo, read only by default, each user''s own rights'
   metric: $31
   metric_label: one-time price
-  full_desc: 'Claude connector for Odoo. This Claude MCP server lets Claude answer from your own Odoo data: sales, invoices, contacts and any custom model. It is an on premises Claude connector as much as a cloud one, and a community Claude Odoo connector too: it runs inside Odoo Community and Enterprise with no extra server, and each person connects with their own Odoo login. An administrator switches the connector on and gives people the AI Connector User role. A user adds the connector address to claude.ai, signs in on an Odoo page and clicks Allow. From then on Claude can look up models and fields, search, count and total records, read one record and open saved filters, always with that user''s access rights and record rules.'
+  full_desc: 'Odoo Claude connector for Odoo. This Claude MCP server is an Odoo MCP server built on the Model Context Protocol (MCP). It lets Claude answer from your own Odoo data: sales, invoices, contacts and any custom model. As an MCP server for Odoo it is an on premise Claude connector as much as a cloud one, and a community Claude Odoo connector too: it runs inside Odoo Community and Enterprise with no extra server, and each person connects with their own Odoo login. An administrator switches the AI connector on and gives people the AI Connector User role. A user adds the connector address to claude.ai, signs in on an Odoo page and clicks Allow. From then on Claude can look up models and fields, search, count and total records, read one record and open saved filters, always with that user''s access rights and record rules.'
   tags:
   - AI Assistant
   - MCP
@@ -291,9 +423,117 @@ projects:
   - src: images/apps/shots/nb_mcp_server/claude-mcp-odoo-topics-prompts-instructions.jpg
     caption: Claude MCP topic in Odoo with instructions and prompts for a sales team
   new: true
-  banner_sha: 75594b5a1ad8
+  banner_sha: 23b8acbb944e
+- id: nb_mcp_code_mode
+  title: Odoo MCP Code Mode
+  category: odoo
+  featured: false
+  year: 2026
+  client: NeuralBytea
+  role: Community & Enterprise · $39 · OPL-1
+  odoo_version: Odoo 19.0
+  image: assets/images/apps/nb_mcp_code_mode.jpg
+  store_url: https://apps.odoo.com/apps/modules/19.0/nb_mcp_code_mode/
+  short_desc: 'MCP Code Mode for Odoo: the AI runs one safe script instead of dozens of tool calls'
+  metric: $39
+  metric_label: one-time price
+  full_desc: Let the AI run one safe script in Odoo instead of dozens of tool calls. Odoo Claude Code Mode adds a code-execution layer to the Odoo Claude Connector. Claude writes a short script, Odoo runs it in a sandbox as the same user, and only the final answer goes back. That keeps big result sets out of the conversation, cuts token use, handles multi-step questions in one call and adds saved skills, budgets, a dry run before any change and a log of every script.
+  tags:
+  - AI Assistant
+  - MCP
+  - Claude
+  modules:
+  - Mcp Server
+  tech_stack:
+  - Python
+  - Odoo ORM
+  - QWeb
+  - OWL / JavaScript
+  highlights:
+  - 'One Script per Question: The AI writes a short script and Odoo runs it. Loops, conditions, sorting and totals happen inside Odoo, not in the AI conversation.'
+  - 'Search Before It Writes: A search tool shows the exact calls and saved skills with their arguments, at name, summary or full detail, so the AI loads only what it needs.'
+  - 'A Sandbox, Not exec: Scripts are read by a small interpreter of a restricted Python subset. There is no import, no file, no network, no attribute access and no use of eval or exec.'
+  - 'Same Rights as the User: A script can only call the tools of the AI Connector, as the user of the key. Blocked models, hidden fields and record rules all keep applying.'
+  - 'Five Budgets per Script: Steps, seconds, tool calls, rows read and answer size are limited. A script that goes over is stopped with a clear message.'
+  - 'Dry Run Before Changes: Changes by scripts are off by default. When allowed, a script first runs as a dry run that shows what it would change, and only apply=true keeps it.'
+  - 'Saved Skills: Reviewed, versioned scripts with inputs and a description. The AI runs them by name, and a bad edit is refused before it is saved.'
+  - 'Hide Fields From the AI: List fields such as email and phone. Their values, and anything that looks like an email or a phone number, become tokens like [EMAIL_1] in the answer.'
+  - 'Short-Term Workspace: A script can keep a value for 24 hours per user, so a long job can resume across calls.'
+  - 'Run Log With Savings: Every script is logged with its text, its steps, rows read, data handled, answer size and an estimate of the tokens not used.'
+  screenshots:
+  - src: images/apps/shots/nb_mcp_code_mode/odoo-code-mode-runs-tokens-saved.jpg
+    caption: Odoo Code Mode runs list showing tool calls, rows read, data handled, answer size and tokens saved for each script
+  - src: images/apps/shots/nb_mcp_code_mode/odoo-code-mode-settings-limits-masking.jpg
+    caption: Odoo AI Connector settings with the Code Mode block
+  - src: images/apps/shots/nb_mcp_code_mode/odoo-code-mode-skill-script-editor.jpg
+    caption: Odoo Code Mode skill form with the description, inputs and the script editor
+  - src: images/apps/shots/nb_mcp_code_mode/odoo-code-mode-skills-library.jpg
+    caption: Odoo Code Mode skills library with top customers, overdue invoices, quiet customers, sales by month and top-selling products
+  - src: images/apps/shots/nb_mcp_code_mode/odoo-code-mode-token-savings-graph.jpg
+    caption: Odoo Code Mode graph of tokens not used per day
+  - src: images/apps/shots/nb_mcp_code_mode/odoo-code-mode-tool-control-panel.jpg
+    caption: Odoo AI tool control panel listing the three Code Mode tools next to the connector tools
+  new: true
+  banner_sha: 2e8990dbba6c
+- id: nb_shopify_connector
+  title: Odoo Shopify Connector
+  category: odoo
+  featured: true
+  year: 2026
+  client: NeuralBytea
+  role: Community & Enterprise · $180 · OPL-1
+  odoo_version: Odoo 19.0
+  image: assets/images/apps/nb_shopify_connector.jpg
+  store_url: https://apps.odoo.com/apps/modules/19.0/nb_shopify_connector/
+  short_desc: 'Odoo Shopify connector and integration: sync products, orders, stock, returns and payouts'
+  metric: $180
+  metric_label: one-time price
+  full_desc: The Odoo Shopify connector links a Shopify store to Odoo and keeps products, orders, stock and money in step. This Shopify Odoo integration works in both directions.
+  tags:
+  - Integrations
+  - Shopify
+  - eCommerce
+  modules:
+  - Stock Delivery
+  - Sale Management
+  tech_stack:
+  - Python
+  - Odoo ORM
+  - QWeb
+  - OWL / JavaScript
+  highlights:
+  - 'Products: import and export listings, variants, collections, tags, product types, categories, images and metafields.'
+  - 'Catalogs and markets: Shopify catalogs and markets, with bulk queries for large imports.'
+  - 'Orders: import orders and customers, update order status, cancel orders, and map Shopify payment gateways and delivery carriers.'
+  - 'Fulfillment and returns: for Shopify fulfillment Odoo sends the tracking number, carrier and quantities from the delivery, and Shopify returns are processed.'
+  - 'Inventory: export stock per Shopify location and import stock back.'
+  - 'Payouts: Shopify payout and transaction reconciliation.'
+  - 'Workflows: the Odoo Shopify sync follows financial and order workflow rules per Shopify store, with webhooks, queue jobs and logs.'
+  screenshots:
+  - src: images/apps/shots/nb_shopify_connector/shopify-connector-delivery-fulfillment-tracking-update.jpg
+    caption: 'Shopify fulfillment in Odoo 19: delivery order of a Shopify order marked as fulfilled in the marketplace with Tracking and Create Return in Shopify buttons'
+  - src: images/apps/shots/nb_shopify_connector/shopify-connector-import-export-operations-wizard.jpg
+    caption: Odoo 19 Shopify Perform Operation wizard listing the import operations with an explanation of each
+  - src: images/apps/shots/nb_shopify_connector/shopify-connector-imported-sale-order-shopify-details.jpg
+    caption: 'Odoo 19 Imported Shopify sales order with the Marketplace Detail tab: order number, financial status, fulfillment status and payment gateway'
+  - src: images/apps/shots/nb_shopify_connector/shopify-connector-instance-financial-workflow-gateway-mapping.jpg
+    caption: Odoo 19 Shopify instance form with the workflow configuration table
+  - src: images/apps/shots/nb_shopify_connector/shopify-connector-instances-overview-dashboard.jpg
+    caption: Odoo 19 Marketplace overview with the Demo Shopify Store card, record counts, integration health and weekly activity trend
+  - src: images/apps/shots/nb_shopify_connector/shopify-connector-onboarding-wizard-connect-store.jpg
+    caption: Odoo Shopify connector onboarding wizard on Odoo 19, step Connect Your Store with shop URL and API access token
+  - src: images/apps/shots/nb_shopify_connector/shopify-connector-payout-transactions-reconciliation.jpg
+    caption: Odoo 19 Shopify payout with payout lines showing order reference, transaction type, amount, fees, net amount and bank statement line
+  - src: images/apps/shots/nb_shopify_connector/shopify-connector-product-listing-variants-form.jpg
+    caption: Odoo 19 Shopify listing Classic Cotton Tee with six variants, Odoo products, inventory and Shopify IDs
+  - src: images/apps/shots/nb_shopify_connector/shopify-connector-queue-job-lines-retry-failed.jpg
+    caption: Odoo 19 Marketplace queue job with seven order lines, six processed and one failed with a retry button
+  - src: images/apps/shots/nb_shopify_connector/shopify-connector-stock-location-export-settings.jpg
+    caption: Odoo 19 Shopify location form with import stock location, export stock locations and return restock warehouse
+  new: true
+  banner_sha: 48f9bcaac195
 - id: nb_school_management_system
-  title: School Management System
+  title: School Management System for Odoo
   category: odoo
   featured: true
   year: 2026
@@ -302,7 +542,7 @@ projects:
   odoo_version: Odoo 19.0
   image: assets/images/apps/nb_school_management_system.jpg
   store_url: https://apps.odoo.com/apps/modules/19.0/nb_school_management_system/
-  short_desc: 'School management system for Odoo: students, admissions, family fees, parent portal, teachers'
+  short_desc: 'School suite for Odoo: student management system, admissions, family fees, parent portal, teachers'
   metric: Free
   metric_label: free with the school suite
   full_desc: School management system for Odoo. One install gives a school its student records, admissions, fee invoices, parent portal, teachers, timetable and dashboards, all on the standard Odoo Invoicing, Employees and Contacts apps.
@@ -409,7 +649,7 @@ projects:
     caption: Odoo 19 student list of a school with admission number, grade, section, roll number, family and status
   banner_sha: 29df1cd51243
 - id: nb_school_admission
-  title: School Admission Management
+  title: School Admission Management System
   category: odoo
   featured: false
   year: 2026
@@ -418,7 +658,7 @@ projects:
   odoo_version: Odoo 19.0
   image: assets/images/apps/nb_school_admission.jpg
   store_url: https://apps.odoo.com/apps/modules/19.0/nb_school_admission/
-  short_desc: 'Admission pipeline: enquiry, documents, entrance test, offers with expiry, seat limits, waiting list'
+  short_desc: 'School enquiry to admission pipeline: entrance test, offers, seats and admission waiting list'
   metric: $25
   metric_label: one-time price
   full_desc: 'School admission management for Odoo. Follow every family from the first inquiry to an enrolled student: application, document checklist, entrance test, offer, waiting list, admission fee and admission into a section.'
@@ -468,7 +708,7 @@ projects:
   odoo_version: Odoo 19.0
   image: assets/images/apps/nb_school_fees.jpg
   store_url: https://apps.odoo.com/apps/modules/19.0/nb_school_fees/
-  short_desc: Monthly school fee slips, one invoice per family, concessions and late fees on Odoo Invoicing
+  short_desc: Monthly fee slips, one family invoice, fee concession and late fees for school billing in Odoo
   metric: $39
   metric_label: one-time price
   full_desc: School fee management for Odoo. Generate the month's fee slips at month end, add one-off charges or deductions, invoice each family once, apply late fees on the slip and follow payments, defaulters and concessions, all on standard Odoo invoices.
@@ -574,6 +814,52 @@ projects:
   - src: images/apps/shots/nb_school_portal/school-parent-portal-home-my-children-admissions-cards.jpg
     caption: Odoo 19 parent portal home page with My Children and Admission Applications cards
   banner_sha: 1b8b273f93a6
+- id: payment_Mastercard_website
+  title: Mastercard Website
+  category: odoo
+  featured: false
+  year: 2026
+  client: NeuralBytea
+  role: Community & Enterprise · $29 · OPL-1
+  odoo_version: Odoo 19.0
+  image: assets/images/apps/payment_Mastercard_website.jpg
+  store_url: https://apps.odoo.com/apps/modules/19.0/payment_Mastercard_website/
+  short_desc: Card payment website for shop orders and sales order links; connects to Mastercard MPGS
+  metric: $29
+  metric_label: one-time price
+  full_desc: 'Website payment Mastercard for the Odoo website shop and sales orders: MPGS ecommerce checkout by card and a sales order payment link, as a card payment website add-on that connects to Mastercard MPGS. Customers pay a quotation or a shop order by card on the secure Mastercard page. Odoo verifies the payment with Mastercard and confirms the order. It is a small add-on to Mastercard MPGS Payment, which does the gateway work.'
+  tags:
+  - Payments
+  - Website
+  - eCommerce
+  modules:
+  - Payment Mastercard
+  - Website Sale
+  tech_stack:
+  - Python
+  - Odoo ORM
+  - QWeb
+  - OWL / JavaScript
+  highlights:
+  - 'Website Shop Checkout: Customers pay their shop order with Mastercard at the end of the website checkout.'
+  - 'Quotation Payment Links: The Accept and Pay button of a quotation in the portal offers Mastercard.'
+  - 'Same Hosted Page: Card details and 3-D Secure stay on the Mastercard page, exactly as for invoices.'
+  - 'Order Confirmed by Odoo: When the payment is verified with the gateway, Odoo confirms the quotation with its standard online payment logic.'
+  - 'A New Order Id Per Attempt: The gateway order id comes from the unique transaction reference, so a second attempt after a failure never collides with the first.'
+  - 'Works With the Webhook: If you set up the webhook of the main module, an order is also confirmed when the customer never returns to the shop.'
+  - 'A Small Add-on: One model extension on top of Mastercard MPGS Payment, with no new screens to learn.'
+  - 'Automated Tests: 2 test methods check the session of a sales order and the confirmation of the paid order against a mock gateway.'
+  screenshots:
+  - src: images/apps/shots/payment_Mastercard_website/mastercard-website-order-confirmed-backend.jpg
+    caption: Odoo 19 sales order in the Sales Order state after a Mastercard payment
+  - src: images/apps/shots/payment_Mastercard_website/mastercard-website-order-paid.jpg
+    caption: Odoo 19 customer portal sales order after a Mastercard payment
+  - src: images/apps/shots/payment_Mastercard_website/mastercard-website-order-pay-dialog.jpg
+    caption: Odoo 19 Pay Order dialog with the Mastercard card payment method
+  - src: images/apps/shots/payment_Mastercard_website/mastercard-website-order-transaction.jpg
+    caption: Odoo 19 Mastercard payment transaction of a sales order
+  new: true
+  banner_sha: f74546634a7f
 - id: nb_school_hr
   title: School Teacher Management
   category: odoo
@@ -584,7 +870,7 @@ projects:
   odoo_version: Odoo 19.0
   image: assets/images/apps/nb_school_hr.jpg
   store_url: https://apps.odoo.com/apps/modules/19.0/nb_school_hr/
-  short_desc: Teacher profiles on HR employees, subject allocation, class teachers and weekly workload limits
+  short_desc: Teacher workload limits, subject allocation and class teachers on HR employee profiles
   metric: $15
   metric_label: one-time price
   full_desc: Teacher management for Odoo schools. Teachers are normal Odoo employees, so attendance, time off and payroll keep working from the HR apps, while the school adds teaching assignments, class teachers, subjects a teacher can teach and weekly workload limits.
@@ -634,7 +920,7 @@ projects:
   odoo_version: Odoo 19.0
   image: assets/images/apps/nb_school_timetable.jpg
   store_url: https://apps.odoo.com/apps/modules/19.0/nb_school_timetable/
-  short_desc: Weekly class and teacher timetable with daily periods, clash checks and one-click generation
+  short_desc: Automatic timetable with daily periods, clash check, teacher schedule and one-click generation
   metric: $25
   metric_label: one-time price
   full_desc: Timetable for Odoo schools. Define the daily periods once, then place every subject of every class by its periods per week. The class timetable and the teacher timetable come from the same lessons, so a teacher can never be in two classes at once.
@@ -686,7 +972,7 @@ projects:
   odoo_version: Odoo 19.0
   image: assets/images/apps/nb_school_dashboard.jpg
   store_url: https://apps.odoo.com/apps/modules/19.0/nb_school_dashboard/
-  short_desc: Principal dashboards for admissions, fee collection, staff and students. Free with the school suite
+  short_desc: 'School dashboard: admissions dashboard, fees dashboard, student dashboard and student analytics'
   metric: Free
   metric_label: free with the school suite
   full_desc: School dashboard for Odoo. Four ready-made dashboards show admissions, fee collection, staff and students, built on the standard Odoo Dashboards app and the data of the school modules.
@@ -736,7 +1022,7 @@ projects:
   odoo_version: Odoo 19.0
   image: assets/images/apps/nb_course_core.jpg
   store_url: https://apps.odoo.com/apps/modules/19.0/nb_course_core/
-  short_desc: Short courses and training batches with seats, trainers, learners and an automatic waiting list
+  short_desc: Course batches and course seats for a coaching center or training institute, trainers, waiting list
   metric: $25
   metric_label: one-time price
   full_desc: 'Course management for Odoo. Run short courses next to your classes: a course catalog, batches with dates, trainers and seats, learners with the family that pays, and an automatic waiting list that fills a seat when someone drops out.'
@@ -784,7 +1070,7 @@ projects:
     caption: Odoo 19 course waiting list grouped by batch with learners and their fee
   banner_sha: a19e611c7208
 - id: nb_course_admission
-  title: Course Enrollment and Admission
+  title: Course Enrollment Management
   category: odoo
   featured: false
   year: 2026
@@ -793,7 +1079,7 @@ projects:
   odoo_version: Odoo 19.0
   image: assets/images/apps/nb_course_admission.jpg
   store_url: https://apps.odoo.com/apps/modules/19.0/nb_course_admission/
-  short_desc: Applications for course batches with seat limits, waiting list, offers and enrollment on admit
+  short_desc: 'Training enrollment and student registration for course batches: seat limit, waiting list, offers'
   metric: $15
   metric_label: one-time price
   full_desc: 'Course admission for Odoo. Take applications for short-course batches in the same pipeline as your class admissions: document checklist, offer, batch seats, waiting list and, when admitted, enrollment in the batch and its fee slips.'
@@ -843,7 +1129,7 @@ projects:
   odoo_version: Odoo 19.0
   image: assets/images/apps/nb_elearning_video.jpg
   store_url: https://apps.odoo.com/apps/modules/19.0/nb_elearning_video/
-  short_desc: 'Upload video file for local video lessons in Odoo eLearning: MP4 and WebM, video player, no download'
+  short_desc: 'MP4 eLearning with local video lessons in Odoo: upload video file, WebM, video player, no download'
   metric: $20
   metric_label: one-time price
   full_desc: 'Course video upload for Odoo eLearning. Odoo eLearning plays lesson videos from YouTube, Vimeo and Google Drive links only. eLearning Video Upload adds a video you upload from your computer to a Video lesson: it is checked, stored in Odoo and streamed privately to the people who may open the lesson, on the lesson page and in the fullscreen player, with no download button. Made for training centres, schools, academies and course creators that keep their course videos in Odoo.'
@@ -896,7 +1182,7 @@ projects:
   odoo_version: Odoo 19.0
   image: assets/images/apps/nb_course_fees.jpg
   store_url: https://apps.odoo.com/apps/modules/19.0/nb_course_fees/
-  short_desc: Installment plans and fee slips for course enrollments, billed to the family or the paying company
+  short_desc: 'Course payment plan and course billing: installment fee slips for enrollments, family or company'
   metric: $15
   metric_label: one-time price
   full_desc: Course fee installments for Odoo. Split a course fee into a deposit and equal parts, create fee slips when a learner is enrolled, invoice the family or company that pays, and use the same late fees, concessions and payments as class fees.
@@ -938,7 +1224,7 @@ projects:
     caption: Odoo 19 course installment plans list with the installments of each plan
   banner_sha: f0429b0e6029
 - id: nb_employee_self_service
-  title: Employee Self Service
+  title: Employee Self Service Portal
   category: odoo
   featured: false
   year: 2026
@@ -947,7 +1233,7 @@ projects:
   odoo_version: Odoo 18.0
   image: assets/images/apps/nb_employee_self_service.jpg
   store_url: https://apps.odoo.com/apps/modules/18.0/nb_employee_self_service/
-  short_desc: 'Internal self-service portal: profile, time off, attendance, expenses and payslips'
+  short_desc: Employee payslips, attendance correction, time off and expense portal for internal self-service
   metric: $119
   metric_label: one-time price
   full_desc: A single self-service workspace on the standard Odoo /my pages where your internal users handle their own HR admin instead of emailing HR. It installs on any Odoo database and lights up payslips and timesheets automatically when those apps are present.
@@ -965,31 +1251,33 @@ projects:
   - QWeb
   - OWL / JavaScript
   highlights:
-  - 'My Profile: editable private info, avatar, ID-card scans, resume and skills'
-  - 'My Time Off: balances, request form, and a filterable manager approval inbox'
-  - 'My Attendances: check in and out, a full-month timeline and manager-approved corrections'
-  - 'My Overtime: extra hours by month, comp-off balance and requests'
-  - 'My Expenses: reports, quick log form and totals'
-  - Payslips with in-page PDF preview (Enterprise) and timesheets, when those apps are installed
-  - One-click user creation from the employee form
+  - 'My Profile: Work details, editable private information, avatar, ID card scans, and resume and skills when the Skills app is installed.'
+  - 'My Time Off: Leave balances, a request form limited to the allocated balance, and the history of requests.'
+  - 'Approval Inbox: Time-off approvers see their team''s requests with filters and approve or refuse them in the portal.'
+  - 'Check In and Out: A widget in the portal side panel with Check In, Check Out and a worked-time timer for the open attendance.'
+  - 'Attendance Timeline: Every day of the month classified as present, absent, on leave, holiday or weekend, with totals and a chart.'
+  - 'Attendance Corrections: Employees add a forgotten entry or ask to fix wrong times; the manager or the time-off responsible approves or refuses and the attendance is updated on approval.'
+  - 'Overtime and Comp-Off: Extra hours by month, the comp-off balance, a request for a comp-off day and a team view for managers, when the Attendances app is installed.'
+  - 'Expenses: Expenses with status and totals, and a quick form to log an expense, when the Expenses app is installed.'
+  - 'Payslips: A list with PDF preview and download, when the Payroll app is installed.'
+  - 'Timesheets: Project time entries of the employee, when the Timesheets app is installed.'
+  - 'Internal Users Only: HR content is shown to internal users and every page reads only the records of the signed-in employee.'
   screenshots:
-  - src: images/apps/shots/nb_employee_self_service/employee-self-service-attendance-working-hours-chart.jpg
-    caption: Odoo employee portal My Attendances page with present, absent, on leave and total hours cards above a worked hours chart and attendance records
-  - src: images/apps/shots/nb_employee_self_service/employee-self-service-expenses-reports-and-status.jpg
-    caption: Odoo employee portal My Expenses page with report, total, approved and pending cards and an expense list with draft, submitted and approved statuses
-  - src: images/apps/shots/nb_employee_self_service/employee-self-service-overtime-comp-off-balance.jpg
-    caption: Odoo employee portal My Overtime page with comp-off balance, hours earned this month and a monthly overtime table
-  - src: images/apps/shots/nb_employee_self_service/employee-self-service-portal-home-dashboard-check-in.jpg
-    caption: Odoo employee self service portal home with Profile, Time Off, Attendances, Overtime, Expenses and Timesheets cards and a check-in widget
-  - src: images/apps/shots/nb_employee_self_service/employee-self-service-profile-resume-and-skills.jpg
-    caption: Employee self service portal My Profile page showing the resume timeline, skills and the Work Information, Private Information and Settings tabs
-  - src: images/apps/shots/nb_employee_self_service/employee-self-service-time-off-balance-and-requests.jpg
-    caption: Odoo employee portal My Time Off page with a paid time off balance card and a requests table with approved and to approve statuses
-  - src: images/apps/shots/nb_employee_self_service/employee-self-service-time-off-new-request-form.jpg
-    caption: Odoo employee portal new time off request form with leave type, from and to dates and a description field
-  - src: images/apps/shots/nb_employee_self_service/employee-self-service-timesheets-hours-on-projects.jpg
-    caption: Odoo employee portal My Timesheets page listing hours logged per date, project and task
-  banner_sha: f2a101bd8121
+  - src: images/apps/shots/nb_employee_self_service/employee-self-service-attendance-corrections.jpg
+    caption: Odoo employee self service attendance records with fix times links, my correction requests and the corrections to approve
+  - src: images/apps/shots/nb_employee_self_service/employee-self-service-attendance-history.jpg
+    caption: Odoo employee self service attendance page with present, absent and on leave totals and a working hours chart
+  - src: images/apps/shots/nb_employee_self_service/employee-self-service-expenses-list-and-totals.jpg
+    caption: Odoo employee self service expenses page with totals and the list of expenses with status
+  - src: images/apps/shots/nb_employee_self_service/employee-self-service-home-check-in-cards.jpg
+    caption: Odoo employee self service home with a check in widget and cards for profile, time off, attendances, overtime, expenses and timesheets
+  - src: images/apps/shots/nb_employee_self_service/employee-self-service-overtime-extra-hours-comp-off.jpg
+    caption: Odoo employee self service overtime page with comp-off balance, monthly extra hours and team overtime
+  - src: images/apps/shots/nb_employee_self_service/employee-self-service-profile-page.jpg
+    caption: Odoo employee self service profile page with work details, resume and skills tabs
+  - src: images/apps/shots/nb_employee_self_service/employee-self-service-time-off-balance-requests.jpg
+    caption: Odoo employee self service time off page with a balance card
+  banner_sha: 72c660ffbffb
 - id: portal_ext
   title: Portal Sidebar Pro
   category: odoo
@@ -1025,7 +1313,7 @@ projects:
   - 'Works With Your Portal Apps: Cards added by other modules, such as invoices, orders, tickets or the employee portal, show up in the sidebar by themselves.'
   - 'No Python, No Models: Only views and assets, so it adds no database tables and keeps your portal code untouched.'
   - 'Odoo Online Ready: A data and assets module without Python files, available for Odoo Online, Odoo.sh and On Premise.'
-  banner_sha: d765cef48991
+  banner_sha: f1703bc1f27a
 - id: payment_Mastercard
   title: Mastercard MPGS Payment
   category: odoo
@@ -1036,7 +1324,7 @@ projects:
   odoo_version: Odoo 18.0
   image: assets/images/apps/payment_Mastercard.jpg
   store_url: https://apps.odoo.com/apps/modules/18.0/payment_Mastercard/
-  short_desc: Mastercard MPGS Hosted Checkout for invoice payments with auto posting and reconciliation
+  short_desc: 'Mastercard gateway for invoices: MPGS Hosted Checkout, 3D Secure, auto posting and reconciliation'
   metric: $49
   metric_label: one-time price
   full_desc: Payment provider for the Mastercard Payment Gateway Services (MPGS) Hosted Checkout with 3-D Secure. Payments are posted automatically and reconciled with invoices.
@@ -1060,11 +1348,13 @@ projects:
   - 'Portal Pay Now: Customers pay from the invoice in the portal with the standard Odoo payment dialog and the Card method.'
   - 'Simple Credentials: Host, merchant ID, user name and API password per provider, and the State field for test mode and production.'
   - 'Multi-company: The provider is found by company on the return, so each company can use its own merchant account.'
+  - 'Test Connection: One click on the provider checks that the gateway answers and that the merchant ID and the API password are accepted, without creating an order.'
+  - 'Webhook Confirmation: Mastercard can notify Odoo of a payment. The notification secret is checked, then the order is read from the gateway again, so a payment is settled even if the customer never returns to Odoo.'
   - 'Branded Result Pages: A success page and an error page with a clear message and buttons to the invoices and the home page.'
-  - 'Automated Tests: 10 test methods run the whole flow against a mock gateway over HTTP: session, success, failure, wrong amount.'
-  banner_sha: f58000875934
+  - 'Automated Tests: 14 test methods run the whole flow against a mock gateway over HTTP: session, success, failure, wrong amount, webhook, connection test.'
+  banner_sha: ae1dcb4d8d94
 - id: employee_loan_management_enterprise
-  title: Employee Loan Pro
+  title: Employee Loan Management
   category: odoo
   featured: false
   year: 2026
@@ -1073,7 +1363,7 @@ projects:
   odoo_version: Odoo 18.0
   image: assets/images/apps/employee_loan_management_enterprise.jpg
   store_url: https://apps.odoo.com/apps/modules/18.0/employee_loan_management_enterprise/
-  short_desc: Employee loans and salary advances with automatic payroll deduction and analytics
+  short_desc: Staff loan and salary advances with loan portal, automatic payroll deduction and analytics
   metric: $49
   metric_label: one-time price
   full_desc: 'Manages employee loans and salary advances end to end: loan types, installment schedules, rescheduling, accounting configuration and automatic deduction on the payslip, with an analytics dashboard.'
@@ -1100,7 +1390,7 @@ projects:
   - 'Employee Portal: Employees see only their own loans, progress and installments from the website portal.'
   - 'Access Rules: Employees see only their own loans. HR, payroll officers and loan approvers see all of them.'
   - 'Multi-Company Aware: Loans, accounts and the dashboard follow the companies selected in the company switcher.'
-  banner_sha: 030cc03732c3
+  banner_sha: f954c162ca73
 - id: hr_attendance_board
   title: Attendance Leave Gantt
   category: odoo
@@ -1111,7 +1401,7 @@ projects:
   odoo_version: Odoo 18.0
   image: assets/images/apps/hr_attendance_board.jpg
   store_url: https://apps.odoo.com/apps/modules/18.0/hr_attendance_board/
-  short_desc: Attendance and leave Gantt with late arrivals, remote and hybrid work, click-to-edit and KPIs
+  short_desc: Employee attendance with late arrivals, remote work and hybrid work, click-to-edit, KPIs
   metric: $24.99
   metric_label: one-time price
   full_desc: A colour-coded Gantt board of attendance and leave that separates office, remote and hybrid days, with click-to-edit, remote-work periods on contracts and on-site versus remote KPIs.
@@ -1140,7 +1430,7 @@ projects:
   - 'Insights and Leaderboards: Attendance and on-time rates, arrival times, weekday and department comparison, time off by type, and rankings of absences and late arrivals.'
   - 'Excel Export: Download the filtered grid with a column for every attendance summary value.'
   - 'Recompute Lateness: A list action for Attendance Shift Managers re-derives shift and lateness after a schedule or grace change.'
-  banner_sha: 059eb8b00ad4
+  banner_sha: 8700f89f85a7
 - id: nb_payroll_dashboard
   title: Payroll Dashboard Pro
   category: odoo
@@ -1151,7 +1441,7 @@ projects:
   odoo_version: Odoo 18.0
   image: assets/images/apps/nb_payroll_dashboard.jpg
   store_url: https://apps.odoo.com/apps/modules/18.0/nb_payroll_dashboard/
-  short_desc: Payroll dashboard with month and batch comparison, salary rule totals and Excel PDF report
+  short_desc: 'HR dashboard for payroll: month vs month, payslip analytics, salary rule and Excel report'
   metric: $29
   metric_label: one-time price
   full_desc: A zero-configuration payroll dashboard built with Owl, plus a wizard that exports salary reports to Excel and PDF.
@@ -1177,7 +1467,7 @@ projects:
   - 'Excel and PDF Report: Salary report for a month, a payslip batch or custom dates, grouped by company, department and employee, with one Excel sheet per company.'
   - 'Excel Export of the Comparison: Download the comparison with totals on one sheet and every employee on another.'
   - 'Multi-Company Aware: Batches, months and totals follow the companies selected in the company switcher.'
-  banner_sha: 85ea9b237991
+  banner_sha: 4aff05624e95
 - id: sale_payment_dashboard
   title: Sales Analytics Dashboard
   category: odoo
@@ -1188,7 +1478,7 @@ projects:
   odoo_version: Odoo 18.0
   image: assets/images/apps/sale_payment_dashboard.jpg
   store_url: https://apps.odoo.com/apps/modules/18.0/sale_payment_dashboard/
-  short_desc: Sales analytics dashboard with customer churn, retention and invoice payment collection tracking
+  short_desc: 'Invoice payment dashboard for sales: customer churn, customer retention and payment collection'
   metric: $49
   metric_label: one-time price
   full_desc: 'Owl dashboards that link sale orders, invoices and payments: live KPIs, recovery tracking, customer revenue ranking, product category mix and 12-month trends.'
@@ -1215,7 +1505,7 @@ projects:
   - 'Fast on Large Databases: A loading skeleton shows at once and sections fill in as they finish. Heavy figures use SQL aggregation in batches.'
   - 'Recalculate on Demand: Each board is a snapshot of the moment it loaded. Press Recalculate to pull in newer records.'
   - 'User Rights Apply: Figures are read with the access rights of the signed-in user. The module only reads data and changes nothing.'
-  banner_sha: de777faa16dc
+  banner_sha: a7d29186d0d7
 - id: nb_smart_list_search_pro
   title: Smart List Search Pro
   category: odoo
@@ -1270,7 +1560,7 @@ projects:
   odoo_version: Odoo 18.0
   image: assets/images/apps/mail_ext.jpg
   store_url: https://apps.odoo.com/apps/modules/18.0/mail_ext/
-  short_desc: Hide, resize chatter with per-user memory; admin layout rules; preview toggle
+  short_desc: Chatter width, chatter memory and chatter toggle per user, plus admin layout rules
   metric: $29
   metric_label: one-time price
   full_desc: Lets users hide and resize the chatter with their choice remembered per user, while admins set layout rules per model and company.
@@ -1310,7 +1600,7 @@ projects:
   odoo_version: Odoo 18.0
   image: assets/images/apps/pane_split_view.jpg
   store_url: https://apps.odoo.com/apps/modules/18.0/pane_split_view/
-  short_desc: Master-detail split pane for every Odoo list view - preview and edit side by side
+  short_desc: 'Side by side view of list and form in Odoo: form preview and list view preview, resizable'
   metric: $24.99
   metric_label: one-time price
   full_desc: A master-detail split pane for Odoo list views so you can preview and edit records beside the list.
@@ -1348,7 +1638,7 @@ projects:
   odoo_version: Odoo 18.0
   image: assets/images/apps/web_home_menu.jpg
   store_url: https://apps.odoo.com/apps/modules/18.0/web_home_menu/
-  short_desc: 'Home menu for Community: full-screen app grid with clock, opened from the navbar apps button'
+  short_desc: 'Enterprise home menu for Community: full screen app grid with clock, opened from the navbar button'
   metric: $20
   metric_label: one-time price
   full_desc: Brings an Enterprise-style home menu to Odoo Community.
@@ -1423,7 +1713,7 @@ projects:
   odoo_version: Odoo 18.0
   image: assets/images/apps/web_ext.jpg
   store_url: https://apps.odoo.com/apps/modules/18.0/web_ext/
-  short_desc: 'Web UI extensions: rounded search bar, kanban, list and form styling and a dark navy theme'
+  short_desc: 'Web extensions for Odoo: rounded search bar, kanban style, list view style and a dark navy theme'
   metric: $5
   metric_label: one-time price
   full_desc: Shared UI enhancements for the Odoo web client. Required by Sidebar App Navigation.
@@ -1449,7 +1739,7 @@ projects:
   - 'Clean Uninstall: Everything is styling, so uninstalling the module from Apps brings the stock look back and leaves nothing in your database.'
   banner_sha: 36a990cb58e3
 - id: nb_ai_chatbot
-  title: AI Chat Community
+  title: Odoo AI Chatbot
   category: odoo
   featured: true
   year: 2026
@@ -1458,7 +1748,7 @@ projects:
   odoo_version: Odoo 19.0
   image: assets/images/apps/nb_ai_chatbot.jpg
   store_url: https://apps.odoo.com/apps/modules/19.0/nb_ai_chatbot/
-  short_desc: 'AI chatbot for Odoo: ChatGPT, Claude, Gemini query your data and create records on confirm'
+  short_desc: 'AI chat assistant for Odoo data: ChatGPT, Claude, Gemini or Ollama; records change on confirm'
   metric: $19
   metric_label: one-time price
   full_desc: A floating AI chat bubble on every screen of Odoo Community and Enterprise. Connect your own AI model with your own API key, then chat with your Odoo data. The assistant always runs with the access rights of the signed-in user.
@@ -1485,7 +1775,7 @@ projects:
   - 'Shared Agents: Tick Shared on an agent and other internal users can chat with it from their chat button. They never see the key.'
   - 'Test Connection: One click sends a short message to the provider and shows the answer and how long it took.'
   - 'Extra Instructions: Add your own instructions to an agent, for example to answer in French. They are added to the built-in ones.'
-  banner_sha: d89df62473b8
+  banner_sha: 3148412be297
 - id: payment_ngenius
   title: N-Genius Payment Provider
   category: odoo
@@ -1496,7 +1786,7 @@ projects:
   odoo_version: Odoo 19.0
   image: assets/images/apps/payment_ngenius.jpg
   store_url: https://apps.odoo.com/apps/modules/19.0/payment_ngenius/
-  short_desc: 'N-Genius card payments in Odoo: hosted checkout, webhooks, sandbox and full refunds'
+  short_desc: 'NGenius refund, hosted checkout and webhooks: card payments UAE and KSA with Network International'
   metric: Free
   metric_label: open licence
   full_desc: Accept online payments in Odoo with N-Genius Online by Network International. Customers pay on a secure hosted checkout, payment status updates automatically, and you can refund in full from Odoo. Requires an active N-Genius merchant account.
@@ -1516,12 +1806,14 @@ projects:
   - Automatic payment status updates in Odoo
   - Full refund support from Odoo
   screenshots:
-  - src: images/apps/shots/payment_ngenius/n-genius-card-payment-method-invoice-pay-odoo.jpg
-    caption: Odoo invoice portal Pay dialog showing the Card payment method secured by N-Genius
-  - src: images/apps/shots/payment_ngenius/n-genius-payment-transaction-refund-child-odoo.jpg
-    caption: Odoo payment transaction for N-Genius in Confirmed state with a refund child transaction
-  - src: images/apps/shots/payment_ngenius/n-genius-payments-odoo-19-overview.jpg
-    caption: 'How the N-Genius Payment Provider connects Odoo 19 invoices to N-Genius Online: hosted checkout, webhooks, sandbox and live, full refunds'
-  - src: images/apps/shots/payment_ngenius/n-genius-provider-credentials-test-mode-odoo.jpg
-    caption: N-Genius payment provider credentials tab in Odoo with API Key, Outlet Reference and webhook header fields
-  banner_sha: 7ae2942b705e
+  - src: images/apps/shots/payment_ngenius/n-genius-card-payment-method-enabled.jpg
+    caption: Odoo 19 N-Genius payment provider with the Card payment method enabled
+  - src: images/apps/shots/payment_ngenius/n-genius-invoice-paid-reconciled-odoo.jpg
+    caption: Odoo 19 customer payment posted by the N-Genius transaction
+  - src: images/apps/shots/payment_ngenius/n-genius-portal-pay-now-invoice.jpg
+    caption: Odoo 19 customer portal invoice with the Pay dialog and the N-Genius card payment method
+  - src: images/apps/shots/payment_ngenius/n-genius-provider-credentials-test-connection.jpg
+    caption: Odoo %s N-Genius provider credentials with the Test Connection button
+  - src: images/apps/shots/payment_ngenius/n-genius-transaction-with-refund-odoo.jpg
+    caption: Odoo 19 N-Genius payment transaction with its linked refund transaction
+  banner_sha: 83e558b45dc9
